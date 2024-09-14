@@ -1,0 +1,47 @@
+﻿@model City.Add
+
+@using (Ajax.BeginForm("_CityAdd", "Masters",
+        new { src = ViewBag.src},
+         new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess", OnBegin = "ShowLoadingDialog()" },
+            new { @id = "_CityAddForm" })
+    )
+{
+
+    @Html.HiddenFor(x => Model.CityID)
+<div class="row">
+
+    <div class="col-lg-6 col-md-6 col-sm-6 form-group">
+        <label>State <sup>*</sup></label>
+        @Html.DropDownListFor(x => Model.StateID, new SelectList(Model.StateList, "ID", "Name", Model.StateID), "Select", new { @class = "form-control  applyselect" })
+        @Html.ValidationMessageFor(model => Model.StateID, "", new { @class = "text-danger" })
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 form-group">
+        <label>City Name<sup>*</sup></label>
+        @Html.TextBoxFor(model => model.CityName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.CityName, "", new { @class = "text-danger" })
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 form-group">
+        <label>City Code <sup>*</sup></label>
+        @Html.TextBoxFor(model => model.CityCode, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.CityCode, "", new { @class = "text-danger" })
+    </div>
+    
+    <div class="col-lg-6 col-md-6 col-sm-6 form-group">
+        <label>Priority</label>
+        @Html.TextBoxFor(model => model.Priority, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Priority, "", new { @class = "text-danger" })
+    </div>
+    <div class="col-lg-12 form-group">
+
+        @if (Model.CityID > 0)
+        {
+            <button type="submit" class="btn btn-indigo" name="Command" value="Add"><i class="fa fa-paper-plane" aria-hidden="true"></i> Update</button>
+        }
+        else
+        {
+            <button type="submit" class="btn btn-indigo" name="Command" value="Add"><i class="fa fa-paper-plane" aria-hidden="true"></i> Submit</button>
+        }
+    </div>
+
+</div>
+}

@@ -1,0 +1,56 @@
+﻿@model IList<Helpdesk.Ticket.List>
+
+<div class="table-responsive">
+    <table id="example" class="table table-bordered text-nowrap key-buttons">
+        <thead>
+            <tr>
+                <th>S.no.</th>
+                <th>Ticket No</th>
+                <th>Category</th>
+                <th>Sub Category</th>
+                <th>Subject</th>
+                <th>Status</th>
+                <th>Priority</th>
+
+
+                <th>Notes</th>
+                <th>Next Date</th>
+                <th>Updated Date</th>
+                <th>Updated by</th>
+                <th>IP Address</th>
+            </tr>
+
+        </thead>
+        <tbody>
+            @{ int count = 0;}
+            @foreach (Helpdesk.Ticket.List item in Model)
+            {
+                count++;
+            <tr>
+                <td>
+                    @count
+                    <input type="hidden" name="I" value="@item.TicketID" />
+                    <input type="hidden" name="N" value="@item.TicketNo" />
+                </td>
+
+                <td>
+                    <a title="click to view details" class="green-clr" href="@Url.Action("TicketDetails","HelpDesk", new { src = ClsCommon.Encrypt(ViewBag.MenuID + "*" + "/HelpDesk/TicketDetails*" + item.TicketID) })" data-toggle='tooltip'> @item.TicketNo</a>
+                </td>
+                <td>@item.CategoryName</td>
+                <td>@item.SubCategoryName</td>
+                <td>@item.Subject</td>
+                <td style="color:@item.CurrentStatus_Color"><b> @item.CurrentStatus</b> </td>
+                <td>@item.TicketPriority </td>
+
+
+                <td>@Html.Raw(item.Latest_Notes)</td>
+                <td>@item.Latest_NextDate</td>
+                <td>@item.ModifiedDate</td>
+                <td>@item.ModifiedBy</td>
+                <td>@item.IPAddress</td>
+            </tr>
+            }
+
+        </tbody>
+    </table>
+</div>

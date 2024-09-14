@@ -1,0 +1,216 @@
+﻿@model Billing.Create
+
+@if (Model.StaffList != null)
+{
+    <div class="row">
+        <div class="col-lg-2 form-group">
+            <label>Gross Amt</label>
+            @Html.TextBoxFor(model => model.Gross_Amt, new { @class = "form-control", @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.Gross_Amt, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-lg-2 form-group">
+            <label>Agency Per</label>
+            @Html.TextBoxFor(model => model.AgencyPer, new { @class = "form-control", @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.AgencyPer, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-lg-2 form-group">
+            <label>Agency Commission</label>
+            @Html.TextBoxFor(model => model.AgencyCommission, new { @class = "form-control", @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.AgencyCommission, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-lg-2 form-group">
+            <label style="@(@Model.IGST>0?"color:green":"")">IGST (@Model.IGST %)</label>
+            @Html.HiddenFor(model => model.IGST)
+            @Html.TextBoxFor(model => model.IGST_Amt, new { @class = "form-control", @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.IGST_Amt, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-lg-2 form-group">
+            <label style="@(@Model.CGST>0?"color:green":"")">CGST (@Model.CGST %)</label>
+            @Html.HiddenFor(model => model.CGST)
+            @Html.TextBoxFor(model => model.CGST_Amt, new { @class = "form-control", @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.CGST_Amt, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-lg-2 form-group">
+            <label style="@(@Model.SGST>0?"color:green":"")">SGST (@Model.SGST %)</label>
+            @Html.HiddenFor(model => model.SGST)
+            @Html.TextBoxFor(model => model.SGST_Amt, new { @class = "form-control", @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.SGST_Amt, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-lg-2 form-group">
+            <label>Total Amt</label>
+            @Html.TextBoxFor(model => model.Total_Amt, new { @class = "form-control", @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.Total_Amt, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-lg-2 form-group">
+            <label>No Of Employee </label>
+            @Html.TextBoxFor(model => model.EMPCount, new { @class = "form-control purplecolor", @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.EMPCount, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+}
+
+<div class="row">
+    <div class="col-lg-12 form-group mb-1">
+       
+        <div id="DivLeaveRequestTable" class="scroll">
+            <div class='table-responsive'>
+                <table id="ExportTable" class="table table-bordered text-nowrap key-buttons">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>
+                                <input type="checkbox" class="newwidth" id="checkAll" onclick="chkAll();" name="ChkAll" value="All" checked="checked" />
+                                <label for="checkAll"></label>
+                            </th>
+                            <th>Name</th>
+                            <th>Code</th>
+                            <th>Gender</th>
+                            <th>Department</th>
+                            <th>Designation</th>
+
+                            <th>Dealer Name</th>
+                            <th>Dealer Type</th>
+                            <th>State</th>
+                            <th>Location</th>
+                            <th class="text-right w-300">Pay Days</th>
+                            <th class="text-right w-30">Net Pay</th>
+                            <th class="text-right w-30">Incentive</th>
+                            <th class="text-right w-30">Net Gross</th>
+                            <th class="text-right w-30">CTC</th>
+                            <th class="text-right w-30">Agency Per</th>
+                            <th class="text-right w-30">Agency Commission</th>
+                            <th class="text-right w-30">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{int trancount = 0;}
+                        @if (Model.StaffList != null)
+                        {
+                            for (int i = 0; i < Model.StaffList.Count; i++)
+                            {
+                                trancount++;
+                        <tr>
+                            <td>
+                                @trancount
+
+                            </td>
+                            <td>
+                                <input type="checkbox" class="newwidth Chksingle" id="Chksingle_@trancount" name="@Html.NameFor(x=>Model.StaffList[i].IsChecked)" checked="checked" onclick="calculateRate()" />
+                                <label for="Chksingle_@trancount"></label>
+                                @Html.ValidationMessageFor(model => Model.StaffList[i].IsChecked, "", new { @class = "text-danger" })
+                            </td>
+                            <td>
+                                @Model.StaffList[i].EMPName
+                                @Html.HiddenFor(x => Model.StaffList[i].EMPName)
+                                @Html.ValidationMessageFor(model => Model.StaffList[i].EMPName, "", new { @class = "text-danger" })
+                            </td>
+                            <td>
+                                @Model.StaffList[i].EMPCode
+                                @Html.HiddenFor(x => Model.StaffList[i].EMPCode)
+                                @Html.ValidationMessageFor(model => Model.StaffList[i].EMPCode, "", new { @class = "text-danger" })
+                            </td>
+                            <td>
+                                @Model.StaffList[i].Gender
+                                @Html.HiddenFor(x => Model.StaffList[i].Gender)
+                                @Html.ValidationMessageFor(model => Model.StaffList[i].Gender, "", new { @class = "text-danger" })
+                            </td>
+                            <td>
+                                @Model.StaffList[i].Department
+                                @Html.HiddenFor(x => Model.StaffList[i].Department)
+                                @Html.ValidationMessageFor(model => Model.StaffList[i].Department, "", new { @class = "text-danger" })
+                            </td>
+                            <td>
+                                @Model.StaffList[i].Designation
+                                @Html.HiddenFor(x => Model.StaffList[i].Designation)
+                                @Html.ValidationMessageFor(model => Model.StaffList[i].Designation, "", new { @class = "text-danger" })
+                            </td>
+
+                            <td>
+                                @Model.StaffList[i].DealerName
+                                @Html.HiddenFor(x => Model.StaffList[i].DealerName)
+                                @Html.ValidationMessageFor(model => Model.StaffList[i].DealerName, "", new { @class = "text-danger" })
+                            </td>
+                            <td>
+                                @Model.StaffList[i].DealerType
+                                @Html.HiddenFor(x => Model.StaffList[i].DealerType)
+                                @Html.ValidationMessageFor(model => Model.StaffList[i].DealerType, "", new { @class = "text-danger" })
+                            </td>
+
+                            <td>
+                                @Model.StaffList[i].State
+                                @Html.HiddenFor(x => Model.StaffList[i].State)
+                                @Html.ValidationMessageFor(model => Model.StaffList[i].State, "", new { @class = "text-danger" })
+                            </td>
+                            <td>
+                                @Model.StaffList[i].Location
+                                @Html.HiddenFor(x => Model.StaffList[i].Location)
+                                @Html.ValidationMessageFor(model => Model.StaffList[i].Location, "", new { @class = "text-danger" })
+                            </td>
+                            <td class="text-right">
+                                @Model.StaffList[i].PayDays
+                                @Html.HiddenFor(x => Model.StaffList[i].PayDays)
+                                @Html.ValidationMessageFor(model => Model.StaffList[i].PayDays, "", new { @class = "text-danger" })
+                            </td>
+                            <td class="text-right">
+                                @Model.StaffList[i].NetPay
+                                @Html.HiddenFor(x => Model.StaffList[i].NetPay)
+                                @Html.ValidationMessageFor(model => Model.StaffList[i].NetPay, "", new { @class = "text-danger" })
+                            </td>
+                            <td class="text-right">
+                                @Model.StaffList[i].Incentive
+                                @Html.HiddenFor(x => Model.StaffList[i].Incentive)
+                                @Html.ValidationMessageFor(model => Model.StaffList[i].Incentive, "", new { @class = "text-danger" })
+                            </td>
+                            <td class="text-right">
+                                @Model.StaffList[i].NetGross
+                                @Html.HiddenFor(x => Model.StaffList[i].NetGross)
+                                @Html.ValidationMessageFor(model => Model.StaffList[i].NetGross, "", new { @class = "text-danger" })
+                            </td>
+                            <td class="text-right">
+                                @Model.StaffList[i].CTC
+                                @Html.HiddenFor(x => Model.StaffList[i].CTC, new { @class = "hdnCTC" })
+                                @Html.ValidationMessageFor(model => Model.StaffList[i].CTC, "", new { @class = "text-danger" })
+                            </td>
+                            <td class="text-right">
+                                @Model.StaffList[i].Tran_AgencyPer
+                                @Html.HiddenFor(x => Model.StaffList[i].Tran_AgencyPer)
+                                @Html.ValidationMessageFor(model => Model.StaffList[i].Tran_AgencyPer, "", new { @class = "text-danger" })
+                            </td>
+                            <td class="text-right">
+                                @Model.StaffList[i].Tran_AgencyCommission
+                                @Html.HiddenFor(x => Model.StaffList[i].Tran_AgencyCommission)
+                                @Html.ValidationMessageFor(model => Model.StaffList[i].Tran_AgencyCommission, "", new { @class = "text-danger" })
+                            </td>
+                            <td class="text-right">
+                                @Model.StaffList[i].Total
+                                @Html.HiddenFor(x => Model.StaffList[i].Total)
+                                @Html.ValidationMessageFor(model => Model.StaffList[i].Total, "", new { @class = "text-danger" })
+                            </td>
+                        </tr>
+                            }
+                        }
+                    </tbody>
+                    @if (Model.StaffList != null)
+                    {
+                        <tfoot>
+                            <tr bgcolor="#fbffbb">
+                                <td colspan="11" align="right"><strong> Total</strong></td>
+                                <td class="text-right"> <strong> @Model.StaffList.Sum(x => x.PayDays)</strong> </td>
+                                <td class="text-right"> <strong> @Model.StaffList.Sum(x => x.NetPay) </strong></td>
+                                <td class="text-right"><strong> @Model.StaffList.Sum(x => x.Incentive) </strong></td>
+                                <td class="text-right"><strong> @Model.StaffList.Sum(x => x.NetGross) </strong></td>
+                                <td class="text-right"><strong> @Model.StaffList.Sum(x => x.CTC) </strong></td>
+                                <td class="text-right"><strong> @Model.StaffList.Sum(x => x.Tran_AgencyPer) </strong></td>
+                                <td class="text-right"><strong>@Model.StaffList.Sum(x => x.Tran_AgencyCommission) </strong></td>
+                                <td class="text-right"><strong>@Model.StaffList.Sum(x => x.Total) </strong></td>
+                            </tr>
+                        </tfoot>
+                    }
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>

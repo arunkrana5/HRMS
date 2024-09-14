@@ -1,0 +1,152 @@
+﻿@model IList<Users.List>
+@section style{
+    @System.Web.Optimization.Styles.Render("~/bundle/dataTablecss")
+}
+
+<div>
+    @Html.Partial("ListHeader_Partial", "Users List")
+
+
+
+    <div class="row">
+        <div class="col-lg-12 ">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="example" class="table table-bordered text-nowrap key-buttons">
+                            <thead>
+                                <tr>
+                                    <th>S.no.</th>
+                                    <th>Action</th>
+                                    <th>User ID</th>
+                                    <th>Role Name</th>
+                                    <th>Name</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
+
+                                    <th>Inserted Date</th>
+                                    <th>Inserted by</th>
+                                    <th>Updated Date</th>
+                                    <th>Updated by</th>
+                                    <th>IP Address</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{ int Count = 0;}
+                                @foreach (Users.List item in Model)
+                                {
+                                    Count++;
+                                <tr class="@(item.IsActive == true?"": "trrowred")">
+                                    <td>@Count</td>
+                                    <td>
+                                        <input type="hidden" name="I" value="@item.ID" />
+                                        <input type="hidden" name="N" value="@item.Name" />
+                                        @if (ClsApplicationSetting.GetSessionValue("Modify") == "True")
+                                        {
+                                            @Html.Raw(item.IsActive == true
+                            ? "<a  data-toggle='tooltip' data-original-title='Click to DeActivate' list='LoginUser_IsActive' OP='0' class='IsActive_Confirm' > <i class='fa fa-check-circle checkgreen' aria-hidden='true'></i></a>"
+                            : "<a data-toggle='tooltip' data-original-title='Click to Activate' list='LoginUser_IsActive' OP='1'  class='IsActive_Confirm' > <i class='fa fa-times-circle crossred' aria-hidden='true'></i></a>")
+
+                                            <a title="Edit" onclick="ListHeaderAdd(@item.ID);" data-toggle='tooltip'> <i class="fa fa-pencil-square-o checkgreen" aria-hidden="true"></i> </a>
+
+                                        }
+                                    </td>
+                                    <td>@item.UserID</td>
+                                    <td>@item.rolename</td>
+                                    <td>@item.Name</td>
+                                    <td>@item.Phone</td>
+                                    <td>@item.email</td>
+
+                                    <td>@item.CreatedDate</td>
+                                    <td>@item.CreatedBy</td>
+                                    <td>@item.ModifiedDate</td>
+                                    <td>@item.ModifiedBy</td>
+                                    <td>@item.IPAddress</td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade pop-dgn" id="ViewModal">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+
+            <div class="modal-header blk-gdn-btn">
+                <h4 class="modal-title"><i class="fas fa-print"></i>Add User </h4>
+                <div class="close" data-dismiss="modal">&times;</div>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div id="TagetDiv"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts    {
+    @System.Web.Optimization.Scripts.Render("~/bundle/dataTablesjs")
+    @System.Web.Optimization.Scripts.Render("~/bundle/unobtrusivejs")
+
+    <script>
+
+
+
+        function ListHeaderAdd(CMSID) {
+
+        if (CMSID == undefined)
+        {
+            CMSID = 0;
+        }
+			$.ajax({
+                url: "/Tools/_AddUser",
+				type: "Get",
+                data: { src: EncryptJSON(@ViewBag.MenuID+"*" + "/Tools/_AddUser" + "*" + CMSID) },
+                success: function (data)
+                {
+					$("#TagetDiv").empty();
+                    $("#TagetDiv").html(data);
+                    $(".applyselect").select2();
+                    $('#ViewModal').modal({
+                        backdrop: 'static',
+                        keyboard: false
+                    });
+                    $(".applyselect").select2();
+                     var form = $("form")
+                .removeData("validator")
+                .removeData("unobtrusiveValidation");
+                    $.validator.unobtrusive.parse(form);
+				},
+				error: function (er) {
+					alert(er);
+
+				}
+			});
+            }
+
+
+        function OnSuccess(obj) {
+            if (obj.Status) {
+                SuccessToaster(obj.SuccessMessage);
+                window.location.href = obj.RedirectURL;
+            }
+            else {
+                CloseLoadingDialog();
+                FailToaster(obj.SuccessMessage);
+
+            }
+        }
+
+
+    </script>
+}
+

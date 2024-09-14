@@ -1,0 +1,14 @@
+update Leave_Log set LeaveTypeID=(case when LeaveTypeID=1 then 4 when LeaveTypeID=2 then 5 when LeaveTypeID=3 then 6 when LeaveTypeID=4 then 3 end)
+
+update Leave_Log_Tran set LeaveTypeID=(case when LeaveTypeID=1 then 4 when LeaveTypeID=2 then 5 when LeaveTypeID=3 then 6 when LeaveTypeID=4 then 3 end)
+
+
+
+UPDATE Attendance SET Approved = tbl.Approved,ApprovedBy=tbl.ApprovedBy,ApprovedDate=tbl.ApprovedDate,ApprovedRemarks=tbl.ApprovedRemarks
+	FROM
+	(
+		select a.Approved as Approved,a.ApprovedDate as ApprovedDate,a.ApprovedBy as ApprovedBy,a.ApprovedRemarks as ApprovedRemarks,a.Month as MONTH, a.EMPID as EMPID
+		from Attendance_Final as a
+		where a.Isdeleted=0
+	) AS tbl
+	where Attendance.EMPID=tbl.EMPID and Attendance.Month=tbl.MONTH

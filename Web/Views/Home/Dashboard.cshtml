@@ -1,0 +1,219 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+    ViewBag.Title = "getStudentsCountbyCity";
+}
+
+<div class="col-xl-12 col-md-12 col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            Helpdesk Tickets
+            @if (ClsApplicationSetting.GetSessionValue("RoleID") == "1")
+            {
+            <span class="text-success me-1"><i class="fe fe-arrow-down ms-1"></i>Welcome @ClsApplicationSetting.GetSessionValue("NAME") You have special rights you can view all the tickets</span>
+            }
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12 col-sm d-flex mb-4 mb-sm-0">
+                    <i class="mdi mdi-basket-fill fs-60 text-success icon-dropshadow-success me-3"></i>
+                    <div class="mt-5">
+                        <h6>Total Tickets</h6>
+                        <h3 class="mb-0 font-weight-bold"><span class="spnTotal">0</span></h3>
+                        <div class="progress progress-sm mt-3 bg-primary-transparent">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" style="width: 58%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm d-flex mb-4 mb-sm-0">
+                    <i class="mdi mdi-basket-fill fs-60 text-primary icon-dropshadow-primary me-3"></i>
+                    <div class="mt-5">
+                        <h6>Pending</h6>
+                        <h3 class="mb-0 font-weight-bold"><span class="spnPending">0</span></h3>
+                        <div class="progress progress-sm mt-3 bg-primary-transparent">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary PendingPbar"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm d-flex">
+                    <i class="mdi mdi-basket-fill fs-60 text-danger icon-dropshadow-danger me-3"></i>
+                    <div class="mt-5">
+                        <h6>In Process</h6>
+                        <h3 class="mb-0 font-weight-bold"><span class="spnInProcess">0</span></h3>
+                        <div class="progress progress-sm mt-3 bg-primary-transparent">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary InProcessPbar"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm d-flex">
+                    <i class="mdi mdi-basket-fill fs-60 text-danger icon-dropshadow-danger me-3"></i>
+                    <div class="mt-5">
+                        <h6>Forward</h6>
+                        <h3 class="mb-0 font-weight-bold"><span class="spnForward">0</span></h3>
+                        <div class="progress progress-sm mt-3 bg-primary-transparent">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary ForwardPbar"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm d-flex">
+                    <i class="mdi mdi-basket-fill fs-60 text-danger icon-dropshadow-danger me-3"></i>
+                    <div class="mt-5">
+                        <h6>Completed</h6>
+                        <h3 class="mb-0 font-weight-bold"><span class="spnCompleted">0</span></h3>
+                        <div class="progress progress-sm mt-3 bg-primary-transparent">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary CompletedPbar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+@*<div class="row">
+    <div class="col-xl-3 col-lg-3 col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <i class="mdi mdi-file-outline card-custom-icon icon-dropshadow-primary text-primary fs-60"></i>
+                <p class=" mb-1 ">Pending</p>
+                <h2 class="mb-1 font-weight-bold"> <span class="spnPending">0</span> </h2>
+                <span class="mb-1 text-muted"><span class="text-danger"><i class="fa fa-caret-down  me-1"></i> 43.2</span> than last month</span>
+                <div class="progress progress-sm mt-3 bg-success-transparent">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-success PendingPbar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-lg-3 col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <svg class="card-custom-icon text-secondary icon-dropshadow-secondary" x="1008" y="1248" viewBox="0 0 24 24" height="100%" width="100%" preserveAspectRatio="xMidYMid meet" focusable="false">
+                    <path opacity=".0" d="M12.07,6.01 C8.2,6.01 5.07,9.14 5.07,13.01 C5.07,16.88 8.2,20.01 12.07,20.01 C15.94,20.01 19.07,16.88 19.07,13.01 C19.07,9.14 15.94,6.01 12.07,6.01 Z M13.07,14.01 L11.07,14.01 L11.07,8.01 L13.07,8.01 L13.07,14.01 Z"></path>
+                    <path d="M9.07,1.01 L15.07,1.01 L15.07,3.01 L9.07,3.01 L9.07,1.01 Z M11.07,8.01 L13.07,8.01 L13.07,14.01 L11.07,14.01 L11.07,8.01 Z M19.1,7.39 L20.52,5.97 C20.09,5.46 19.62,4.98 19.11,4.56 L17.69,5.98 C16.14,4.74 14.19,4 12.07,4 C7.1,4 3.07,8.03 3.07,13 C3.07,17.97 7.09,22 12.07,22 C17.05,22 21.07,17.97 21.07,13 C21.07,10.89 20.33,8.93 19.1,7.39 Z M12.07,20.01 C8.2,20.01 5.07,16.88 5.07,13.01 C5.07,9.14 8.2,6.01 12.07,6.01 C15.94,6.01 19.07,9.14 19.07,13.01 C19.07,16.88 15.94,20.01 12.07,20.01 Z"></path>
+                </svg>
+                <p class=" mb-1 ">In Process</p>
+                <h2 class="mb-1 font-weight-bold"> <span class="spnInProcess">0</span></h2>
+                <span class="mb-1 text-muted"><span class="text-success"><i class="fa fa-caret-up  me-1"></i> 19.8</span> than last month</span>
+                <div class="progress progress-sm mt-3 bg-secondary-transparent">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-secondary InProcessPbar" style="width: 58%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-lg-3 col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <svg class="card-custom-icon text-primary icon-dropshadow-primary" x="1008" y="1248" viewBox="0 0 24 24" height="100%" width="100%" preserveAspectRatio="xMidYMid meet" focusable="false">
+                    <path d="M17.65,6.35 C16.2,4.9 14.21,4 12,4 C7.58,4 4.01,7.58 4.01,12 C4.01,16.42 7.58,20 12,20 C15.73,20 18.84,17.45 19.73,14 L17.65,14 C16.83,16.33 14.61,18 12,18 C8.69,18 6,15.31 6,12 C6,8.69 8.69,6 12,6 C13.66,6 15.14,6.69 16.22,7.78 L13,11 L20,11 L20,4 L17.65,6.35 Z"></path>
+                </svg>
+                <p class=" mb-1 ">Forward</p>
+                <h2 class="mb-1 font-weight-bold"> <span class="spnForward">0</span></h2>
+                <span class="mb-1 text-muted"><span class="text-success"><i class="fa fa-caret-up  me-1"></i> 0.8%</span> than last month</span>
+                <div class="progress progress-sm mt-3 bg-primary-transparent">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary ForwardPbar" style="width: 58%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-lg-3 col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <i class="mdi mdi-heart-outline card-custom-icon icon-dropshadow-success text-success fs-60"></i>
+                
+                <p class=" mb-1 ">Completed</p>
+                <h2 class="mb-1 font-weight-bold"> <span class="spnCompleted">0</span></h2>
+                <span class="mb-1 text-muted"><span class="text-success"><i class="fa fa-caret-up  me-1"></i> 0.8%</span> than last month</span>
+                <div class="progress progress-sm mt-3 bg-primary-transparent">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary CompletedPbar" style="width: 58%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>*@
+@section scripts    {
+    @System.Web.Optimization.Scripts.Render("~/bundle/dataTablesjs")
+
+    @System.Web.Optimization.Scripts.Render("~/bundle/unobtrusivejs")
+
+
+
+    <script>
+        $(document).ready(function () {
+            GetHelpdeskticketcount();    
+        });
+
+
+        setInterval(function () {
+            GetHelpdeskticketcount();
+        }, 5000);
+
+            function GetHelpdeskticketcount() {
+                $.ajax({
+                 url: '/CommonAjax/GetHelpdeskticketcountJson',
+                type: "Get",
+                 data: { src: EncryptJSON(@ViewBag.MenuID+"*" + "/CommonAjax/GetHelpdeskticketcountJson" + "*") },
+                success: function (data)
+                {
+                    var spnPending = $(".spnPending")
+                    var spnInProcess = $(".spnInProcess")
+                    var spnForward = $(".spnForward")
+                    var spnCompleted = $(".spnCompleted")
+                    var spnTotal = $(".spnTotal")
+                    if (parseInt(spnTotal.html()) != data.Total) {
+                        $(spnTotal).html(data.Total);
+                        $(spnTotal).addClass('animation');
+                        $(".PendingPbar").attr("style", "width:" + data.Total + '%')
+                        setTimeout(function () {
+                            $(spnTotal).removeClass('animation');
+                        }, 5000);
+                    }
+
+                    if (parseInt(spnPending.html()) != data.Pending) {
+                        $(spnPending).html(data.Pending);
+                        $(spnPending).addClass('animation');
+                        $(".PendingPbar").attr("style", "width:"+data.Pending+'%')
+                        setTimeout(function () {
+                            $(spnPending).removeClass('animation');
+                        }, 5000);
+                    }
+                    if (parseInt(spnInProcess.html()) != data.InProcess) {
+                        $(spnInProcess).html(data.InProcess);
+                        $(spnInProcess).addClass('animation');
+                        $(".InProcessPbar").attr("style", "width:" + data.InProcess + '%')
+                        setTimeout(function () {
+                            $(spnInProcess).removeClass('animation');
+                        }, 5000);
+                    }
+                    if (parseInt(spnForward.html()) != data.Forward) {
+                        $(spnForward).html(data.Forward);
+                        $(spnForward).addClass('animation');
+                        $(".ForwardPbar").attr("style", "width:" + data.Forward + '%')
+                        setTimeout(function () {
+                            $(spnForward).removeClass('animation');
+                        }, 5000);
+                    }
+                    if (parseInt(spnCompleted.html()) != data.Completed) {
+                        $(spnCompleted).html(data.Completed);
+                        $(spnCompleted).addClass('animation');
+                        $(".CompletedPbar").attr("style", "width:" + data.Completed + '%')
+                        setTimeout(function () {
+                            $(spnCompleted).removeClass('animation');
+                        }, 5000);
+                    }
+                  
+				},
+				error: function (er) {
+					console.log(er);
+
+				}
+                })
+
+            }
+
+
+
+
+    </script>
+}
+

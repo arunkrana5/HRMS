@@ -1,0 +1,335 @@
+﻿@import "brand-color.css";
+body, html{
+  overflow-x:hidden;
+    margin:0;
+  
+    padding:0;
+}
+/*-------------------My Login CSS-----------------------*/
+.bg-style:before {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/loginimgs/artboard 1bglogin2.png');
+    background-repeat: no-repeat;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    opacity: 0.8;
+}
+h1 {
+    color: #03045e;
+    font-size:52px;
+}
+.page-style1 .input-group-addon {
+    background-color: none;
+    border:#fff;
+    border-bottom: 1px solid #D3DFEA;
+}
+.page-style1 .form-control {
+    border: none;
+    background-color:none;
+    border-bottom: 1px solid #D3DFEA;
+}
+.login-form .fa {
+    font-size: 22px;
+    color: #a7a7d1;
+}
+
+::placeholder{
+    font-size:15px;
+    letter-spacing:1px;
+}
+
+a{
+    font-size:14px;
+}
+.btn-login{
+    margin-top:20%;
+}
+button {
+    background-color: #11c893;
+    color:#fff;
+    border-radius:20px;
+    letter-spacing:1px;
+    font-weight:500;
+    height:40px;
+    border:none;
+    width:280px;
+}
+.form-control:focus {
+    outline: none;
+    border-color: #00000085;
+    box-shadow: 0 0 10px #719ECE;
+}
+.input-group:focus {
+    outline: none;
+    border-color: #00000085;
+    box-shadow: 0 0 10px #719ECE;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+button:focus {
+    outline: none
+}
+
+i{
+	margin-right:5px;
+}
+
+body{
+	font-family: 'Roboto', sans-serif;
+}
+
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #ef8911;
+    outline: 0;
+    box-shadow: 0 0 0 0.0rem rgb(255, 255, 255);
+}
+.btn{
+    border: 0px;
+    font-size: 16px;
+    padding: 8px 16px;
+    font-weight: bold;
+    -webkit-box-shadow: -1px 5px 20px -5px rgba(0,0,0,0.2);
+    -moz-box-shadow: -1px 5px 20px -5px rgba(0,0,0,0.2);
+    box-shadow: -1px 5px 20px -5px rgba(0,0,0,0.2);
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 200px;
+    margin-left: 5px;
+    margin-bottom: 10px;
+}
+
+.login-bg {
+    background: url(/assets/design/images/login-bg.jpg) no-repeat center;
+    background-attachment: fixed;
+    background-size: cover;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+
+.login-page {
+    background: #fff;
+    padding: 40px 40px;
+    background: #fff;
+    width: 440px;
+    height: 400px;
+    -webkit-box-shadow: -2px 15px 37px -10px rgba(0,0,0,0.75);
+    -moz-box-shadow: -2px 15px 37px -10px rgba(0,0,0,0.75);
+    box-shadow: -2px 15px 37px -10px rgba(0,0,0,0.75);
+    position: relative;
+}
+
+.login-header {
+    margin-bottom: 40px;
+}
+
+    .login-header h2 {
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+
+.login-form input {
+    border: 1px solid #c5c5c5;
+    padding: 20px 10px;
+    width: 100%;
+    font-size: 12px;
+	    border-radius: 0px;
+}
+
+.login-logo {
+    position: absolute;
+    top: -55px;
+    right: -40px;
+    height: 120px;
+    width: 120px;
+    background: #fff;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    border-radius: 100px;
+    padding: 45px 27px;
+}
+
+.org-btn {
+    padding: 10px 35px;
+    color: #fff !important
+}
+
+    .org-btn:hover {
+        color: #fff
+    }
+
+.login-footer a {
+    font-size: 14px !important;
+	color:#00000085;
+	
+}
+
+.login-footer a:hover{
+	color:#000;
+	text-decoration:none
+	
+}
+
+.lgn-err{
+	color: #fb0505;
+    background-color: #f0f3bc;
+    border-color: #b6c512;
+	padding: 5px 10px;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+
+
+
+.page-style1 {
+    position: relative;
+    height: 100vh;
+}
+
+   /* .page-style1:before {
+        position: absolute;
+        content: '';
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(rgba(68, 84, 195, 0.25), rgba(68, 84, 195, 0.18)), url(../../assets/images/pattern/4.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: top;
+        opacity: 0.8;
+    }
+*/
+    .page-style1 .form-control {
+        padding-top: 4px;
+        height: 45px;
+        padding-bottom: 6px;
+    }
+
+    .page-style1 .btn {
+        height: 45px;
+        padding-top: 0;
+        padding-bottom: 0;
+        line-height: 45px;
+    }
+
+    .page-style1 .input-group-addon {
+        border-top:none;
+        border-right:0;
+        border-bottom: 1px solid #D3DFEA;
+         border-right: 0;
+        line-height: 0px;
+    }
+
+    .page-style1 .input-group-append {
+        border-top: none;
+        border-right: 0;
+        border-bottom: 1px solid #D3DFEA;
+        border-right: 0;
+        line-height: 16px;
+        border-radius: 0 5px 5px 0;
+    }
+
+    .page-style1 .form-control {
+        border-top:none;
+/*
+        border: 1px solid #D3DFEA;
+    */}
+
+    .page-style1 hr {
+        border-top: 1px solid #d3dfea;
+    }
+
+    .page-style1 .custom-control-label {
+        line-height: 26px;
+    }
+
+    .page-style1 .btn-svgs .svg-icon {
+        position: absolute;
+        left: 37%;
+        top: auto;
+    }
+
+    .page-style1 .custom-control-label:before {
+        border: 1px solid #d3dfea;
+    }
+
+.bg-style {
+    position: relative;
+}
+
+   /* .bg-style:before {
+        position: absolute;
+        content: '';
+        width: 100%;
+        height: 100%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: top;
+        opacity: 0.8;
+    }
+
+   */ .bg-style .svg-icon {
+        fill: #fff;
+    }
+
+    .bg-style .header-brand-img {
+        position: absolute;
+        top: 30px;
+        left: 55px;
+    }
+
+.page-style2 .h-100vh {
+    max-height: 100vh;
+}
+
+.page-style1 .page-content,
+.page-style2 .page-content {
+    margin: 0;
+}
+
+@media (max-width: 767px) {
+    .d-md-flex .bg-style {
+        display: none;
+    }
+
+    .d-md-flex .w-80 {
+        width: 100% !important;
+    }
+}

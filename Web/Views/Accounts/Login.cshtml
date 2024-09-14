@@ -1,0 +1,125 @@
+﻿
+@model AdminUser.Login
+
+@{
+    Layout = null;
+    string PageName = ClsApplicationSetting.GetPageName();
+}
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@PageName </title>
+    <meta name="title" content="@PageName" />
+    <meta name="keywords" content="@PageName" />
+    <meta name="description" content="@PageName" />
+
+    <link rel="icon" href="@Url.Content("~/assets/design/images/brand/favicon.png")" type="image/png" sizes="50x50">
+    @Html.IncludeVersionedCss(Url.Content("~/assets/design/css/style.css"))
+    @*@Html.IncludeVersionedCss(Url.Content("~/assets/design/css/dark.css"))
+        @Html.IncludeVersionedCss(Url.Content("~/assets/design/css/skins.css"))*@
+    @Html.IncludeVersionedCss(Url.Content("~/assets/design/css/animated.css"))
+    @Html.IncludeVersionedCss(Url.Content("~/assets/design/plugins/web-fonts/icons.css"))
+    @Html.IncludeVersionedCss(Url.Content("~/assets/design/plugins/web-fonts/font-awesome/font-awesome.min.css"))
+    @Html.IncludeVersionedCss(Url.Content("~/assets/design/plugins/web-fonts/plugin.css"))
+
+    @Html.IncludeVersionedCss(Url.Content("~/assets/design/css/login.css"))
+</head>
+
+
+<body class="page-style1 page-style2 light-mode default-sidebar bg-white">
+    <div class="row ">
+        <div class="col-xl-6  bg-style h-100vh page-style">
+            <div class="page-content">
+                <div class="page-single-content">
+                    <div class="card-body text-white py-5 px-8 text-center">
+                               
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class=" col-xl-6 page-content">
+            <div class="page-single-content">
+                <div class="card-body p-6">
+
+                    @using (Html.BeginForm("Login", "Accounts",
+new { ReturnURL = ViewBag.ReturnURL }, FormMethod.Post,
+new
+{
+name = "LoginForm",
+id = "LoginForm",
+@class = "login-form",
+enctype = "multipart/form-data"
+}))
+                    {
+
+                        <div class="row">
+                            <div class="col-md-8 mx-auto d-block">
+                               
+                                    <h1 class=""> Account Login</h1>
+                               
+                                <div class="input-group mb-3">
+                                    <span class="input-group-addon">
+                                        <img src="~/assets/design/images/loginImgs/icons8-user-48.png" />
+                                    </span>
+                                    @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @autofocus = "true", @placeholder = "Username" })
+                                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="input-group mb-4">
+                                    <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                                    @Html.TextBoxFor(model => model.Password, new { @class = "form-control", @autofocus = "true", @placeholder = "Password", @type = "password" })
+                                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                </div>
+                                @*<div class="input-group mb-4">
+                                        @Html.CheckBoxFor(model => model.RememberMe)
+                                        @Html.LabelFor(f => f.RememberMe)
+                                    </div>*@
+                                <div class="row">
+                                    <div class="col-12">
+                                        <a href="/Accounts/ForgotPassword" class="forgot">Forgot password?</a>
+                                    </div>
+                                    <div class="col-12 btn-login">
+                                       
+                                        <button name="Command" value="Submit" class="" type="submit">  Login</button>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    @if (TempData["LoginSuccess"] != null)
+                                    {
+                                        if (TempData["LoginSuccess"].ToString() != "")
+                                        {
+                                            <div class="@(TempData["LoginSuccess"].ToString()=="Y"?"text-success":"text-danger") text-center">
+                                                @TempData["LoginSuccessMsg"]
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                               
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    @Html.IncludeVersionedJs(Url.Content("~/assets/design/js/vendors/jquery-3.5.1.min.js"))
+    @Html.IncludeVersionedJs(Url.Content("/assets/design/plugins/bootstrap/popper.min.js"))
+    @Html.IncludeVersionedJs(Url.Content("/assets/design/plugins/othercharts/jquery.sparkline.min.js"))
+    @Html.IncludeVersionedJs(Url.Content("/assets/design/js/vendors/circle-progress.min.js"))
+    @Html.IncludeVersionedJs(Url.Content("/assets/design/plugins/rating/jquery.rating-stars.js"))
+    @System.Web.Optimization.Scripts.Render("~/bundle/unobtrusivejs")
+    @Html.IncludeVersionedJs(Url.Content("~/assets/design/Scripts/CustomValidate.min.js"))
+
+
+
+</body>
+
+
+
+</html>

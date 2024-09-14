@@ -1,0 +1,56 @@
+﻿@model Helpdesk.Status.Add
+
+@using (Ajax.BeginForm("_StatusAdd", "HelpDesk",
+        new { src = ViewBag.src },
+         new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess", OnBegin = "ShowLoadingDialog()" },
+            new { @id = "_StatusAddForm" })
+    )
+{
+
+
+    
+    @Html.HiddenFor(x => Model.StatusID)
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+        <label>Status Name <sup>*</sup></label>
+        @Html.TextBoxFor(model => model.StatusName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.StatusName, "", new { @class = "text-danger" })
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+        <label>Display Name <sup>*</sup></label>
+        @Html.TextBoxFor(model => model.DisplayName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.DisplayName, "", new { @class = "text-danger" })
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+        <label>Color</label>
+        @Html.TextBoxFor(model => model.Color, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Color, "", new { @class = "text-danger" })
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+        <label>Icon </label>
+        @Html.TextBoxFor(model => model.Icon, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Icon, "", new { @class = "text-danger" })
+    </div>
+    
+
+
+    <div class="col-lg-6 col-md-6 col-sm-6 form-group">
+        <label>Priority</label>
+        @Html.TextBoxFor(model => model.Priority, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Priority, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="col-lg-12 form-group">
+
+        @if (Model.StatusID > 0)
+        {
+            <button type="submit" class="btn btn-indigo" name="Command" value="Add"><i class="fa fa-paper-plane" aria-hidden="true"></i> Update</button>
+        }
+        else
+        {
+            <button type="submit" class="btn btn-indigo" name="Command" value="Add"><i class="fa fa-paper-plane" aria-hidden="true"></i> Submit</button>
+        }
+    </div>
+
+</div>
+}

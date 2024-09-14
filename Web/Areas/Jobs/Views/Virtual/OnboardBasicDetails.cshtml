@@ -1,0 +1,336 @@
+﻿@model Onboarding.Users.BasicDetails
+
+<div class="row" id="demoform2">
+    <div class="col-sm-12 col-xl-12 col1 text-center brand-logo">
+        <div class="container">
+            <h1 class="pt-3">Requirter Details</h1>
+        </div>
+    </div>
+    <div class="col-xl-12 col-sm-12">
+
+        @using (Ajax.BeginForm("OnboardBasicDetails", "Virtual",
+          new { Key = ViewBag.Key },
+           new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess" },
+              new { @id = "OnboardBasicDetailsForm" })
+      )
+        {
+            @Html.ValidationSummary(false);
+            <div class="tab" id="regForm">
+                <div class="basic">
+                    <div class="icons">
+                        <span class="user-icon">
+                            <img src="~/Areas/Jobs/assets/Images/user.png" />
+
+                        </span>
+                        <h4 class="mt-4">Basic Details</h4>
+                    </div>
+                    <p class="">Please Fill All Your Details</p>
+                    @if (Model.Approved > 0)
+                    {
+                        <div class="field1 my-2 row">
+                            <div class="col-xl-3 col-md-6 col-sm-12">
+                                <div class="form-floating form-group">
+
+                                    <p style="color:red">@Model.ApprovedStatus</p>
+
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6 col-sm-12">
+                                <div class="form-floating form-group">
+                                    <p style="color:blue">@Model.ApprovedRemarks</p>
+
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <div class="field1 my-2 row">
+                        <div class="col-xl-3 col-md-6 col-sm-12">
+                            <div class="form-floating form-group">
+                                <label for="floatingInput">Name <sup>*</sup></label>
+                                @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @id = "floatingInput", })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 col-sm-12">
+                            <div class="form-floating form-group">
+                                <label for="FatherName">FatherName <sup>*</sup></label>
+                                @Html.TextBoxFor(model => model.FatherName, new { @class = "form-control", @id = "floatingInput" })
+                                @Html.ValidationMessageFor(model => model.FatherName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 col-sm-12">
+
+                            <div class="form-floating form-group">
+                                <label for="FatherName">Mobile <sup>*</sup></label>
+                                @Html.TextBoxFor(model => model.Mobile, new { @class = "form-control", })
+                                @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 col-sm-12">
+                            <div class="form-floating form-group">
+                                <label for="EmailID">EmailID <sup>*</sup></label>
+                                @Html.TextBoxFor(model => model.EmailID, new { @class = "form-control", })
+                                @Html.ValidationMessageFor(model => model.EmailID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="my-2 row ">
+                        <div class="col-xl-3 col-md-6 col-sm-12">
+                            <div class="form-floating form-group">
+                                <label for="DOB">DOB <sup>*</sup></label>
+                                @Html.TextBoxFor(model => model.DOB, new { @class = "form-control", @id = "floatingInput", @type = "date" })
+                                @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6 col-sm-12">
+                            <div class="form-floating form-group ">
+                                <label for="Gender">Gender <sup>*</sup></label>
+                                @Html.EnumDropDownListFor(m => m.Gender, "Select", new { @class = "form-control applyselect" })
+                                @Html.ValidationMessageFor(m => m.Gender)
+
+                            </div>
+                        </div>
+                        <div class=" col-xl-3 col-md-6 col-sm-12 ">
+                            <div class="form-floating form-group">
+                                <label for="BloodGroup">Blood Group <sup>*</sup></label>
+                                @Html.EnumDropDownListFor(m => m.BloodGroup, "Select", new { @class = "form-control applyselect" })
+                                @Html.ValidationMessageFor(m => m.BloodGroup)
+                            </div>
+
+                        </div>
+                        <div class="col-xl-3 col-md-6 col-sm-12">
+                            <div class="form-floating form-group ">
+                                <label for="MaritalStatus">Marital Status <sup>*</sup></label>
+                                @Html.EnumDropDownListFor(m => m.MaritalStatus, "Select", new { @class = "form-control applyselect" })
+
+                                @Html.ValidationMessageFor(model => model.MaritalStatus, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="mb-1 row">
+
+                        <div class="col-xl-3 col-md-6 col-sm-12 ">
+                            <div class="form-floating form-group">
+                                <label for="floatingnumber">Aadhar No <sup>*</sup></label>
+                                @Html.TextBoxFor(model => model.AadharNo, new { @class = "form-control", @id = "floatingInput" })
+
+                                @Html.ValidationMessageFor(model => model.AadharNo, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6 col-sm-12 ">
+                            <div class="form-floating form-group">
+                                <label for="floatingnumber">PAN <sup>*</sup></label>
+                                @Html.TextBoxFor(model => model.PAN, new { @class = "form-control", @id = "floatingInput" })
+
+                                @Html.ValidationMessageFor(model => model.PAN, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 col-sm-12 ">
+                            <div class="form-floating form-group">
+                                <label for="floatingnumber">ESIC </label>
+                                @Html.TextBoxFor(model => model.ESIC, new { @class = "form-control", @id = "floatingInput" })
+
+                                @Html.ValidationMessageFor(model => model.ESIC, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 col-sm-12 ">
+                            <div class="form-floating form-group">
+                                <label for="floatingnumber">UAN </label>
+                                @Html.TextBoxFor(model => model.UAN, new { @class = "form-control", @id = "floatingInput" })
+
+                                @Html.ValidationMessageFor(model => model.UAN, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="my-2 row">
+                        <div class="col-xl-3 col-md-6 col-sm-12">
+                            <div class="form-floating form-group">
+                                <label for="floatingaddress">Country <sup>*</sup></label>
+                                @Html.DropDownListFor(n => n.CountryID, new SelectList(Model.CountryList, "ID", "Name", Model.CountryID), "Select",
+                             new { @class = "form-control  applyselect", @onchange = "FillRegion(this)" })
+                                @Html.ValidationMessageFor(model => model.CountryID, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 col-sm-12">
+                            <div class="form-floating form-group">
+                                <label for="floatingaddress">Region <sup>*</sup></label>
+                                @Html.DropDownListFor(n => n.RegionID, new SelectList(Model.RegionList, "ID", "Name", Model.RegionID), "Select",
+                             new { @class = "form-control  applyselect", @onchange = "FillState(this)" })
+                                @Html.ValidationMessageFor(model => model.RegionID, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 col-sm-12">
+                            <div class="form-floating form-group">
+                                <label for="State">State <sup>*</sup></label>
+                                @Html.DropDownListFor(n => n.StateID, new SelectList(Model.StateList, "ID", "Name", Model.StateID), "Select",
+                               new { @class = "form-control  applyselect", @onchange = "FillCity(this)" })
+                                @Html.ValidationMessageFor(model => model.StateID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 col-sm-12">
+                            <div class="form-floating form-group ">
+                                <label for="City">City <sup>*</sup></label>
+                                @Html.DropDownListFor(n => n.CityID, new SelectList(Model.CityList, "ID", "Name", Model.CityID), "Select",
+                               new { @class = "form-control  applyselect" })
+                                @Html.ValidationMessageFor(model => model.CityID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 col-sm-12">
+                            <div class="form-floating form-group ">
+                                <label for="PINCode">PIN Code <sup>*</sup></label>
+                                @Html.TextBoxFor(model => model.PINCode, new { @class = "form-control", })
+                                @Html.ValidationMessageFor(model => model.PINCode, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-xl-9  col-sm-12">
+                            <div class="form-floating form-group">
+                                <label for="CurrentAddress">Address<sup>*</sup></label>
+                                @Html.TextBoxFor(model => model.Address, new { @class = "form-control", })
+                                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="my-2 row">
+                      
+                        <div class="col-xl-3 col-md-6 col-sm-12 ">
+                            <div class="form-floating form-group">
+                                <label for="floatingnumber">Vaccination Details </label>
+                                @Html.EnumDropDownListFor(m => m.VaccinationDetails, "Select", new { @class = "form-control applyselect" })
+
+                                @Html.ValidationMessageFor(model => model.VaccinationDetails, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            <div style="overflow:auto;">
+                <div class="d-flex justify-content-center ">
+                    <button type="submit" class="button" name="Command" value="Add" id="nextBtn"><i class="fa fa-paper-plane" aria-hidden="true"></i> Next</button>
+                </div>
+            </div>
+        }
+    </div>
+
+</div>
+@section scripts    {
+
+    @System.Web.Optimization.Scripts.Render("~/bundle/unobtrusivejs")
+
+    <script>
+        function OnSuccess(obj) {
+            if (obj.Status) {
+                SuccessToaster(obj.SuccessMessage);
+                window.location.href = obj.RedirectURL;
+            }
+            else {
+                CloseLoadingDialog();
+                FailToaster(obj.SuccessMessage);
+
+            }
+        }
+
+        function FillRegion() {
+            var CountryID = $("#CountryID").find("option:selected").val();
+            if (CountryID != '') {
+                var data = GetDropDownList(CountryID, "Region");
+                if (data != '') {
+                    $("#RegionID").empty();
+                    $("#RegionID").append($("<option />").val("").text("Select"));
+                    $("#StateID").empty();
+                    $("#StateID").append($("<option />").val("").text("Select"));
+                    $("#CityID").empty();
+                    $("#CityID").append($("<option />").val("").text("Select"));
+                    $(data).each(function () {
+                        $("#RegionID").append($("<option />").val(this.ID).text(this.Name));
+                        $("#RegionID").select2();
+                    });
+                    CloseLoadingDialog();
+                } else {
+                    $("#RegionID").empty();
+                    $("#RegionID").append($("<option />").val("").text("Select"));
+                    $("#StateID").empty();
+                    $("#StateID").append($("<option />").val("").text("Select"));
+                    $("#CityID").empty();
+                    $("#CityID").append($("<option />").val("").text("Select"));
+
+                }
+            } else {
+                $("#RegionID").empty();
+                $("#RegionID").append($("<option />").val("").text("Select"));
+                $("#StateID").empty();
+                $("#StateID").append($("<option />").val("").text("Select"));
+                $("#CityID").empty();
+                $("#CityID").append($("<option />").val("").text("Select"));
+            }
+
+        }
+
+        function FillState() {
+            var RegionID = $("#RegionID").find("option:selected").val();
+            if (RegionID != '') {
+                var data = GetDropDownList(RegionID, "State");
+                if (data != '') {
+                    $("#StateID").empty();
+                    $("#StateID").append($("<option />").val("").text("Select"));
+                    $("#CityID").empty();
+                    $("#CityID").append($("<option />").val("").text("Select"));
+                    $(data).each(function () {
+                        $("#StateID").append($("<option />").val(this.ID).text(this.Name));
+                        $("#StateID").select2();
+                    });
+                    CloseLoadingDialog();
+                } else {
+                    $("#StateID").empty();
+                    $("#StateID").append($("<option />").val("").text("Select"));
+                    $("#CityID").empty();
+                    $("#CityID").append($("<option />").val("").text("Select"));
+
+                }
+            } else {
+                $("#StateID").empty();
+                $("#StateID").append($("<option />").val("").text("Select"));
+                $("#CityID").empty();
+                $("#CityID").append($("<option />").val("").text("Select"));
+            }
+
+        }
+
+        function FillCity() {
+            var StateID = $("#StateID").find("option:selected").val();
+            if (StateID != '') {
+                var data = GetDropDownList(StateID, "City");
+                if (data != '') {
+                    $("#CityID").empty();
+                    $("#CityID").append($("<option />").val("").text("Select"));
+                    $(data).each(function () {
+                        $("#CityID").append($("<option />").val(this.ID).text(this.Name));
+                        $("#CityID").select2();
+                    });
+                    CloseLoadingDialog();
+                } else {
+                    $("#CityID").empty();
+                    $("#CityID").append($("<option />").val("").text("Select"));
+
+                }
+            } else {
+                $("#CityID").empty();
+                $("#CityID").append($("<option />").val("").text("Select"));
+            }
+
+        }
+    </script>
+}

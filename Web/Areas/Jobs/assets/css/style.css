@@ -1,0 +1,325 @@
+﻿
+/* ravi123456 */
+@import url('https://fonts.googleapis.com/css2?family=Overpass&family=Righteous&family=Rubik&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Righteous&family=Rubik&display=swap');
+
+#demoform2 .tab {
+    width: 80% !important;
+    font-family: 'Rubik', sans-serif;
+}
+
+#demoform2 .brand-logo {
+    color: #f8f8f8;
+    margin-bottom: 10px;
+    padding-bottom: 0;
+}
+
+/* field1 start */
+#demoform2 .header {
+    padding: 20px;
+    border-radius: 9px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+#demoform2 p {
+    font-weight: 400;
+    margin-left: 4px;
+    color: #4a5577;
+    font-family: Raleway;
+}
+
+#demoform2 h2 {
+    color: #2a20aa;
+    margin-bottom: 40px;
+}
+
+#demoform2 .head-icon {
+    background-color: #2a20aa;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 50%;
+    color: #fff;
+}
+
+#demoform2 .head {
+    color: #000;
+}
+#demoform2 .fa-paper-plane{
+    margin-right:6px;
+}
+
+#form {
+    padding: 10px;
+    border-radius: 8px;
+}
+
+
+
+#demoform2 label {
+    color: #757575 ;
+    border: none !important;
+    border-radius: 0;
+    font-size: 14px;
+    margin:0;
+    padding:4px 10px;
+}
+
+#demoform2 input {
+    color: #333;
+    width: 100%;
+    height: 50px;
+    margin-top: 0px;
+    padding: 14px 10px 0 10px;
+    border: 1px solid #aaaaaa;
+}
+
+
+#demoform2 select {
+    border: 1px solid #aaaaaa !important;
+    color: #333;
+    width: 100%;
+    font-size: 14px;
+}
+#demoform2 option {
+    color: #333;
+    width: 100%;
+}
+.form-select {
+    background-color: #fff;
+    border: 1px solid #aaaaaa !important;
+    width: 100%;
+    color: #333;
+}
+
+.form-control {
+    background-color: #fff;
+    border: 1px solid #aaaaaa !important;
+    width: 100%;
+    color: #dddddd;
+}
+
+#demoform2 .form-floating {
+    /* background-color: #f8f8f8; */
+
+    color: #757575 ;
+    border: none !important;
+    padding-bottom:10px;
+    margin:0;
+}
+
+/* document upload start */
+#documents .card{
+    border:none;
+}
+#documents tbody, td, tfoot, th, thead, tr {
+    border: none !important;
+}
+#documents textarea{
+    height: 43px !important;
+}
+#documents .form-control {
+    background-color: #fff;
+    height: auto;
+    padding: 8px;
+}
+#documents input {
+ 
+}
+#demoform2 table {
+    border: none;
+}
+
+#form-upload button {
+    background-color: #219652;
+    color: #fff;
+    border: none;
+    width: auto !important;
+    border-radius: 8px;
+    padding: 4px 20px;
+    margin: 0 !important;
+    font-family: Raleway;
+}
+
+#form-upload input {
+    border: none;
+    background-color: #f7f7f7;
+    color: #333;
+}
+
+#form-upload td {
+    border: none;
+}
+
+.fa-window-close {
+    font-size: 24px;
+    color: #d11a2a;
+}
+.fa-window-close:hover {
+    font-size: 24px;
+    color: #ff4b5b;
+}
+/* document upolad end */
+#regForm {
+    background-color: #ffffff;
+    margin: 20px auto;
+    width: 80%;
+    min-width: 300px;
+}
+
+#demoform2 h1 {
+    color: #f7f7f7;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#demoform2 h4 {
+    font-weight: 500;
+    margin-left: 12px;
+    color: #4a5577;
+    font-size:18px;
+    text-align: center;
+    margin-bottom: 40px;
+    margin-top: 40px;
+}
+
+#demoform2 p {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+
+    /* Mark input boxes that gets an error on validation: */
+    #demoform2 input.invalid {
+        background-color: #ffdddd;
+    }
+
+#demoform2 .button {
+    margin: 40px;
+    text-align:center;
+    height: 40px;
+    width: 120px;
+    border: none;
+  font-weight:400;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#nextBtn {
+    background-color: #4787f3;
+    color: #fff;
+    font-weight: 500;
+}
+
+#demoform2 button:hover {
+    opacity: 0.8;
+}
+#btn-add {
+    background-color: #42b280;
+    color:#fff;
+    width: auto;
+    border-radius: 18px;
+    padding: 10px 15px;
+    font-size:14px;
+}
+    #btn-add:hover {
+        background-color: #18A558;
+        color: #fff;
+        width: auto;
+        border-radius: 18px;
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+#prevBtn{
+    color: #000;
+    background-color: #bbbbbb;
+    padding-top: 5px;
+    font-weight: 400;
+}
+    #prevBtn:hover {
+        color: #000;
+        background-color: #a39d9d;
+        padding-top: 5px;
+        font-weight: 400;
+    }
+a{
+   color:inherit;
+   text-decoration:none;
+}
+
+/* Make circles that indicate the steps of the form: */
+#demoform2 .step {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbbbbb;
+    border: none;
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 0.5;
+}
+
+    #demoform2 .step.active {
+        opacity: 1;
+    }
+
+    /* Mark the steps that are finished and valid: */
+    #demoform2 .step.finish {
+        background-color: #4787f3;
+    }
+
+#demoform2 .col1 {
+    padding: 30px;
+    height: 250px;
+    background-color: #4787f3;
+}
+
+#demoform2 img{
+    height:18px;
+    width:auto;   
+}
+
+#demoform2 .basic {
+    margin-top: -120px;
+    background-color: #fff;
+    padding: 20px 20px;
+    box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+}
+
+#demoform2 .tab .icons {
+    margin-top: -25px;
+    margin-bottom: 40px;
+    text-align:center;
+}
+
+#demoform2 .tab .user-icon {
+    font-size: 16px;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 50%;
+    color: #888;
+    padding: 14px 16px;
+}
+/* responsive table */
+@media only screen and (max-width: 40em) {
+    #demoform2 thead th:not(:first-child) {
+        display: none;
+    }
+
+    #demoform2 td, th {
+        display: block;
+    }
+
+        #demoform2 td[data-th]:before {
+            content: attr(data-th);
+        }
+}
+/*
+#demoform2 .brand-logo img {
+    background-color: #fff;
+    padding: 10px 2px;
+    border-radius: 50%;
+}*/
+/* responsive table*/
+
+

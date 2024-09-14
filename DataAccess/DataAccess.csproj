@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E7D82A4A-BB4C-4310-BE24-A51F163C088D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DataAccess</RootNamespace>
+    <AssemblyName>DataAccess</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapper">
+      <HintPath>..\..\Thrivera\Website\bin\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.5.0.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>..\..\Thrivera\Website\bin\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\..\Thrivera\Website\bin\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\..\Thrivera\Website\bin\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\..\Thrivera\Website\bin\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit.abstractions">
+      <HintPath>..\..\Thrivera\DataModal\bin\Release\xunit.abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit.core">
+      <HintPath>..\..\Thrivera\DataModal\bin\Release\xunit.core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CommanClass\ClsCommon.cs" />
+    <Compile Include="CommanClass\clsDataBaseHelper.cs" />
+    <Compile Include="CommanClass\Common_SPU.cs" />
+    <Compile Include="CommanClass\MailConfigration.cs" />
+    <Compile Include="ModelsMasterHelper\IAccountsHelper.cs" />
+    <Compile Include="ModelsMasterHelper\IHelpDeskHelper.cs" />
+    <Compile Include="ModelsMasterHelper\IHomeHelper.cs" />
+    <Compile Include="ModelsMasterHelper\IBillingHelper.cs" />
+    <Compile Include="ModelsMasterHelper\IMasterHelper.cs" />
+    <Compile Include="ModelsMasterHelper\IOnboardingHelper.cs" />
+    <Compile Include="ModelsMasterHelper\IRequirterHelper.cs" />
+    <Compile Include="ModelsMasterHelper\IToolHelper.cs" />
+    <Compile Include="ModelsMaster\AccountsModel.cs" />
+    <Compile Include="ModelsMaster\HelpDeskModal.cs" />
+    <Compile Include="ModelsMaster\HomeModal.cs" />
+    <Compile Include="ModelsMaster\BillingModal.cs" />
+    <Compile Include="ModelsMaster\MasterModal.cs" />
+    <Compile Include="ModelsMaster\OnboardingModal.cs" />
+    <Compile Include="ModelsMaster\RequirterModal.cs" />
+    <Compile Include="ModelsMaster\ToolsModal.cs" />
+    <Compile Include="Models\Address.cs" />
+    <Compile Include="Models\AdminMenu.cs" />
+    <Compile Include="Models\AdminUser.cs" />
+    <Compile Include="Models\AllEnum.cs" />
+    <Compile Include="Models\Bank.cs" />
+    <Compile Include="Models\Billing.cs" />
+    <Compile Include="Models\Clients.cs" />
+    <Compile Include="Models\ConfigSetting.cs" />
+    <Compile Include="Models\Country.cs" />
+    <Compile Include="Models\Department.cs" />
+    <Compile Include="Models\Drive.cs" />
+    <Compile Include="Models\EmailTemplate.cs" />
+    <Compile Include="Models\ErrorLog.cs" />
+    <Compile Include="Models\Helpdesk.cs" />
+    <Compile Include="Models\Masters.cs" />
+    <Compile Include="Models\Onboarding.cs" />
+    <Compile Include="Models\PostResponse.cs" />
+    <Compile Include="Models\PrintBill.cs" />
+    <Compile Include="Models\Profile.cs" />
+    <Compile Include="Models\SMTPMail.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

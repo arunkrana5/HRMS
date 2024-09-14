@@ -1,0 +1,208 @@
+﻿@model MyTab.Approval
+@section style{
+    @System.Web.Optimization.Styles.Render("~/bundle/dataTablecss")
+}
+
+@Html.Partial("ListHeader_Partial", "Onboarding List")
+
+<div class="row">
+    <div class="col-lg-12 ">
+        <div class="card">
+            <div class="card-body">
+                <div class="">
+
+                    
+                    @using (Ajax.BeginForm("_OnboardingList", "Onboarding",
+                             new { src = ClsCommon.Encrypt(ViewBag.MenuID + "*/Onboarding/_OnboardingList") },
+                              new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess", OnBegin = "ShowLoadingDialog()" },
+                                 new { @id = "_OnboardingList" })
+                         )
+                    {
+                        <div class="row">
+                            <div class="tabmargin">
+                                @Html.HiddenFor(x => x.Approved)
+                                <ul id="tabs" class="nav nav-tabs " role="tablist">
+                                    <li class="nav-item"> <a tabvalue="-1" class="nav-link ripplelink AnchorApproval @(Model.Approved == -1 ? "active" : "")" data-toggle="tab" role="tab">Created</a> </li>
+                                    <li class="nav-item"> <a tabvalue="0" class="nav-link ripplelink AnchorApproval @(Model.Approved == 0 ? "active" : "")" data-toggle="tab" role="tab">Pending</a> </li>
+                                    <li class="nav-item"> <a tabvalue="1" class="nav-link ripplelink AnchorApproval @(Model.Approved == 1 ? "active" : "") " data-toggle="tab" role="tab">Approved</a></li>
+                                    <li class="nav-item"> <a tabvalue="2" class="nav-link ripplelink AnchorApproval @(Model.Approved == 2 ? "active" : "") " data-toggle="tab" role="tab">Resubmit</a></li>
+                                </ul>
+
+                            </div>
+                            <div class="col-sm-2 form-group" style="display:none">
+                                <label class="small">&nbsp;</label>
+                                <button type="submit" id="btnSearch" name="Command" value="Add" class="btn btndefault pull-right form-control">
+                                    <i class="fa fa-search"></i>  Search
+                                </button>
+                            </div>
+                        </div>
+                    }
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="TargetDiv"> </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+<div class="modal fade pop-dgn" id="ViewModal">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+
+            <div class="modal-header blk-gdn-btn">
+                <h4 class="modal-title"><i class="fas fa-print"></i>Create Onboarding </h4>
+                <div class="close" data-dismiss="modal">&times;</div>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div id="TagetDiv"></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="modal fade pop-dgn" id="ViewFullModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header blk-gdn-btn">
+                <h4 class="modal-title"><i class="fas fa-print"></i>View Onboarding </h4>
+                <div class="close" data-dismiss="modal">&times;</div>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div id="ViewTagetDiv"></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section scripts    {
+    @System.Web.Optimization.Scripts.Render("~/bundle/dataTablesjs")
+
+    @System.Web.Optimization.Scripts.Render("~/bundle/unobtrusivejs")
+
+<script>
+
+         function ListHeaderAdd(ID) {
+			$.ajax({
+                url: "/Onboarding/_CreateOnboarding",
+                type: "Get",
+                data: { src: EncryptJSON(@ViewBag.MenuID+"*" + "/Onboarding/_CreateOnboarding" + "*" + ID) },
+                success: function (data)
+                {
+                    $("#TagetDiv").empty();
+                    $("#TagetDiv").html(data);
+                    $('#ViewModal').modal({
+                        backdrop: 'static',
+                        keyboard: false
+                    })
+                     var form = $("form")
+                .removeData("validator")
+                .removeData("unobtrusiveValidation");
+                    $.validator.unobtrusive.parse(form);
+				},
+				error: function (er) {
+					alert(er);
+
+				}
+			});
+            }
+
+
+        function OnBegin() {
+            $("#TargetDiv").empty();
+            $("#TargetDiv").html('<img src="/assets/design/images/loader.gif" class="imgloader" />');
+        }
+        $(document).ready(function () {
+            $("#btnSearch").click();
+        });
+
+
+        $('.AnchorApproval').on('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var att = $(this).attr("tabvalue");
+            $(".AnchorApproval.active").removeClass("active");
+            $(this).addClass("active");
+            $("#Approved").val(att);
+            $('#btnSearch').click();
+        });
+
+
+    function OnOnboardingSuccess(obj) {
+        if (obj.Status) {
+            $('#ViewModal').modal('hide');
+            SuccessToaster(obj.SuccessMessage);
+            $('#btnSearch').click();
+        }
+        else {
+            CloseLoadingDialog();
+            FailToaster(obj.SuccessMessage);
+
+        }
+    }
+
+        function OnSuccess(obj) {
+            $("#TargetDiv").empty();
+            $("#TargetDiv").html(obj);
+            CloseLoadingDialog();
+            DatatableScripts();
+        }
+
+
+    function ViewOnboarding(obj) {
+        var ID = $(obj).closest("tr").find("input:hidden[name=I]").val();
+			$.ajax({
+                url: "/Onboarding/_ViewOnboarding",
+                type: "Get",
+                data: { src: EncryptJSON(@ViewBag.MenuID+"*/Onboarding/_ViewOnboarding*" + ID) },
+                success: function (data)
+                {
+                    $("#ViewTagetDiv").empty();
+                    $("#ViewTagetDiv").html(data);
+                    $('#ViewFullModal').modal({
+                        backdrop: 'static',
+                        keyboard: false
+                    })
+                     var form = $("form")
+                .removeData("validator")
+                .removeData("unobtrusiveValidation");
+                    $.validator.unobtrusive.parse(form);
+				},
+				error: function (er) {
+					alert(er);
+
+				}
+			});
+    }
+
+    function OnboardingApproveSuccess(obj) {
+        if (obj.Status) {
+            $('#ViewFullModal').modal('hide');
+            SuccessToaster(obj.SuccessMessage);
+            $('#btnSearch').click();
+        }
+        else {
+            CloseLoadingDialog();
+            FailToaster(obj.SuccessMessage);
+
+        }
+    }
+
+
+</script>
+
+}

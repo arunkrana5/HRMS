@@ -1,0 +1,343 @@
+﻿@model Onboarding.Users.WorkInformation
+
+<div class="row" id="demoform2">
+    <div class="col-sm-12 col-xl-12 col1 text-center brand-logo">
+        <div class="container">
+            <h1 class="pt-3">Requirter Details</h1>
+        </div>
+    </div>
+    <div class="col-xl-12 col-sm-12">
+
+        @using (Ajax.BeginForm("OnboardWorkInformation", "Virtual",
+          new { Key = ViewBag.Key },
+           new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess" },
+              new { @id = "OnboardWorkInformationForm" })
+      )
+        {
+            @Html.ValidationSummary(false);
+            <!-- One "tab" for each step in the form: -->
+            <div class="tab" id="regForm">
+                <div class="basic">
+                    <div class="icons">
+                        <span class="user-icon">
+                            <img src="~/Areas/Jobs/assets/Images/portfolio.png" />
+                        </span>
+                        <h4 class="mt-4">Work Information</h4>
+                    </div>
+                    <p class="">Fill All Your Work related information</p>
+
+                    <div class="field1 my-2 row">
+                        <div class="col-xl-3 col-md-6 col-sm-12">
+                            <div class="form-floating form-group">
+                                <label for="floatingInput">Work Profile</label>
+                                @Html.TextBoxFor(model => model.WorkProfile, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.WorkProfile, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6 col-sm-12">
+                             <div class="form-floating form-group">
+                                <label for="floatingnumber">Net Pay </label>
+                                @Html.TextBoxFor(model => model.NetPay, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.NetPay, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 col-sm-12">
+                            <div class="form-floating form-group">
+                                <label for="DOJ">DOJ</label>
+                                @Html.TextBoxFor(model => model.DOJ, new { @class = "form-control", @type = "date" })
+                                @Html.ValidationMessageFor(model => model.DOJ, "", new { @class = "text-danger" })
+
+                               
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 col-sm-12">
+                            <div class="form-floating form-group">
+                                <label for="floatingfname">Metro/Non-Metro </label>
+                                @Html.EnumDropDownListFor(m => m.Metropolitan, "Select", new { @class = "form-control applyselect" })
+                                @Html.ValidationMessageFor(model => model.Metropolitan, "", new { @class = "text-danger" })
+
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class=" my-2 row">
+
+                        <div class="col-xl-3 col-md-6 col-sm-12">
+                            <div class="form-floating form-group">
+                                <label for="Department ">Department </label>
+                                @Html.TextBoxFor(model => model.Department, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Department, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 col-sm-12">
+                            <div class="form-floating form-group">
+                                <label for="Department ">Designation </label>
+                                @Html.TextBoxFor(model => model.Designation, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Designation, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 col-sm-12">
+                            <div class="form-floating form-group">
+                                <label for="SalaryType">Salary Type </label>
+                                @Html.TextBoxFor(model => model.SalaryType, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.SalaryType, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 col-sm-12">
+                            <div class="form-floating form-group">
+                                <label for="Salary_Month">Salary Month </label>
+                                @Html.TextBoxFor(model => model.Salary_Month, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Salary_Month, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="my-2 row">
+                        
+                        <div class="col-xl-3 col-md-6 col-sm-12">
+                            <div class="form-floating form-group">
+                                <label for="floatingaddress">Country </label>
+                                @Html.DropDownListFor(n => n.WL_CountryID, new SelectList(Model.CountryList, "ID", "Name", Model.WL_CountryID), "Select",
+                             new { @class = "form-control  applyselect", @onchange = "FillRegion(this)" })
+                                @Html.ValidationMessageFor(model => model.WL_CountryID, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 col-sm-12">
+                             <div class="form-floating form-group">
+                                <label for="floatingaddress">Region </label>
+                                @Html.DropDownListFor(n => n.WL_RegionID, new SelectList(Model.RegionList, "ID", "Name", Model.WL_RegionID), "Select",
+                             new { @class = "form-control  applyselect", @onchange = "FillState(this)" })
+                                @Html.ValidationMessageFor(model => model.WL_RegionID, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 col-sm-12">
+                             <div class="form-floating form-group">
+                                <label for="State">State</label>
+                                @Html.DropDownListFor(n => n.WL_StateID, new SelectList(Model.StateList, "ID", "Name", Model.WL_StateID), "Select",
+                               new { @class = "form-control  applyselect", @onchange = "FillCity(this)" })
+                                @Html.ValidationMessageFor(model => model.WL_StateID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 col-sm-12">
+                            <div class="form-floating form-group ">
+                                <label for="City">City </label>
+                                @Html.DropDownListFor(n => n.WL_CityID, new SelectList(Model.CityList, "ID", "Name", Model.WL_CityID), "Select",
+                               new { @class = "form-control  applyselect" })
+                                @Html.ValidationMessageFor(model => model.WL_CityID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                       
+                    </div>
+                    
+                    <div class=" my-2 row">
+                        <div class="col-xl-3 col-md-6 col-sm-12">
+                            <div class="form-floating form-group ">
+                                <label for="PINCode">PIN Code </label>
+                                @Html.TextBoxFor(model => model.WL_PIN, new { @class = "form-control", })
+                                @Html.ValidationMessageFor(model => model.WL_PIN, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 col-sm-12">
+                            <div class="form-floating form-group">
+                                <label for="ContractEndDate ">Contract End Date </label>
+                                @Html.TextBoxFor(model => model.ContractEndDate, new { @class = "form-control", @type = "date" })
+                                @Html.ValidationMessageFor(model => model.ContractEndDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 col-sm-12">
+                            <div class="form-floating form-group">
+                                <label for="NoticePeriod">Notice Period </label>
+                                @Html.TextBoxFor(model => model.NoticePeriod, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.NoticePeriod, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 col-sm-12">
+                            <div class="form-floating form-group">
+                                <label for="UAN ">UAN</label>
+                                @Html.TextBoxFor(model => model.UAN, new { @class = "form-control", })
+                                @Html.ValidationMessageFor(model => model.UAN, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class=" my-2 row">
+                        <div class="col-xl-3 col-md-6 col-sm-12">
+                             <div class="form-floating form-group">
+                                <label for="RPT_ManagerName">Reporting Manager Name </label>
+                                @Html.TextBoxFor(model => model.RPT_ManagerName, new { @class = "form-control", })
+                                @Html.ValidationMessageFor(model => model.RPT_ManagerName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 col-sm-12">
+                            <div class="form-floating  form-group ">
+                                <label for="RPT_ManagerEmail">Reporting Manager Email </label>
+                                @Html.TextBoxFor(model => model.RPT_ManagerEmail, new { @class = "form-control", })
+                                @Html.ValidationMessageFor(model => model.RPT_ManagerEmail, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 col-sm-12">
+                            <div class="form-floating form-group">
+                                <label for="RPT_ManagerPhone ">Reporting Manager Phone </label>
+                                @Html.TextBoxFor(model => model.RPT_ManagerPhone, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.RPT_ManagerPhone, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row my-2">
+                        <div class="col-xl-3 col-md-6 col-sm-12">
+                            <div class="form-floating form-group">
+                                <label for="ESIC ">ESIC</label>
+                                @Html.TextBoxFor(model => model.ESIC, new { @class = "form-control", })
+                                @Html.ValidationMessageFor(model => model.ESIC, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 col-sm-12">
+                            <div class="form-floating form-group">
+                                <label for="floatingInput">PAN <sup>*</sup></label>
+                                @Html.TextBoxFor(model => model.PAN, new { @class = "form-control", @id = "floatingInput", })
+                                @Html.ValidationMessageFor(model => model.PAN, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 col-sm-12">
+                             <div class="form-floating form-group">
+                                <label for="AadharNo">Aadhar No <sup>*</sup></label>
+                                @Html.TextBoxFor(model => model.AadharNo, new { @class = "form-control", @id = "floatingInput" })
+                                @Html.ValidationMessageFor(model => model.AadharNo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 col-sm-12">
+                            <div class="form-floating form-group">
+                                <label for="Category ">Category</label>
+                                @Html.TextBoxFor(model => model.Category, new { @class = "form-control", })
+                                @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            <div style="overflow:auto;">
+                <div class="d-flex justify-content-center ">
+                    <a href="/OnboardBasicDetails/@ViewBag.Key" type="button" id="prevBtn" class="button">Previous</a>
+                    <button type="submit" class="button" name="Command" value="Add" id="nextBtn"><i class="fa fa-paper-plane" aria-hidden="true"></i> Next</button>
+                </div>
+            </div>
+        }
+    </div>
+
+</div>
+@section scripts    {
+
+    @System.Web.Optimization.Scripts.Render("~/bundle/unobtrusivejs")
+
+    <script>
+        function OnSuccess(obj) {
+            if (obj.Status) {
+                SuccessToaster(obj.SuccessMessage);
+                window.location.href = obj.RedirectURL;
+            }
+            else {
+                CloseLoadingDialog();
+                FailToaster(obj.SuccessMessage);
+
+            }
+        }
+
+
+        function FillRegion() {
+            var CountryID = $("#WL_CountryID").find("option:selected").val();
+            if (CountryID != '') {
+                var data = GetDropDownList(CountryID, "Region");
+                if (data != '') {
+                    $("#WL_RegionID").empty();
+                    $("#WL_RegionID").append($("<option />").val("").text("Select"));
+                    $("#WL_StateID").empty();
+                    $("#WL_StateID").append($("<option />").val("").text("Select"));
+                    $("#WL_CityID").empty();
+                    $("#WL_CityID").append($("<option />").val("").text("Select"));
+                    $(data).each(function () {
+                        $("#WL_RegionID").append($("<option />").val(this.ID).text(this.Name));
+                        $("#WL_RegionID").select2();
+                    });
+                    CloseLoadingDialog();
+                } else {
+                    $("#WL_RegionID").empty();
+                    $("#WL_RegionID").append($("<option />").val("").text("Select"));
+                    $("#WL_StateID").empty();
+                    $("#WL_StateID").append($("<option />").val("").text("Select"));
+                    $("#WL_CityID").empty();
+                    $("#WL_CityID").append($("<option />").val("").text("Select"));
+
+                }
+            } else {
+                $("#WL_RegionID").empty();
+                $("#WL_RegionID").append($("<option />").val("").text("Select"));
+                $("#WL_StateID").empty();
+                $("#WL_StateID").append($("<option />").val("").text("Select"));
+                $("#WL_CityID").empty();
+                $("#WL_CityID").append($("<option />").val("").text("Select"));
+            }
+
+        }
+
+        function FillState() {
+            var RegionID = $("#WL_RegionID").find("option:selected").val();
+            if (RegionID != '') {
+                var data = GetDropDownList(RegionID, "State");
+                if (data != '') {
+                    $("#WL_StateID").empty();
+                    $("#WL_StateID").append($("<option />").val("").text("Select"));
+                    $("#WL_CityID").empty();
+                    $("#WL_CityID").append($("<option />").val("").text("Select"));
+                    $(data).each(function () {
+                        $("#WL_StateID").append($("<option />").val(this.ID).text(this.Name));
+                        $("#WL_StateID").select2();
+                    });
+                    CloseLoadingDialog();
+                } else {
+                    $("#WL_StateID").empty();
+                    $("#WL_StateID").append($("<option />").val("").text("Select"));
+                    $("#WL_CityID").empty();
+                    $("#WL_CityID").append($("<option />").val("").text("Select"));
+
+                }
+            } else {
+                $("#WL_StateID").empty();
+                $("#WL_StateID").append($("<option />").val("").text("Select"));
+                $("#WL_CityID").empty();
+                $("#WL_CityID").append($("<option />").val("").text("Select"));
+            }
+
+        }
+
+        function FillCity() {
+            var StateID = $("#WL_StateID").find("option:selected").val();
+            if (StateID != '') {
+                var data = GetDropDownList(StateID, "City");
+                if (data != '') {
+                    $("#WL_CityID").empty();
+                    $("#WL_CityID").append($("<option />").val("").text("Select"));
+                    $(data).each(function () {
+                        $("#WL_CityID").append($("<option />").val(this.ID).text(this.Name));
+                        $("#WL_CityID").select2();
+                    });
+                    CloseLoadingDialog();
+                } else {
+                    $("#WL_CityID").empty();
+                    $("#WL_CityID").append($("<option />").val("").text("Select"));
+
+                }
+            } else {
+                $("#WL_CityID").empty();
+                $("#WL_CityID").append($("<option />").val("").text("Select"));
+            }
+
+        }
+    </script>
+}
+
+

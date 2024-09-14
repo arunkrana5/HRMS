@@ -1,0 +1,162 @@
+﻿@model IList<Clients.List>
+@section style{
+    @System.Web.Optimization.Styles.Render("~/bundle/dataTablecss")
+}
+
+@Html.Partial("ListHeader_Partial", "Clients List")
+
+<div class="row">
+    <div class="col-lg-12 ">
+        <div class="card">
+            <div class="card-body">
+                <div class="">
+                    <div class="table-responsive">
+                        <table id="example" class="table table-bordered text-nowrap key-buttons">
+                            <thead>
+                                <tr>
+                                    <th>S.no.</th>
+                                    <th>Action</th>
+                                    <th>Name</th>
+                                    <th>Code</th>
+                                    <th>Display Name</th>
+                                    <th>Other Code</th>
+                                    <th>Inserted Date</th>
+                                    <th>Inserted by</th>
+                                    <th>Updated Date</th>
+                                    <th>Updated by</th>
+                                    <th>IP Address</th>
+                                </tr>
+
+                            </thead>
+                            <tbody>
+                                @{ int count = 0;}
+                                @foreach (var item in Model)
+                                {
+                                    count++;
+                                <tr>
+                                    <td>@count</td>
+                                    <td>
+                                        <input type="hidden" name="I" value="@item.ClientID" />
+                                        <input type="hidden" name="N" value="@item.ClientCode" />
+
+
+                                        @if (ClsApplicationSetting.GetSessionValue("Modify") == "True")
+                                        {
+                                            @Html.Raw(item.IsActive == true
+                                      ? "<a  data-toggle='tooltip' data-original-title='Click to DeActivate' list='Clients_IsActive' OP='0' class='AIsActive' > <i class='fa fa-check-circle checkgreen' aria-hidden='true'></i></a>"
+                                      : "<a data-toggle='tooltip' data-original-title='Click to Activate' list='Clients_IsActive' OP='1'  class='AIsActive' > <i class='fa fa-times-circle crossred' aria-hidden='true'></i></a>")
+
+
+
+                                            <a title="Edit" onclick="ListHeaderAdd(@item.ClientID);" data-toggle='tooltip'> <i class="fa fa-pencil-square-o checkgreen" aria-hidden="true"></i> </a>
+                                        }
+
+                                    </td>
+                                    <td>@item.ClientName</td>
+                                    <td>
+                                        @if (ClsApplicationSetting.GetSessionValue("Modify") == "True")
+                                        {
+                                            <strong>
+                                                <a data-toggle='tooltip' data-title="click to view tran" class="green-clr" onclick="ShowLoadingDialog()" href="@Url.Action("ClientsTranList","Masters", new { src = ClsCommon.Encrypt(ViewBag.MenuID + "*/Masters/ClientsTranList*" + item.ClientID+"*"+item.ClientCode) })" data-toggle='tooltip'> @item.ClientCode </a>
+
+
+                                            </strong>
+                                        }
+                                        else
+                                        {
+                                            @item.ClientCode
+                                        }
+                                    </td>
+                                    <td>@item.DisplayName</td>
+                                    <td>@item.OtherCode</td>
+                                    <td>@item.CreatedDate</td>
+                                    <td>@item.CreatedBy</td>
+                                    <td>@item.ModifiedDate</td>
+                                    <td>@item.ModifiedBy</td>
+                                    <td>@item.IPAddress</td>
+                                </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+<div class="modal fade pop-dgn" id="ViewModal">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+
+            <div class="modal-header blk-gdn-btn">
+                <h4 class="modal-title"><i class="fas fa-print"></i>Add Client </h4>
+                <div class="close" data-dismiss="modal">&times;</div>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div id="TagetDiv"></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+@section scripts    {
+    @System.Web.Optimization.Scripts.Render("~/bundle/dataTablesjs")
+
+    @System.Web.Optimization.Scripts.Render("~/bundle/unobtrusivejs")
+
+    <script>
+
+         function ListHeaderAdd(ID) {
+        if (ID == undefined)
+        {
+            ID = 0;
+        }
+			$.ajax({
+                url: "/Masters/_ClientsAdd",
+                type: "Get",
+                data: { src: EncryptJSON(@ViewBag.MenuID+"*" + "/Masters/_ClientsAdd" + "*" + ID) },
+                success: function (data)
+                {
+                    $("#TagetDiv").empty();
+                    $("#TagetDiv").html(data);
+                    $('#ViewModal').modal({
+                        backdrop: 'static',
+                        keyboard: false
+                    })
+                    
+                     var form = $("form")
+                .removeData("validator")
+                .removeData("unobtrusiveValidation");
+                    $.validator.unobtrusive.parse(form);
+				},
+				error: function (er) {
+					alert(er);
+
+				}
+			});
+            }
+
+
+        function OnSuccess(obj) {
+            if (obj.Status) {
+                SuccessToaster(obj.SuccessMessage);
+                window.location.reload();
+            }
+            else {
+                CloseLoadingDialog();
+                FailToaster(obj.SuccessMessage);
+
+            }
+        }
+
+    </script>
+
+}

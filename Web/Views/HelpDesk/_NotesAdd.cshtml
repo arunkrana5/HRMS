@@ -1,0 +1,49 @@
+﻿@model Helpdesk.Notes.Add
+<div class="card">
+    <div class="card-body">
+
+        @using (Ajax.BeginForm("_NotesAdd", "HelpDesk",
+                new { src = ViewBag.src },
+                 new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnNotesSuccess", OnBegin = "ShowLoadingDialog()" },
+                    new { @id = "_NotesAddForm", @enctype = "multipart/form-data" })
+            )
+        {
+            @Html.HiddenFor(x => Model.TicketID)
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 form-group">
+                <label>Status<sup>*</sup></label>
+                @Html.DropDownListFor(n => n.StatusID, new SelectList(Model.StatusList, "ID", "Name", Model.StatusID), "Select Status",
+                    new { @class = "form-control applyselect", @Onchange = "ShowUser()" })
+                @Html.ValidationMessageFor(model => model.StatusID, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 form-group" style="display:none" id="userdiv">
+                <label>Users<sup>*</sup></label>
+                @Html.DropDownListFor(n => n.UserID, new SelectList(Model.UserList, "ID", "Name", Model.UserID), "Select User",
+                    new { @class = "form-control applyselect" })
+                @Html.ValidationMessageFor(model => model.UserID, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 form-group">
+                <label>Next Date <sup>*</sup></label>
+                @Html.TextBoxFor(model => model.NextDate, new { @class = "form-control", @Type = "datetime-local" })
+                @Html.ValidationMessageFor(model => model.NextDate, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                <label>Notes <sup>*</sup></label>
+                @Html.TextAreaFor(model => model.Notes, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                <label>Attachments</label>
+                @Html.TextBoxFor(x => x.Upload, new { @class = "dropify", @type = "file", @multiple = "multiple" })
+                @Html.ValidationMessageFor(model => model.Upload, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-lg-12 form-group">
+                <button type="submit" class="btn btn-indigo" name="Command" value="Add"><i class="fa fa-paper-plane" aria-hidden="true"></i> Submit</button>
+            </div>
+
+        </div>
+        }
+
+    </div>
+</div>

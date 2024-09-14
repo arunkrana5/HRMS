@@ -1,0 +1,109 @@
+﻿@model IList<Billing.List>
+
+<div class="">
+    <div class="table-responsive">
+        <table id="example" class="table table-bordered text-nowrap key-buttons">
+            <thead>
+                <tr>
+                    <th>S.no.</th>
+                    <th>Action</th>
+                    <th>Download</th>
+                    <th>Doc No</th>
+                    <th>Doc Date</th>
+                    <th>Client Code</th>
+                    <th>Sub Client Code</th>
+                    <th>Dealer Type</th>
+                    <th>Designation</th>
+                    <th>Department</th>
+                    <th>State</th>
+                    <th>GST No</th>
+                    <th>PAN No</th>
+
+                    <th>HSN Code</th>
+                    <th>Agency %</th>
+                    <th>Agency Commission</th>
+                    <th>Gross Amt</th>
+
+                    <th>Total Amt</th>
+                    <th>Inserted Date</th>
+                    <th>Inserted by</th>
+                    <th>Updated Date</th>
+                    <th>Updated by</th>
+                    <th>IP Address</th>
+                </tr>
+
+            </thead>
+            <tbody>
+                @{ int count = 0;}
+                @foreach (var item in Model)
+                {
+                    count++;
+                    <tr>
+                        <td>@count</td>
+                        <td>
+                            <input type="hidden" name="I" value="@item.BillID" />
+                            <input type="hidden" name="N" value="@item.DocNo" />
+
+                            @if (ClsApplicationSetting.GetSessionValue("Modify") == "True")
+                            {
+                                if (item.TranCount == 0)
+                                {
+                                    <a title="Edit" href="@Url.Action("CreateStaffBill", new { src = ClsCommon.Encrypt(ViewBag.MenuID + "*" + "/Billing/CreateStaffBill" + "*" + item.BillID) })" data-toggle='tooltip'> <i class="fa fa-pencil-square-o checkgreen" aria-hidden="true"></i> </a>
+                                }
+                                else
+                                {
+                                    <a onclick="DeleteBillTran(this)" title="Delete" data-toggle='tooltip' data-original-title="Delete All Tran" class="remove"><i class="fa fa-trash red-clr" aria-hidden="true"></i></a>
+
+                                }
+
+                                @Html.Raw(item.IsActive == true
+? "<a  data-toggle='tooltip' data-original-title='Click to DeActivate' list='ClientBilling_IsActive' OP='0' class='IsActive_Confirm' > <i class='fa fa-check-circle checkgreen' aria-hidden='true'></i></a>"
+: "<a data-toggle='tooltip' data-original-title='Click to Activate' list='ClientBilling_IsActive' OP='1'  class='IsActive_Confirm' > <i class='fa fa-times-circle crossred' aria-hidden='true'></i></a>")
+
+
+                            }
+                        </td>
+                        <td>
+                            @*<a class="green-clr" href="@Url.Action("PrintStaffBilling","Billing", new { src = ClsCommon.Encrypt(ViewBag.MenuID + "*" + "/Billing/PrintStaffBilling" + "*" + item.BillID) })" data-toggle='tooltip'> Download</a>*@
+                            <a class="green-clr" title="click to download" onclick="downloadBill(this)" data-toggle='tooltip'> Download</a>
+                            @{Html.BeginForm("MergeDocuments", "Billing",
+                                        new { src = ClsCommon.Encrypt(ViewBag.MenuID + "*/Billing/MergeDocuments" + "*" + item.DocNo) },
+                                        FormMethod.Post);
+                                {
+                                    <input type="submit" class="e-btn" value="Generate PDF" style="width: 150px; text-transform:capitalize" />
+                                    Html.EndForm();
+                                }
+                            }
+                        </td>
+                        <td>
+                            <a title="View Staff" data-toggle='tooltip' data-original-title="View Request" onclick="ViewBillingTran(this)"> @item.DocNo</a>
+                        </td>
+                        <td>@item.DocDate</td>
+                        <td>@item.ClientCode</td>
+                        <td>@item.SC_Code</td>
+                        <td>@item.DealerType</td>
+                        <td>@item.Designation</td>
+                        <td>@item.Department</td>
+                        <td>@item.StateName</td>
+                        <td>@item.SC_GSTNo</td>
+                        <td>@item.SC_PANNo</td>
+
+                        <td>@item.HSNCode</td>
+                        <td>@item.AgencyPer</td>
+                        <td>@item.AgencyCommission</td>
+                        <td>@item.Gross_Amt</td>
+
+                        <td>@item.Total_Amt</td>
+                        <td>@item.CreatedDate</td>
+                        <td>@item.CreatedBy</td>
+                        <td>@item.ModifiedDate</td>
+                        <td>@item.ModifiedBy</td>
+                        <td>@item.IPAddress</td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+@Html.IncludeVersionedJs(Url.Content("/assets/scripts/IsActiveSetting.js"))

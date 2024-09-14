@@ -1,0 +1,119 @@
+﻿@model Onboarding.Users.BankDetails
+
+<div class="row" id="demoform2">
+    <div class="col-sm-12 col-xl-12 col1 text-center brand-logo">
+        <div class="container">
+            <h1 class="pt-3">Requirter Details</h1>
+        </div>
+    </div>
+    <div class="col-xl-12 col-sm-12">
+
+        @using (Ajax.BeginForm("OnboardBankDetails", "Virtual",
+          new { Key = ViewBag.Key },
+           new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess" },
+              new { @id = "OnboardBankDetailsForm" })
+      )
+        {
+            @Html.ValidationSummary(false);
+            <!-- One "tab" for each step in the form: -->
+            <div class="tab" id="regForm">
+                <div class="basic">
+                    <div class="icons">
+                        <span class="user-icon">
+                            <img src="~/Areas/Jobs/assets/Images/piggy-bank.png" />
+
+                        </span>
+                        <h4 class="mt-4">Bank Details</h4>
+                    </div>
+                    <p class="">Please Fill All Your Details</p>
+
+                    <div class="field1 my-2 row">
+                        <div class="col-xl-3  col-md-3 col-sm-12">
+                            <div class="form-floating form-group">
+                                <label for="BankName">Bank Name <sup>*</sup></label>
+                                @Html.TextBoxFor(model => model.BankName, new { @class = "form-control", @id = "floatingInput", })
+                                @Html.ValidationMessageFor(model => model.BankName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-xl-3  col-md-3 col-sm-12">
+                            <div class="form-floating form-group">
+                                <label for="AccountNo">Account No <sup>*</sup></label>
+                                @Html.TextBoxFor(model => model.AccountNo, new { @class = "form-control", @id = "floatingInput" })
+                                @Html.ValidationMessageFor(model => model.AccountNo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-xl-3  col-md-3 col-sm-12">
+                            <div class="form-floating form-group">
+                                <label for="AccountNo"> Branch <sup>*</sup></label>
+                                @Html.TextBoxFor(model => model.BankBranch, new { @class = "form-control", @id = "floatingInput" })
+                                @Html.ValidationMessageFor(model => model.BankBranch, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-xl-3  col-md-3 col-sm-12">
+
+                            <div class="form-floating form-group">
+                                <label for="IFSCCode">IFSC Code <sup>*</sup></label>
+                                @Html.TextBoxFor(model => model.IFSCCode, new { @class = "form-control", })
+                                @Html.ValidationMessageFor(model => model.IFSCCode, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class=" row my-2">
+                        <div class="col-xl-3  col-md-3 col-sm-12">
+                            <div class="form-floating form-group">
+                                <label for="IFSCCode">Nominee Name</label>
+                                @Html.TextBoxFor(model => model.NomineeName, new { @class = "form-control", })
+                                @Html.ValidationMessageFor(model => model.NomineeName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-xl-3  col-md-3 col-sm-12">
+                            <div class="form-floating form-group">
+                                <label for="NomineeRelation">Relationship with Nominee</label>
+                                @Html.TextBoxFor(model => model.NomineeRelation, new { @class = "form-control", })
+                                @Html.ValidationMessageFor(model => model.NomineeRelation, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-xl-3  col-md-3 col-sm-12">
+                            <div class="form-floating form-group">
+                                <label for="NomineeDOB">Nominee DOB</label>
+                                @Html.TextBoxFor(model => model.NomineeDOB, new { @class = "form-control", @type = "date" })
+                                @Html.ValidationMessageFor(model => model.NomineeDOB, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    
+
+
+                </div>
+            </div>
+            <div style="overflow:auto;">
+                <div class="d-flex justify-content-center ">
+                    <a href="/OnboardBasicDetails/@ViewBag.Key" type="button" id="prevBtn" class="button">Previous</a>
+                    <button type="submit" class="button" name="Command" value="Add" id="nextBtn"><i class="fa fa-paper-plane" aria-hidden="true"></i> Next</button>
+                </div>
+            </div>
+        }
+    </div>
+
+</div>
+@section scripts    {
+
+    @System.Web.Optimization.Scripts.Render("~/bundle/unobtrusivejs")
+
+    <script>
+        function OnSuccess(obj) {
+            if (obj.Status) {
+                SuccessToaster(obj.SuccessMessage);
+                window.location.href = obj.RedirectURL;
+            }
+            else {
+                CloseLoadingDialog();
+                FailToaster(obj.SuccessMessage);
+
+            }
+        }
+
+
+    </script>
+}

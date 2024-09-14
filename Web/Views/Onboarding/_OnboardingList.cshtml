@@ -1,0 +1,61 @@
+﻿@model IList<Onboarding.List>
+
+<div class="table-responsive">
+    <table id="example" class="table table-bordered text-nowrap key-buttons">
+        <thead>
+            <tr>
+                <th>S.no.</th>
+                <th>Doc No</th>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Mobile</th>
+                <th>EmailID</th>
+                <th>DOB </th>
+                <th>Created Date</th>
+                <th>IP Address</th>
+            </tr>
+
+        </thead>
+        <tbody>
+            @{ int count = 0;}
+            @foreach (var item in Model)
+            {
+                count++;
+            <tr>
+                <td>
+                    @count
+                    <input type="hidden" name="I" value="@item.AppID" />
+                    <input type="hidden" name="N" value="@item.DocNo" />
+                </td>
+
+                <td>
+                    <a title="click to view details" class="green-clr" onclick="ViewOnboarding(this)" data-toggle='tooltip'> @item.DocNo</a>
+                </td>
+
+                @if (item.Approved <=0 || item.Approved==2)
+                {
+                    <td>
+                        <a title="click to fill form" href="/OnboardBasicDetails/@item.Token" target="_blank" class="green-clr"> @item.Name</a>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @item.Name
+                    </td>
+                   
+                }
+
+
+                <td>@item.Gender</td>
+                <td>@item.Mobile</td>
+                <td>@item.EmailID</td>
+                <td>@item.DOB</td>
+                <td>@item.CreatedDate</td>
+                <td>@item.IPAddress</td>
+            </tr>
+            }
+
+        </tbody>
+    </table>
+</div>

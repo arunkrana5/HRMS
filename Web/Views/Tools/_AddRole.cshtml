@@ -1,0 +1,40 @@
+﻿
+@model AdminUser.Role.Add
+
+@using (Ajax.BeginForm("_AddRole", "Tools",
+        new { src = ViewBag.src  },
+         new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess", OnBegin = "ShowLoadingDialog()" },
+            new { @id = "_AddRoleForm" })
+    )
+{
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(x => Model.RoleID)
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 form-group">
+                <label>Role Name<sup>*</sup></label>
+                @Html.TextBoxFor(model => model.rolename, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.rolename, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-6 form-group">
+                <label>Description<sup>*</sup></label>
+                @Html.TextBoxFor(model => model.description, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            @if (Model.RoleID > 0)
+            {
+                <button type="submit" class="btn btn btn-indigo" name="Command" value="Add"><i class="fa fa-paper-plane" aria-hidden="true"></i> Update</button>
+            }
+            else
+            {
+                <button type="submit" class="btn btn btn-indigo" name="Command" value="Add"><i class="fa fa-paper-plane" aria-hidden="true"></i> Submit</button>
+            }
+        </div>
+
+    }
+

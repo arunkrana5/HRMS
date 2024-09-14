@@ -1,0 +1,454 @@
+﻿@model Billing.Create
+
+@section style{
+    @System.Web.Optimization.Styles.Render("~/bundle/dataTablecss")
+}
+
+@{
+    string DocNo1 = "", DocNo2 = "";
+    if (!string.IsNullOrEmpty(Model.BillingDocNo))
+    {
+        DocNo1 = Model.BillingDocNo.Split('#')[0];
+        DocNo2 = Model.BillingDocNo.Split('#')[1];
+    }
+}
+<div class="page-header">
+    <div class="page-leftheader">
+        <h4 class="page-title">Create Billing </h4>
+    </div>
+
+</div>
+@using (Ajax.BeginForm("CreateStaffBill", "Billing",
+        new { src = ViewBag.src },
+         new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess", OnBegin = "ShowLoadingDialog()" },
+            new { @id = "CreateStaffBillForm", @enctype = "multipart/form-data" })
+    )
+{
+    
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+
+                @if ((Model.BillID??0)==0)
+                {
+
+                    <div class="col-lg-6 form-group">
+                        <label>Doc No <sup>*</sup></label>
+                        <small class="alertmsg">@DocNo1</small>
+                        @Html.TextBoxFor(model => model.DocNo_Series, new { @class = "" })
+                        @Html.ValidationMessageFor(model => model.DocNo_Series, "", new { @class = "text-danger" })
+                        <small class="alertmsg">@DocNo2</small>
+                    </div>
+
+                }
+                else
+                {
+                    <small class="alertmsg">@Model.DocNo</small>
+                }
+            </div>
+            <div class="row">
+                <div class="col-lg-3 form-group">
+                    <label>Date <sup>*</sup></label>
+                    @Html.TextBoxFor(model => model.Date, new { @class = "form-control", @type = "Month" })
+                    @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-lg-3 form-group">
+                    <label>Client <sup>*</sup></label>
+
+                    @Html.DropDownListFor(n => n.ClientCode, new SelectList(Model.ClientList, "Name", "Name", Model.ClientCode), "Select",
+                         new { @class = "form-control  applyselect", @onchange = "FillSubClient()" })
+                    @Html.ValidationMessageFor(model => model.ClientCode, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-lg-3 form-group">
+                    <label>Sub Client<sup>*</sup></label>
+                    <input type="hidden" id="hdnSC_Code" value="@Model.SC_Code" />
+                    @Html.DropDownListFor(n => n.SC_Code, new SelectList(Model.SubClientList, "Name", "Name", Model.SC_Code), "Select",
+                      new { @class = "form-control  applyselect" })
+                    @Html.ValidationMessageFor(model => model.SC_Code, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-lg-3 form-group">
+                    <label>HSN Code<sup>*</sup></label>
+                    @Html.DropDownListFor(n => n.HSNCode, new SelectList(Model.HSNList, "Name", "Name", Model.HSNCode),
+                      new { @class = "form-control  applyselect" })
+                    @Html.ValidationMessageFor(model => model.HSNCode, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-lg-3 form-group">
+                    <label>Dealer Type</label>
+
+                    <select id="@Html.IdFor(x=> x.DealerType)" name="@Html.IdFor(x=> x.DealerType)" class="form-control applyselect" multiple="multiple">
+
+                        @foreach (var item in Model.DealerTypeList)
+                        {
+                            if (string.IsNullOrEmpty(Model.DealerType))
+                            {
+                                <option value="@item.Name">@item.Name</option>
+                            }
+                            else
+                            {
+                                if (Model.DealerType.Contains(','))
+                                {
+                                    foreach (var a in Model.DealerType.Split(','))
+                                    {
+                                        <option @(a == item.Name ? "selected" : "") value="@item.Name">@item.Name</option>
+                                    }
+                                }
+                                else
+                                {
+                                    <option @(Model.DealerType == item.Name ? "selected" : "") value="@item.Name">@item.Name</option>
+                                }
+                            }
+                        }
+                    </select>
+
+                    @Html.ValidationMessageFor(model => model.Department, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-lg-3 form-group">
+                    <label>Department</label>
+
+                    <select id="@Html.IdFor(x=> x.Department)" name="@Html.IdFor(x=> x.Department)" class="form-control applyselect" multiple="multiple">
+
+                        @foreach (var item in Model.DepartmentList)
+                        {
+                            if (string.IsNullOrEmpty(Model.Department))
+                            {
+                                <option value="@item.Name">@item.Name</option>
+                            }
+                            else
+                            {
+                                if (Model.Department.Contains(','))
+                                {
+                                    foreach (var a in Model.Department.Split(','))
+                                    {
+                                        <option @(a == item.Name ? "selected" : "") value="@item.Name">@item.Name</option>
+                                    }
+                                }
+                                else
+                                {
+                                    <option @(Model.Department == item.Name ? "selected" : "") value="@item.Name">@item.Name</option>
+                                }
+                            }
+                        }
+                    </select>
+
+                    @Html.ValidationMessageFor(model => model.Department, "", new { @class = "text-danger" })
+                </div>
+
+
+                <div class="col-lg-3 form-group">
+                    <label>Designation</label>
+
+                    <select id="@Html.IdFor(x=> x.Designation)" name="@Html.IdFor(x=> x.Designation)" class="form-control applyselect" multiple="multiple">
+
+                        @foreach (var item in Model.DesignationList)
+                        {
+                            if (string.IsNullOrEmpty(Model.Designation))
+                            {
+                                <option value="@item.Name">@item.Name</option>
+                            }
+                            else
+                            {
+                                if (Model.Designation.Contains(','))
+                                {
+                                    foreach (var a in Model.Designation.Split(','))
+                                    {
+                                        <option @(a == item.Name ? "selected" : "") value="@item.Name">@item.Name</option>
+                                    }
+                                }
+                                else
+                                {
+                                    <option @(Model.Designation == item.Name ? "selected" : "") value="@item.Name">@item.Name</option>
+                                }
+                            }
+                        }
+                    </select>
+                    @Html.ValidationMessageFor(model => model.Designation, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-lg-3 form-group">
+                    <label>State</label>
+                    <select id="@Html.IdFor(x=> x.StateName)" name="@Html.IdFor(x=> x.StateName)" class="form-control applyselect" multiple="multiple">
+
+                        @foreach (var item in Model.StateList)
+                        {
+                            if (string.IsNullOrEmpty(Model.StateName))
+                            {
+                                <option value="@item.Name">@item.Name</option>
+                            }
+                            else
+                            {
+                                if (Model.StateName.Contains(','))
+                                {
+                                    foreach (var a in Model.StateName.Split(','))
+                                    {
+                                        <option @(a == item.Name ? "selected" : "") value="@item.Name">@item.Name</option>
+                                    }
+                                }
+                                else
+                                {
+                                    <option @(Model.StateName == item.Name ? "selected" : "") value="@item.Name">@item.Name</option>
+                                }
+                            }
+                        }
+                    </select>
+
+                    @Html.ValidationMessageFor(model => model.StateName, "", new { @class = "text-danger" })
+                </div>
+
+
+                <div class="col-lg-3 form-group loaddownbtn">
+                    <a class="btn btnupdate pull-left" onclick="return AddStaffList();"><i class="fa fa-spinner"></i> Load Staff</a>
+                </div>
+                <div class="col-lg-12 form-group">
+                    <label>Description </label>
+                    @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div id="TableTran">
+            @Html.Partial("_BillingStaff", Model)
+        </div>
+
+
+        <div class="row">
+            <div class="col-lg-12 form-group">
+                <button type="submit" class="btn btn-indigo" name="Command" value="Add"><i class="fa fa-paper-plane" aria-hidden="true"></i> Submit</button>
+
+                <a href="@Url.Action("ClientBillingList",new { src = ClsCommon.Encrypt(ViewBag.MenuID+"*"+"/Billing/ClientBillingList") })" type="button" class="btn btn-sm  close-btn">Back To List</a>
+
+            </div>
+        </div>
+    </div>
+    
+
+}
+
+@section scripts    {
+    @System.Web.Optimization.Scripts.Render("~/bundle/dataTablesjs")
+
+    @System.Web.Optimization.Scripts.Render("~/bundle/unobtrusivejs")
+    <script src="~/assets/design/js/sweetalert.js"></script>
+    <script src="~/assets/design/js/notify.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            var ClientCode = $("#ClientCode").find("option:selected").val();
+            if (ClientCode != "") {
+                FillSubClient();
+            }
+        });
+
+        function FillSubClient() {
+            var hdnSC_Code = $("#hdnSC_Code").val();
+            var ID = $("#ClientCode").find("option:selected").val();
+            if (ID != '') {
+                var data = GetDropDownList(ID, "SubClientList");
+                if (data != '') {
+                    $("#SC_Code").empty();
+                    $("#SC_Code").append($("<option />").val("").text("Select"));
+                    $(data).each(function () {
+                        $("#SC_Code").append($("<option />").val(this.Name).text(this.Name));
+                        $("#SC_Code").select2();
+
+                    });
+                    if (hdnSC_Code != "") {
+                        $("#SC_Code").val(hdnSC_Code);
+                        $("#SC_Code").change();
+                    }
+
+                } else {
+                    $("#SC_Code").empty();
+                    $("#SC_Code").append($("<option />").val("").text("Select"));
+                }
+            } else {
+                $("#SC_Code").empty();
+                $("#SC_Code").append($("<option />").val("").text("Select"));
+            }
+
+        }
+
+        function AddStaffList() {
+            $('.notifyjs-wrapper').trigger('notify-hide');
+            var Date = $("#Date").val();
+            var ClientCode = $("#ClientCode :selected").val();
+            var SC_Code = $("#SC_Code :selected").val();
+            var HSNCode = $("#HSNCode :selected").val();
+
+            var Department = $('#Department option:selected')
+                .toArray().map(item => item.text).join();
+
+            var Designation = $('#Designation option:selected')
+                .toArray().map(item => item.text).join();
+
+            var StateName = $('#StateName option:selected')
+                .toArray().map(item => item.text).join();
+
+            var DealerType = $('#DealerType option:selected')
+                .toArray().map(item => item.text).join();
+
+            if (Date == "") {
+                $.notify($("#Date"), "Month Can't Be Blank", "error");
+                $("#Date").focus();
+            }
+            else if (ClientCode == "") {
+                $.notify($("#ClientCode"), "Client Can't Be Blank", "error");
+                $("#ClientCode").focus();
+            }
+            else if (SC_Code == "") {
+                $.notify($("#SC_Code"), "Sub Client Can't Be Blank", "error");
+                $("#SC_Code").focus();
+            }
+            else if (HSNCode == "") {
+                $.notify($("#HSNCode"), "HSN Can't Be Blank", "error");
+                $("#HSNCode").focus();
+            }
+            else {
+                var dataObject = JSON.stringify({
+                    'Date': Date,
+                    'ClientCode': ClientCode,
+                    'SC_Code': SC_Code,
+                    'HSNCode': HSNCode,
+                    'Department': Department,
+                    'Designation': Designation,
+                    'StateName': StateName,
+                    'DealerType': DealerType,
+                    'src': EncryptJSON("-2*/Billing/_BillingStaff")
+                });
+                ShowLoadingDialog();
+                $.ajax({
+                    url: "/Billing/_BillingStaff",
+                    type: "Post",
+                    contentType: 'application/json',
+                    async: true,
+                    data: dataObject,
+                    success: function (data) {
+                        CloseLoadingDialog();
+                        if (data) {
+                            $("#TableTran").empty();
+                            $("#TableTran").html(data);
+                            ExportTableDatatableScripts();
+                            calculateRate();
+                        }
+                        else {
+
+                            swal(data.SuccessMessage, '');
+                            $("#TableTran").empty();
+                        }
+                    },
+                    error: function (er) {
+                        CloseLoadingDialog();
+                        swal('', 'Something went wrong')
+
+                    }
+                });
+
+            }
+        }
+
+
+        function OnSuccess(obj) {
+            if (obj.Status) {
+                SuccessToaster(obj.SuccessMessage);
+                window.location.href = obj.RedirectURL;
+            }
+            else {
+                CloseLoadingDialog();
+                FailToaster(obj.SuccessMessage);
+
+            }
+        }
+
+        function FillDealer() {
+            var ID = $("#ToCity_ID").find("option:selected").val();
+            if (ID != '') {
+                var data = GetDropDownList(ID, "DealerCityWise");
+                if (data != '') {
+                    $("#ddDealer").empty();
+                    $("#ddDealer").append($("<option />").val("").text("Select"));
+                    $(data).each(function () {
+                        $("#ddDealer").append($("<option />").val(this.ID).text(this.Name));
+                        $("#ddDealer").select2();
+
+                    });
+
+                    if ($("#DealerIDs").val() != "") {
+                        $($("#DealerIDs").val().split(',')).each(function () {
+                            $("#ddDealer option[value='" + this + "']").prop("selected", true);
+
+                        });
+                        $("#ddDealer").change();
+
+                    }
+                    CloseLoadingDialog();
+                } else {
+                    $("#ddDealer").empty();
+                    $("#ddDealer").append($("<option />").val("").text("Select"));
+                }
+            }
+            else {
+                $("#ddDealer").empty();
+                $("#ddDealer").append($("<option />").val("").text("Select"));
+
+            }
+        }
+
+        function FillDealerID(obj) {
+            $("#DealerIDs").val($(obj).val());
+        }
+
+
+        function chkAll() {
+            var checkAll = $("#checkAll").is(":checked");
+            if (checkAll) {
+                $(".Chksingle").each(function () {
+                    $(this).prop('checked', true)
+                });
+            }
+            else {
+                $(".Chksingle").each(function () {
+                    $(this).prop('checked', false)
+                });
+            }
+            calculateRate()
+        }
+
+        function calculateRate() {
+            var Gross_Amt = 0, EMPCount = 0;
+            $(".Chksingle").each(function () {
+                if ($(this).prop('checked') == true) {
+                    Gross_Amt += parseFloat($(this).closest("tr").find(".hdnCTC").val());
+                    EMPCount++;
+                }
+            });
+            $("#EMPCount").val(EMPCount);
+            $("#Gross_Amt").val(Gross_Amt.toFixed(2));
+            var Gross_Amt = $("#Gross_Amt").val();
+            var AgencyPer = $("#AgencyPer").val();
+            var AgencyCommission = ((Gross_Amt * AgencyPer) / 100).toFixed(2);
+            $("#AgencyCommission").val(AgencyCommission);
+
+            var Total = (parseFloat(Gross_Amt) + parseFloat(AgencyCommission))
+            var IGST = $("#IGST").val();
+            var SGST = $("#SGST").val();
+            var CGST = $("#CGST").val();
+
+            var IGST_Amt = ((Total * IGST) / 100).toFixed(2);
+            $("#IGST_Amt").val(IGST_Amt);
+
+            var SGST_Amt = ((Total * SGST) / 100).toFixed(2);
+            $("#SGST_Amt").val(SGST_Amt);
+
+            var CGST_Amt = ((Total * CGST) / 100).toFixed(2);
+            $("#CGST_Amt").val(CGST_Amt);
+
+            var Total_Amt = (parseFloat(Gross_Amt) + parseFloat(AgencyCommission) + parseFloat(IGST_Amt) + parseFloat(SGST_Amt) + parseFloat(CGST_Amt)).toFixed(2);
+            $("#Total_Amt").val(Total_Amt);
+        }
+
+
+
+
+    </script>
+}

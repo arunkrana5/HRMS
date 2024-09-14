@@ -1,0 +1,311 @@
+﻿@model Helpdesk.Ticket.Details
+@{
+    long LoginID = 0;
+    long.TryParse(ClsApplicationSetting.GetSessionValue("LoginID"), out LoginID);
+
+    bool CanAddNotes = false;
+    if (Model.TicketDetails.CurrentStatusID != 4)
+    {
+        CanAddNotes = true;
+    }
+}
+<style>
+</style>
+<input type="hidden" id="TicketID" value="@Model.TicketDetails.TicketID" />
+<div class="card">
+    <div class="row no-gutters">
+        <div class="col-lg-12 col-xl-12">
+            <div class="">
+                <div class="main-content-body main-content-body-contacts">
+                    <div class="main-contact-info-header">
+                        <div class="media">
+                            <div class="media-body">
+                                <h4> @Model.TicketDetails.Subject</h4>
+                                <p>Created By - @Model.TicketDetails.CreatedBy </p>
+                                <nav class="nav">
+                                    <a class="nav-link"> Created By</a>
+                                    <a class="nav-link"> Created Date</a>
+                                    <a class="nav-link"> IP Address</a>
+                                    <a>Current Status</a>
+                                </nav>
+                                <nav class="nav">
+                                    <a class="nav-link"> @Model.TicketDetails.CreatedBy</a>
+                                    <a class="nav-link"> @Model.TicketDetails.CreatedDate</a>
+                                    <a class="nav-link"> @Model.TicketDetails.IPAddress</a>
+                                    <a class="nav-link">   <small class="mf-date" style="color:@Model.TicketDetails.CurrentStatus_Color">   @Model.TicketDetails.CurrentStatus</small></a>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="main-contact-action right">
+                            <a class="btn btn-white btn-svgs" href="@Url.Action("MyTicketsList",new { src = ClsCommon.Encrypt(ViewBag.MenuID+"*"+"/HelpDesk/MyTicketsList") })" type="button"><span> Back To List</span> </a>
+
+                            @if (CanAddNotes)
+                            {
+                                <a class="btn btn-danger btn-svgs" onclick="ShowNotesAdd()"><span>Add Notes </span> </a>
+                            }
+                        </div>
+                        <!-- main-contact-action -->
+                    </div>
+                    <div class="main-contact-info-body">
+                        <div class="media-list pt-0">
+                            <div class="media py-4 border-top mt-0">
+                                <div class="media-body">
+                                    <div class="d-flex">
+                                        <div class="media-icon bg-light text-primary me-3 mt-1">
+                                            <i class="fa fa-map-marker"></i>
+                                        </div>
+                                        <div>
+                                            <label>Message</label>
+                                            <span class="font-weight-semibold fs-14">
+                                                @Html.Raw(Model.TicketDetails.Message)
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="media py-4 border-top mt-0">
+                                <div class="media-body">
+                                    <div class="d-flex">
+                                        <div class="media-icon bg-light text-primary me-3 mt-1">
+                                            <i class="fa fa-map-marker"></i>
+                                        </div>
+                                        <div>
+                                            <label>Assignee</label>
+                                            <span class="font-weight-semibold fs-14">
+                                                @if (Model.AssigneeList != null)
+                                                {
+                                                    foreach (var item in Model.AssigneeList)
+                                                    {
+                                                        <a class="btn btn-light btn-svgs mt-5" href="javascript:void(0)" title="@item.EmailID">
+                                                            <svg class="svg-icon me-3" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"></path><path d="M12 16c-2.69 0-5.77 1.28-6 2h12c-.2-.71-3.3-2-6-2z" opacity=".3"></path><circle cx="12" cy="8" opacity=".3" r="2"></circle><path d="M12 14c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4zm-6 4c.22-.72 3.31-2 6-2 2.7 0 5.8 1.29 6 2H6zm6-6c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0-6c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2z"></path></svg>
+
+                                                            @item.EMPName
+                                                        </a>
+
+                                                    }
+                                                }
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @if (Model.DeferredList != null)
+                            {
+                                <div class="media py-4 border-top mt-0">
+                                    <div class="media-body">
+                                        <div class="d-flex">
+                                            <div class="media-icon bg-light text-primary me-3 mt-1">
+                                                <i class="fa fa-map-marker"></i>
+                                            </div>
+                                            <div>
+                                                <label>Deferred</label>
+                                                <span class="font-weight-semibold fs-14">
+
+                                                    @foreach (var item in Model.DeferredList)
+                                                    {
+                                                        <a class="btn btn-light btn-svgs mt-5" href="javascript:void(0)" title="@item.EmailID">
+                                                            <svg class="svg-icon me-3" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"></path><path d="M12 16c-2.69 0-5.77 1.28-6 2h12c-.2-.71-3.3-2-6-2z" opacity=".3"></path><circle cx="12" cy="8" opacity=".3" r="2"></circle><path d="M12 14c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4zm-6 4c.22-.72 3.31-2 6-2 2.7 0 5.8 1.29 6 2H6zm6-6c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0-6c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2z"></path></svg>
+
+                                                            @item.EMPName
+                                                        </a>
+
+                                                    }
+
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                            @if (Model.AttachmentList.Where(x => x.NotesID == 0).Count() > 0)
+                            {
+                                <div class="media py-4 border-top mt-0">
+                                    <div class="media-body">
+                                        <div class="d-flex">
+                                            <div class="media-icon bg-light text-primary me-3 mt-1">
+                                                <i class="fa fa-map-marker"></i>
+                                            </div>
+                                            <div>
+                                                <label>Attachments</label>
+                                                <span class="font-weight-semibold fs-14">
+
+                                                    @foreach (var Aitem in Model.AttachmentList.Where(x => x.NotesID == 0).ToList())
+                                                    {
+                                                    <a target="_blank" href="@Aitem.Filepath">
+                                                        @if (Aitem.contenttype == ".png")
+                                                        {
+
+
+                                                            <span><i class="fa fa-images"></i></span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span><i class="fa fa-images"></i></span>
+                                                        }
+
+                                                    </a>
+
+                                                    }
+
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card ">
+    <div class="card-header">
+        Notes
+    </div>
+    <div class="row no-gutters">
+
+        <div class="chat-body-style ps ps--active-y">
+            @{ int Count = 0;}
+            @foreach (var item in Model.NotesList)
+            {
+                Count++;
+                <div class="message-feed media mt-0 ">
+                    <div class="media-body">
+                        <div class="mf-content">
+                            @Html.Raw(@item.Notes)
+                            <small class="mf-date" style="color:@item.Color">   @item.DisplayName</small>
+                            <small class="mf-date"><i class="fa fa-clock-o"></i>  @item.CreatedBy</small>
+                            <small class="mf-date"><i class="fa fa-clock-o"></i>  @item.CreatedDate</small>
+                            <small class="mf-date"><i class="fa fa-"></i>  @item.IPAddress</small>
+                        </div>
+                        @if (Model.AttachmentList.Where(x => x.NotesID == item.NotesID).Count() > 0)
+                        {
+                            <div class="media py-4 border-top mt-0">
+                                <div class="media-body">
+                                    <div class="d-flex">
+                                        <div class="media-icon bg-light text-primary me-3 mt-1">
+                                            <i class="fa fa-map-marker"></i>
+                                        </div>
+                                        <div>
+                                            <label>Attachments</label>
+                                            <span class="font-weight-semibold fs-14">
+
+                                                @foreach (var Aitem in Model.AttachmentList.Where(x => x.NotesID == item.NotesID).ToList())
+                                                {
+                                                <a target="_blank" href="@Aitem.Filepath">
+                                                    @if (Aitem.contenttype == ".png")
+                                                    {
+
+
+                                                        <span><i class="fa fa-images"></i></span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span><i class="fa fa-images"></i></span>
+                                                    }
+
+                                                </a>
+
+                                                }
+
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+
+
+            }
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade pop-dgn" id="ViewModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header blk-gdn-btn">
+                <h4 class="modal-title"><i class="fas fa-print"></i>Add Notes </h4>
+                <div class="close" data-dismiss="modal">&times;</div>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div id="TagetDiv"></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+@section scripts    {
+
+    @System.Web.Optimization.Scripts.Render("~/bundle/unobtrusivejs")
+
+    @Html.IncludeVersionedJs(Url.Content("~/ckeditor/ckeditor.js"))
+    <script>
+        function ShowUser() {
+            var StatusID = $("#StatusID").find("option:selected").val();
+            if (StatusID == 3) {
+                $("#userdiv").show();
+            } else {
+                $("#userdiv").hide();
+            }
+        }
+
+          function ShowNotesAdd() {
+              var TicketID = $("#TicketID").val();
+			$.ajax({
+                url: "/HelpDesk/_NotesAdd",
+                type: "Get",
+                data: { src: EncryptJSON(@ViewBag.MenuID+"*" + "/HelpDesk/_NotesAdd" + "*" + TicketID) },
+                success: function (data)
+                {
+                    $("#TagetDiv").empty();
+                    $("#TagetDiv").html(data);
+                    $('#ViewModal').modal({
+                        backdrop: 'static',
+                        keyboard: false
+                    })
+                    $(".applyselect").select2();
+
+                    CKEDITOR.replace("Notes");
+
+                     var form = $("form")
+                .removeData("validator")
+                .removeData("unobtrusiveValidation");
+                    $.validator.unobtrusive.parse(form);
+				},
+				error: function (er) {
+					alert(er);
+
+				}
+			});
+    }
+
+
+    function OnNotesSuccess(obj) {
+        if (obj.Status) {
+            SuccessToaster(obj.SuccessMessage);
+            window.location.reload();
+        }
+        else {
+            CloseLoadingDialog();
+            FailToaster(obj.SuccessMessage);
+
+        }
+    }
+
+    </script>
+}

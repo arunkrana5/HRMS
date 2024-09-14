@@ -1,0 +1,72 @@
+﻿@model List<AdminModule>
+
+<div class="menu_section">
+    <input type="hidden" id="hdnForMenuID" value="@ViewBag.MenuID" />
+
+
+    <ul class="side-menu">
+
+        @foreach (AdminModule item in Model)
+        {
+            <li class="slide mt-4">
+                <a class="side-menu_item" data-toggle="slide"><span class="mx-2"><i class="@item.ModuleIcon"></i></span> <span class="side-menu__label">@item.ModuleName</span> <i class="angle fa fa-angle-right"></i></a>
+                <ul class="slide-menu">
+                    @foreach (AdminMenu itemMenu in item.MainMenuList.Where(x => x.ParentMenuID == 0).OrderBy(x => x.Priority).ThenBy(x => x.MenuName).ToList())
+                    {
+                        <li class="sub-slide">
+                            <a class="parentMenu slide-item" id="Menu_@itemMenu.MenuID" target="@itemMenu.Target" href="@(itemMenu.MenuURL+ "?src="+ClsCommon.Encrypt(itemMenu.MenuID.ToString()+"*"+itemMenu.MenuURL))" onclick="@(itemMenu.IsChild != "Y"?"ShowLoadingDialog();":"")">
+                                <span class="sub-side-menu_label">
+                                    @itemMenu.MenuName
+                                </span>
+                                @if (itemMenu.IsChild == "Y")
+                                {
+                                    <i class="sub-angle fe fe-chevron-down"></i>
+                                }
+                            </a>
+                            @if (itemMenu.IsChild == "Y")
+                            {
+
+                                @ShowChild(itemMenu.ChildMenuList.ToList());
+
+                            }
+
+
+                        </li>
+                    }
+                </ul>
+
+            </li>
+        }
+
+
+    </ul>
+</div>
+
+
+@helper ShowChild(List<AdminMenu> ChildList)
+{
+    <ul class="sub-slide-menu">
+        @foreach (AdminMenu itemMenu in ChildList.OrderBy(x => x.Priority).ThenBy(x => x.MenuName).ToList())
+        {
+        <li>
+            <a class="childMenu slide-item" id="Menu_@itemMenu.MenuID" target="@itemMenu.Target" href="@(itemMenu.MenuURL+ "?src="+ClsCommon.Encrypt(itemMenu.MenuID.ToString()+"*"+itemMenu.MenuURL))" onclick="@(itemMenu.IsChild != "Y"?"ShowLoadingDialog();":"")">
+                <span class="sub-side-menu_label">
+                    @itemMenu.MenuName
+                </span>
+                @if (itemMenu.IsChild == "Y")
+                {
+                    <i class="sub-angle fe fe-chevron-down"></i>
+                }
+            </a>
+            @if (itemMenu.IsChild == "Y")
+            {
+
+                @ShowChild(itemMenu.ChildMenuList.ToList());
+
+            }
+
+        </li>
+        }
+    </ul>
+
+}

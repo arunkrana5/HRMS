@@ -1,0 +1,172 @@
+﻿html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+   
+  
+}
+/*error page */
+
+#oopss {
+    font-family: 'Rubik', sans-serif;
+    background-color: #274482;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100vh;
+}
+
+    #oopss p {
+        text-align: center;
+        color: #C0C0C0;
+        font-size: 16px;
+        margin: 0px 10px 20px 10px;
+        width: 400px;
+    }
+
+
+    #oopss h1 {
+        font-size: 100px;
+        font-weight: 600;
+        color: #fff;
+        margin-bottom: 10px;
+    }
+
+    #oopss h5{
+        font-size: 65px;
+        font-weight: 600;
+        color: #fff;
+        margin-bottom: 30px;
+    }
+
+    #oopss .button {
+        color: #274482;
+        border: none;
+        background-color: #f4f7fb;
+        height: 40px;
+        width: 140px;
+        padding-top:8px;
+        font-weight: bold;
+        border-radius: 20px;
+        text-transform: uppercase;
+        font-weight: 500;
+    }
+
+        #oopss .button:hover {
+            background-color: #C0C0C0;
+        }
+
+        #oopss a {
+            
+            text-decoration: none;
+        }
+
+        #oopss a:hover {
+            text-decoration: none;
+        }
+
+@media only screen and (min-width: 300px) and (max-width: 600px) {
+  #oopss{
+      height:auto;
+  }
+    #oopss h1 {
+        font-size: 42px;
+    }
+        #oopss h5{
+            font-size:20px;
+        }
+        #oopss p{
+         width:100%;
+        }
+       
+}
+
+@media only screen and (max-width: 1199px) and (min-width: 599px){
+   
+        #oopss p {
+            width: 100%;
+        }
+    #oopss {
+        height: auto;
+    }
+}
+
+/*error page end*/
+/*error page1 */
+/*#oopss1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #fff;
+}
+    #oopss1 img{
+        height:600px;
+        width:auto;
+    }
+
+    #oopss1 .sorry-text p {
+        background-color: inherit;
+        text-align: center;
+        color: #333;
+        font-size: 18px;
+        margin-bottom: 20px;
+        width: auto !important;
+    }
+
+
+    #oopss1 h1 {
+        font-size: 100px;
+        font-weight: 700;
+        color: #274482;
+        margin-bottom: 10px;
+    }
+
+    #oopss1 p:nth-child(2) {
+        font-size: 55px;
+        font-weight: 600;
+        color: #000;
+        margin-bottom: 0;
+    }
+
+    #oopss1 button {
+        background-color: #274482;
+        border: none;
+         color: #f4f7fb;
+        height: 40px;
+        width: 140px;
+        font-weight: bold;
+        border-radius: 20px;
+        text-transform: uppercase;
+        font-weight: 500;
+    }
+
+    #oopss1 a {
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+        #oopss1 a:hover {
+            text-decoration: none;
+        }
+
+@media only screen and (min-width: 300px) and (max-width: 1199px) {
+    #oopss1 {
+        height: auto;
+    }
+
+        #oopss1 h1 {
+            font-size: 42px;
+        }
+
+        #oopss1 p:nth-child(2) {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 0;
+  
+
+}*/
+
+/*error page1 end*/
+

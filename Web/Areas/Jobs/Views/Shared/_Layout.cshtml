@@ -1,0 +1,103 @@
+﻿@{ 
+    string PageName = ClsApplicationSetting.GetPageName();
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@PageName </title>
+    <meta name="title" content="@PageName" />
+    <meta name="keywords" content="@PageName" />
+    <meta name="description" content="@PageName" />
+
+    <link rel="icon" href="" type="image/x-icon" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    @Html.IncludeVersionedCss(Url.Content("~/assets/design/plugins/web-fonts/icons.css"))
+    @Html.IncludeVersionedCss(Url.Content("~/assets/design/plugins/web-fonts/font-awesome/font-awesome.min.css"))
+    @Html.IncludeVersionedCss(Url.Content("~/assets/design/plugins/fontawesome5/css/all.min.css"))
+
+    @Html.IncludeVersionedCss(Url.Content("~/Areas/Jobs/assets/css/style.css"))
+
+    @Html.IncludeVersionedCss(Url.Content("~/Areas/Jobs/assets/css/errorpage.css"))
+    @Html.IncludeVersionedCss(Url.Content("~/Areas/Jobs/assets/css/info.css"))
+
+
+    @Html.IncludeVersionedCss(Url.Content("~/assets/design/css/select2.min.css"))
+
+    @RenderSection("style", required: false)
+    @Html.IncludeVersionedCss(Url.Content("~/assets/design/css/custom.css"))
+    
+</head>
+<body>
+    <!---Global-loader-->
+    <div id="global-loader" style="display:none">
+        <img src="~/assets/design/images/svgs/loader.svg" alt="loader">
+    </div>
+    @RenderBody()
+
+
+    <div id="toast">
+        <div id="toasticon"><i></i></div>
+        <div id="toastMsg"></div>
+    </div>
+
+    @Html.IncludeVersionedJs(Url.Content("~/assets/design/js/vendors/jquery-3.5.1.min.js"))
+
+    @Html.IncludeVersionedJs(Url.Content("~/assets/design/js/select2.min.js"))
+
+    @Html.IncludeVersionedJs(Url.Content("~/assets/Scripts/CustomValidate.js"))
+
+    @Html.IncludeVersionedJs(Url.Content("/assets/design/js/sweetalert.js"))
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
+
+
+
+
+    @RenderSection("scripts", required: false)
+    <script>
+        function SuccessToaster(Message) {
+            $("#toastMsg").html(Message);
+            $("#toasticon i").addClass("fa fa-check");
+            var x = document.getElementById("toast")
+            x.className = "show";
+            setTimeout(function () { x.className = x.className.replace("show", ""); }, 4000);
+        }
+
+        function FailToaster(Message) {
+            $("#toastMsg").html(Message);
+            $("#toasticon i").addClass("fa fa-exclamation-triangle");
+            var x = document.getElementById("toast")
+            x.className = "show toaster-warning";
+            setTimeout(function () { x.className = x.className.replace("show toaster-warning", ""); }, 4000);
+        }
+
+
+$(document).ready(function () {
+    var TS = '@TempData["Success"]';
+    var TSM = '@TempData["SuccessMsg"]';
+    if (TS == "Y") {
+        SuccessToaster(TSM);
+    }
+    if (TS == "N") {
+        FailToaster(TSM);
+    }
+});
+
+
+        $(document).ready(function () {
+            $(".applyselect").select2();
+        });
+
+    </script>
+
+    <noscript>
+        <p class="NojavaScript">Javascripts is disabled</p>
+    </noscript>
+
+</body>
+</html>

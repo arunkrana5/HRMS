@@ -1,0 +1,96 @@
+﻿@model MyTab.Approval
+@section style{
+    @System.Web.Optimization.Styles.Render("~/bundle/dataTablecss")
+}
+
+@Html.Partial("ListHeader_Partial", "My Tickets")
+
+<div class="row">
+    <div class="col-lg-12 ">
+        <div class="card">
+            <div class="card-body">
+                <div class="">
+
+                    <input type="hidden" id="hdnAddUrl" name="hdnAddUrl" value="@Url.Action("CreateTicket",new { src = ClsCommon.Encrypt(ViewBag.MenuID+"*"+"/HelpDesk/CreateTicket"+"*"+"0") })" />
+
+                    @using (Ajax.BeginForm("_MyTicketsList", "HelpDesk",
+                             new { src = ClsCommon.Encrypt(ViewBag.MenuID + "*" + "/HelpDesk/_MyTicketsList") },
+                              new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess", OnBegin = "ShowLoadingDialog()" },
+                                 new { @id = "_MyTicketsListsForm" })
+                         )
+                    {
+                        <div class="row">
+                            <div class="tabmargin">
+                                @Html.HiddenFor(x => x.Approved)
+                                <ul id="tabs" class="nav nav-tabs " role="tablist">
+                                    <li class="nav-item"> <a tabvalue="1" class="nav-link ripplelink AnchorApproval @(Model.Approved == 1 ? "active" : "")" data-toggle="tab" role="tab">Pending</a> </li>
+                                    <li class="nav-item"> <a tabvalue="2" class="nav-link ripplelink AnchorApproval @(Model.Approved == 2 ? "active" : "") " data-toggle="tab" role="tab">In Process</a></li>
+                                    <li class="nav-item"> <a tabvalue="3" class="nav-link ripplelink AnchorApproval @(Model.Approved == 3 ? "active" : "") " data-toggle="tab" role="tab">Forward</a></li>
+                                    <li class="nav-item"> <a tabvalue="4" class="nav-link ripplelink AnchorApproval @(Model.Approved == 4 ? "active" : "") " data-toggle="tab" role="tab">Completed</a></li>
+                                </ul>
+
+                            </div>
+                            <div class="col-sm-2 form-group" style="display:none">
+                                <label class="small">&nbsp;</label>
+                                <button type="submit" id="btnSearch" name="Command" value="Add" class="btn btndefault pull-right form-control">
+                                    <i class="fa fa-search"></i>  Search
+                                </button>
+                            </div>
+                        </div>
+                    }
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="TargetDiv">
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+@section scripts    {
+    @System.Web.Optimization.Scripts.Render("~/bundle/dataTablesjs")
+
+    @System.Web.Optimization.Scripts.Render("~/bundle/unobtrusivejs")
+
+    <script>
+        function OnBegin() {
+            $("#TargetDiv").empty();
+            $("#TargetDiv").html('<img src="/assets/design/images/loader.gif" class="imgloader" />');
+        }
+        $(document).ready(function () {
+            $("#btnSearch").click();
+        });
+
+
+        $('.AnchorApproval').on('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var att = $(this).attr("tabvalue");
+            $(".AnchorApproval.active").removeClass("active");
+            $(this).addClass("active");
+            $("#Approved").val(att);
+            $('#btnSearch').click();
+        });
+
+        function OnSuccess(obj) {
+            $("#TargetDiv").empty();
+            $("#TargetDiv").html(obj);
+            CloseLoadingDialog();
+            DatatableScripts();
+        }
+       
+
+    </script>
+
+}

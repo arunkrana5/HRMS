@@ -1,0 +1,14 @@
+
+declare @temp table (SNO BIGINT,CODE varchar(50),[Emp Name] varchar(50),[Staff ID] varchar(50) null,[DOJ] varchar(50),[DOB] varchar(50),GENDER varchar(50),
+[Grade] varchar(50),[ZONE] varchar(50),[Location] varchar(50),Department varchar(50),[Sub Department] varchar(50) null	,
+[Cost Center] varchar(50),Designation	varchar(50)	,[BANKNAME] varchar(50) null,[BANKACNO] varchar(50) null,	[PAYDAYS] NUMERIC(15,2),ArrDays NUMERIC(15,2),[Basic(R)] NUMERIC(15,2),[HRA(R)] NUMERIC(15,2),
+[Special Allowance(R)] NUMERIC(15,2),[Statutory Bonus(R)] NUMERIC(15,2),[Other Allowance(R)] NUMERIC(15,2),[RATEGROSSTOTAL] NUMERIC(15,2),[Basic] NUMERIC(15,2),[HRA] NUMERIC(15,2),[Special Allowance] NUMERIC(15,2),
+[Statutory Bonus] NUMERIC(15,2),[Other Allowance] NUMERIC(15,2),Gratuity NUMERIC(15,2),[ActualGrossSalary] NUMERIC(15,2),[GROSSARREAR] NUMERIC(15,2) null,Incentive NUMERIC(15,2),[Personal Conveyance] NUMERIC(15,2),	OTAMT NUMERIC(15,2),
+[NETGROSSTOTAL] NUMERIC(15,2),PF NUMERIC(15,2),	VPF NUMERIC(15,2),ESI	NUMERIC(15,2),ITAX NUMERIC(15,2),ADDTAX NUMERIC(15,2),PROFTAX NUMERIC(15,2),[LWF Ded] NUMERIC(15,2),GROSSDED NUMERIC(15,2),NETPAY NUMERIC(15,2),DOL date null,	STATE varchar(500),	
+[PAN] varchar(500),[MAXIMUM TAX SLAB %] NUMERIC(15,2),CMSGINO	varchar(500),STATUS int,[PF EMPLR] NUMERIC(15,2),[ESI EMPLR]NUMERIC(15,2),[LWF EMPLR] NUMERIC(15,2),[EMPLR Cont.] NUMERIC(15,2),[Monthly CTC] NUMERIC(15,2))
+
+
+insert into  @temp
+EXECUTE PaySP_SalaryRegInExcel 'BS','','','','','','','','','4','2022','','','A','Admin','L','21'
+
+select * from @temp

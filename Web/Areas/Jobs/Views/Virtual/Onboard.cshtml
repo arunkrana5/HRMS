@@ -1,0 +1,911 @@
+﻿@section style{
+ <style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-weight: 14px;
+        background-color: #ffffff !important;
+        min-height: 100%;
+    }
+
+.brand-name{
+    color: #f8f8f8;
+    margin-bottom: 10px;
+    padding-bottom: 0;
+}
+
+/* field1 start */
+.header{
+
+    padding: 20px;
+    border-radius: 9px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+ p{
+    font-weight: 500;
+    margin-left: 12px;
+    color: #4a5577;
+}
+h2{
+    color: #2a20aa;
+   margin-bottom: 40px;
+}
+.head-icon{
+
+    background-color: #2a20aa;
+    padding: 10px 15px;
+    font-size:16px;
+    border-radius: 50%;
+    color: #fff;
+}
+.head{
+    color: #000;
+
+}
+#form{
+    padding: 10px;
+    border-radius: 8px;
+
+}
+#field1 {
+  flex-wrap: wrap;
+  display: flex;
+  color: #2b2b2b !important;
+}
+#field1 div{
+  color: #2b2b2b !important;
+  flex-grow: 1;
+  font-family: 'Rubik', sans-serif;
+
+
+}
+/* field1 end */
+
+/* field 2 start*/
+
+#field2 {
+  flex-wrap: wrap;
+  display: flex;
+  color: #2b2b2b !important;
+}
+#field2 div{
+  color: #2b2b2b !important;
+  font-family: 'Rubik', sans-serif;
+  padding: 0px;
+  flex-grow: 1;
+}
+/* field 2 end */
+
+/* field 3 start */
+#field{
+  display: flex;
+  flex-wrap: wrap;
+  color: #2b2b2b !important;
+}
+#field div{
+  color: #2b2b2b !important;
+  font-family: 'Rubik', sans-serif;
+  flex-grow: 1;
+}
+
+/* field 3 start */
+#field3{
+  display: flex;
+  flex-wrap: wrap;
+  color: #2b2b2b !important;
+
+}
+#field3 div{
+  flex-grow: 1;
+}
+/* field 4 start*/
+#field4{
+  display: flex;
+  flex-wrap: wrap;
+}
+#field4 div{
+ flex-grow: 1;
+
+}
+/*field 4 end */
+
+label{
+  color: #757575 !important;
+  border: none !important;
+  border-radius: none;
+  font-size: 14px;
+
+}
+input{
+  color: #757575 !important;
+  border: 1px solid #333;
+  width: 80%;
+  border-radius: none;
+
+}
+select{
+  color: #333 !important;
+  width: 80%;
+
+}
+#Recruiter_form .form-select{
+  background-color: #fff;
+  border: 1px solid #333;
+  width: 100%;
+  color: #333 !important;
+
+
+}
+#Recruiter_form .form-control{
+
+    width: 80%;
+    color: #dddddd !important;
+
+
+  }
+
+.form-floating{
+  background-color: #f8f8f8;
+  font-family: 'Rubik', sans-serif;
+  color: #757575 !important;
+  border: none !important;
+
+}
+
+/* document upload start */
+table{
+    border: none;
+}
+#form-upload  button{
+  background-color: #219652;
+  color: #fff;
+  border: none;
+  width: 120px !important;
+  border-radius: 8px;
+  padding: 4px 20px;
+  margin: 0 !important;
+}
+#form-upload input{
+  border: none;
+  background-color: #f7f7f7;
+  color: #333;
+}
+
+#form-upload td{
+  border: none;
+}
+
+
+/* document upolad end */
+
+
+    #regForm {
+        background-color: #ffffff;
+        margin: 20px auto;
+        font-family: Raleway;
+
+        width: 80%;
+
+        min-width: 300px;
+    }
+
+    h1 {
+
+        color: #f7f7f7;
+
+        padding: 20px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    h4{
+        font-weight: 500;
+        text-align: center;
+        margin-bottom: 40px;
+        margin-top: 40px;
+    }
+    p{
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    input {
+        padding: 10px;
+        width: 100%;
+        font-size: 17px;
+        font-family: Raleway;
+        border: 1px solid #aaaaaa;
+    }
+
+        /* Mark input boxes that gets an error on validation: */
+        input.invalid {
+            background-color: #ffdddd;
+        }
+
+    /* Hide all steps by default: */
+    .tab {
+        display: none;
+
+    }
+
+    button {
+        margin: 40px;
+        height: 40px;
+        width: 120px;
+        background-color: #04AA6D;
+        color: #ffffff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-family: Raleway;
+        cursor: pointer;
+    }
+    #nextBtn{
+        background-color: #4787f3;
+    }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+    #prevBtn {
+        background-color: butbbbbb;
+    }
+
+    /* Make circles that indicate the steps of the form: */
+    .step {
+        height: 15px;
+        width: 15px;
+        margin: 0 2px;
+
+        background-color: #bbbbbb;
+        border: none;
+        border-radius: 50%;
+        display: inline-block;
+        opacity: 0.5;
+    }
+
+        .step.active {
+            opacity: 1;
+        }
+
+        /* Mark the steps that are finished and valid: */
+        .step.finish {
+            background-color: #4787f3;
+        }
+
+        .col1{
+            padding: 30px;
+            height: 250px;
+            background-color: #4787f3;
+        }
+        img{
+            margin-top: 40px;
+        }
+        .basic{
+            margin-top: -120px;
+            background-color: #fff;
+            padding: 20px 20px;
+            box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+        }
+        .tab .icons{
+            margin-top: -25px;
+            margin-bottom: 40px;
+        }
+        .tab .user-icon{
+            font-size: 16px;
+            background-color: #fff;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            border-radius: 50%;
+            color: #888;
+            padding: 17px 20px;
+        }
+media only screen and (max-width: 40em) {
+    thead th:not(:first-child) {
+        display: none;
+    }
+
+    td, th {
+        display: block;
+    }
+
+    td[data-th]:before  {
+        content: attr(data-th);
+    }
+}
+
+.brand-logo img{
+    background-color: #fff;
+     padding: 10px 2px;
+    border-radius: 50%;
+}
+
+    </style>
+}
+
+<div class="row">
+    <div class="col-sm-12 col-xl-12 col1 text-center brand-logo">
+        <div class="container">
+            <!-- <span ><img  src="./assets/img/brand/favicon.png" width="90px" height="auto" /></span> -->
+
+
+            <h1 class="pt-3">Requirter Details</h1>
+        </div>
+    </div>
+    <div class="col-xl-12 d-flex justify-content-center">
+
+        <form id="regForm" action="/action_page.php">
+
+            <!-- One "tab" for each step in the form: -->
+            <div class="tab">
+
+
+                <div class="basic">
+
+                    <div class="icons text-center">
+                        <span class="user-icon"><i class="fa-solid fa-user"></i></span>
+                        <p class="mt-4">Basic Details</p>
+                    </div>
+
+                    <p class="">Please Fill All Your Details</p>
+                    <div class="field1 mb-1 " id="field1">
+                        <div class="form-floating m-2">
+                            <input type="text" class="form-control " id="floatingInput" placeholder="name@example.com">
+                            <label for="floatingInput">Name</label>
+                        </div>
+
+                        <div class="form-floating  m-2">
+                            <input type="text" class="form-control" id="floatingfname" placeholder="Father Name">
+                            <label for="floatingfname">Father Name</label>
+                        </div>
+
+                    </div>
+                    <div class="mb-1" id="field1">
+                        <div class="form-floating m-2">
+                            <input type="tel" class="form-control" id="floatingnumber" placeholder="Mobile Number">
+                            <label for="floatingnumber">Mobile Number</label>
+                        </div>
+                        <div class="form-floating m-2">
+                            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                            <label for="floatingInput">Email address</label>
+                        </div>
+                    </div>
+                    <div class="form-floating m-2">
+                        <input type="name" class="form-control " id="floatingInput" placeholder="name@example.com">
+                        <label for="floatingInput">Dealer Name</label>
+                    </div>
+                    <div class="mb-1" id="field4">
+                        <div class="form-floating m-2">
+                            <input type="text" class="form-control" id="floatinglocation" placeholder="Work Location">
+                            <label for="floatinglocation">Work Location</label>
+                        </div>
+                    </div>
+                    <div class="mb-1" id="field2">
+                        <div class="form-floating m-2">
+                            <select for="state" class="form-select" id="floatingnumber" placeholder="Dose 2">
+                                <option value="default">--</option>
+                                <option value="state1">Andhra Pradesh</option>
+                                <option value="state2">Arunachal Pradesh</option>
+                                <option value="state3">Assam</option>
+                                <option value="state4">Bihar</option>
+                                <option value="state5">Chhattisgarh</option>
+                                <option value="state6">Goa</option>
+                                <option value="state7">Gujarat</option>
+                                <option value="state8">Haryana</option>
+                                <option value="state9">Himachal Pradesh</option>
+                                <option value="state10">Jharkhand</option>
+                                <option value="state11">karnataka</option>
+                                <option value="state12">Kerala</option>
+                                <option value="state13">Madhya Pradesh</option>
+                                <option value="state14">Maharashtra</option>
+                                <option value="state15">Manipur</option>
+                                <option value="state16">Meghalaya</option>
+                                <option value="state17">Mizoram</option>
+                                <option value="state18">Nagaland</option>
+                                <option value="state19">Odisha</option>
+                                <option value="state20">Punjab</option>
+                                <option value="state21">Rajasthan</option>
+                                <option value="state22">Sikkim</option>
+                                <option value="state23">Tamil Nadu</option>
+                                <option value="state24">Telangana</option>
+                                <option value="state25">Tripura</option>
+                                <option value="state26">Uttrakhand</option>
+                                <option value="state27">Uttar Pradesh</option>
+                                <option value="state28">West Bangal</option>
+                            </select>
+                            <label for="floatingnumber"> State</label>
+                        </div>
+                        <div class="form-floating m-2">
+                            <input type="text" class="form-control" id="floatincity" placeholder="City">
+                            <label for="floatingcity">City</label>
+                        </div>
+                        <div class="form-floating m-2">
+                            <input type="number" class="form-control" id="floatingpin" placeholder="Pin Code">
+                            <label for="floatingpin">Pincode</label>
+                        </div>
+                    </div>
+                    <div class="mb-1" id="field2">
+                        <div class="form-floating m-2">
+                            <input type="text" class="form-control" id="floatingInput" placeholder="Work Profile">
+                            <label for="floatingInput">Work Profile</label>
+                        </div>
+                        <div class="form-floating m-2">
+                            <input type="number" class="form-control" id="floatingInput" placeholder="Experience (in years)">
+                            <label for="floatingInput">Experience(in year)</label>
+                        </div>
+
+
+                        <div class="form-floating m-2">
+                            <input type="number" class="form-control" id="floatingnumber" placeholder="Net Pay">
+                            <label for="floatingnumber">Net Pay </label>
+                        </div>
+                    </div>
+
+
+                    <div class=" mb-1" id="field3">
+                        <div class="form-floating m-2">
+                            <select for="dose" class="form-select" id="floatingnumber" placeholder="Dose 1">
+                                <option selected>--</option>
+                                <option value="value1">Taken</option>
+                                <option value="value2">Not</option>
+                            </select>
+                            <label for="floatingnumber">Dose 1 </label>
+                        </div>
+
+                        <div class="form-floating m-2">
+                            <select for="dose" class="form-select" id="floatingnumber" placeholder="Dose 2">
+                                <option selected>--</option>
+                                <option value="value1">Taken</option>
+                                <option value="value2">Not</option>
+                            </select>
+                            <label for="floatingnumber">Dose 2 </label>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="tab">
+
+                <div class="basic">
+
+                    <div class="text-center icons"><span class="user-icon"><i class="fa-solid fa-briefcase"></i></span></div>
+                    <h4>Work Information</h4>
+                    <p class="mb-4 ">Please Fill All Your Details</p>
+                    <div class=" mb-1 field1" id="field1">
+                        <div class="form-floating m-2 ">
+                            <input type="text" class="form-control " id="floatingInput" placeholder="name@example.com">
+                            <label for="floatingInput">Name (As Per Aadhar) *</label>
+                        </div>
+
+                        <div class="form-floating  m-2 ">
+                            <input type="text" class="form-control" id="floatingfname" placeholder="Father Name">
+                            <label for="floatingfname">Father Name (As Per Aadhar) *</label>
+                        </div>
+
+                    </div>
+
+                    <div class="mb-2 " id="field2">
+                        <div class="form-floating m-2 ">
+                            <input type="tel" class="form-control" id="floatingnumber" placeholder="Mobile Number">
+                            <label for="floatingnumber">Mobile Number</label>
+                        </div>
+                        <div class="form-floating m-2 ">
+                            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                            <label for="floatingInput">Email ID *</label>
+                        </div>
+                        <div class="form-floating  m-2 ">
+                            <select type="text" class="form-select" id="floatingbgroup" placeholder="Blood Group">
+                                <option value="default">--</option>
+                                <option value="group1">A+</option>
+                                <option value="group2">A-</option>
+                                <option value="group3">B+</option>
+                                <option value="group2">B-</option>
+                                <option value="group3">AB+</option>
+                                <option value="group2">AB-</option>
+                                <option value="group3">O+</option>
+                                <option value="group3">O-</option>
+                            </select>
+                            <label for="floatingfname">Blood Group</label>
+                        </div>
+                    </div>
+
+
+
+                    <div class="mb-2 ">
+                        <div class="form-floating m-2 ">
+                            <input type="text" class="form-control" id="floatingaddress" placeholder="Current Residential Address *">
+                            <label for="floatingaddress">Current Residential Address * </label>
+                        </div>
+                    </div>
+                    <div class=" mb-2" id="field1">
+                        <div class="form-floating m-2 ">
+                            <input type="text" class="form-control" id="floatingaddress" placeholder="Current Residential Address *">
+                            <label for="floatingaddress">Country </label>
+                        </div>
+                        <div class="form-floating  m-2 ">
+                            <select type="text" class="form-select" id="floatingbgroup" placeholder="Metro/Non-Metro * ">
+                                <option value="default">--</option>
+                                <option value="Metro">Metro</option>
+                                <option value="Nmetro">Non-Metro</option>
+
+                            </select>
+                            <label for="floatingfname">Metro/Non-Metro *</label>
+                        </div>
+                    </div>
+
+
+
+                    <div class=" mb-2" id="field2">
+                        <div class="form-floating m-2 ">
+                            <select for="state" name="state" class="form-select" id="state floatingnumber" placeholder="Dose 2">
+                                <option value="default" selected="selected">--</option>
+                            </select>
+                            <label for="floatingnumber"> State</label>
+                        </div>
+
+
+                        <div class="form-floating m-2 ">
+                            <select type="text" class="form-control" id="city" placeholder="City">
+                                <option value="default" selected="selected">--</option>
+                            </select>
+                            <label for="city">City</label>
+                        </div>
+
+                        <div class="form-floating m-2  ">
+                            <input type="pin" class="form-control" id="number" placeholder="Pin Code">
+                            <label for="pin">Pincode</label>
+                        </div>
+                    </div>
+
+                    <div class=" ">
+                        <div class="form-floating m-2 ">
+                            <select for="state" name="state" id="state" class="form-select" id="floatingnumber" placeholder="Dose 2">
+                                <option value="default" selected="selected">--</option>
+                            </select>
+                            <label for="floatingnumber">Work Location</label>
+                        </div>
+                    </div>
+
+                    <div class="" id="field2">
+                        <div class="form-floating m-2 ">
+                            <select type="text" class="form-control" id="city" placeholder="City">
+                                <option value="default" selected="selected">--</option>
+                            </select>
+                            <label for="city">Work Location State *</label>
+                        </div>
+                        <div class="form-floating m-2 ">
+                            <select type="text" class="form-control" id="city" placeholder="City">
+                                <option value="default" selected="selected">--</option>
+                            </select>
+                            <label for="city">Work Location City *</label>
+                        </div>
+                        <div class="form-floating m-2 ">
+                            <input type="number" class="form-control" id="floatingpin" placeholder="Pin Code">
+                            <label for="floatingpin">Pincode(Work Location)</label>
+                        </div>
+                    </div>
+
+                    <div class=" mb-2" id="field2">
+                        <div class="form-floating form-group m-2 ">
+                            <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text" />
+                            <label class="control-label" for="date">Date of Birth</label>
+
+                        </div>
+
+                        <div class="form-floating form-group m-2 ">
+                            <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text" />
+                            <label class="control-label" for="date">Date of Joining</label>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab">
+
+                <div class="basic">
+                    <div class="text-center icons"><span class="user-icon"><i class="fa-solid fa-piggy-bank"></i></span></div>
+                    <h4>Bank Details</h4>
+                    <p class="mb-4 ">Please Fill All Your Details</p>
+                    <div class="form-floating m-2 ">
+                        <select for="Payment" class="form-select" id="floatingnumber" placeholder="Payment Mode">
+                            <option selected>--</option>
+                            <option value="value1">In Account</option>
+                            <option value="value2">In hand</option>
+                        </select>
+                        <label for="floatingnumber">Payment Mode</label>
+                    </div>
+
+                    <div class=" mb-2" id="field2">
+                        <div class="form-floating m-2 ">
+                            <select for="bank" class="form-select" id="floatingnumber" placeholder="Bank Name">
+                                <option selected>--</option>
+
+                                <option value="value1">Bank of Baroda</option>
+                                <option value="value2">Bank of India</option>
+                                <option value="value3">Bank of Maharashtra</option>
+                                <option value="value4">Canara Bank</option>
+                                <option value="value5">Central Bank of India</option>
+                                <option value="value6">Indian Bank</option>
+                                <option value="value7">Indian Overseas Bank	</option>
+                                <option value="value8">Punjab National Bank	</option>
+                                <option value="value9">Punjab and Sind Bank	</option>
+                                <option value="value10">Union Bank of India</option>
+                                <option value="value11">UCO Bank</option>
+                                <option value="value12">State Bank of India</option>
+                                <option value="value13">Axis Bank</option>
+                                <option value="value14">Bandhan Bank</option>
+                                <option value="value15">CSB Bank</option>
+                                <option value="value16">City Union Bank</option>
+                                <option value="value17">DCB Bank</option>
+                                <option value="value18">Dhanlaxmi Bank</option>
+                                <option value="value19">HDFC Bank</option>
+                                <option value="value20">ICICI Bank</option>
+                                <option value="value21">IDBI Bank</option>
+                                <option value="value22">IDFC First Bank</option>
+                                <option value="value23">IndusInd Bank</option>
+                                <option value="value24">Jammu & Kashmir Bank</option>
+                                <option value="value25">Karnataka Bank</option>
+                                <option value="value26">Karur Vysya Bank</option>
+                                <option value="value27">Kotak Mahindra Bank</option>
+                                <option value="value28">Nainital Bank</option>
+                                <option value="value29">RBL Bank</option>
+                                <option value="value30">South Indian Bank</option>
+                                <option value="value31">Tamilnad Mercantile Bank</option>
+                                <option value="value32">Yes Bank</option>
+                            </select>
+                            <label for="floatingnumber">Bank Name</label>
+                        </div>
+                        <div class="form-floating form-group m-2 ">
+                            <input class="form-control" id="account" name="account" type="number" placeholder="Account  Number" />
+                            <label class="control-label" for="account">Account No *</label>
+
+                        </div>
+                        <div class="form-floating form-group m-2 ">
+                            <input class="form-control" id="ifsc" name="ifsc" maxlength="11" type="number" placeholder="IFSC Code" />
+                            <label class="control-label" for="date">IFSC Code*</label>
+
+                        </div>
+                    </div>
+                    <div class=" mb-2" id="field1">
+                        <div class="form-floating form-group m-2 ">
+                            <input class="form-control" id="dep" name="department" type="text" placeholder="Department" />
+                            <label class="control-label" for="dep">Department</label>
+
+                        </div>
+                        <div class="form-floating form-group m-2 ">
+                            <input class="form-control" id="designation" name="designation" type="text" placeholder="Designation" />
+                            <label class="control-label" for="des">Designation * </label>
+
+                        </div>
+                    </div>
+
+                    <div class=" mb-2" id="field2">
+                        <div class="form-floating m-2 ">
+                            <select for="gender" class="form-select" id="floatingnumber" placeholder="Gender">
+                                <option selected>--</option>
+                                <option value="value1">Male</option>
+                                <option value="value2">Female</option>
+                                <option value="value3">Other</option>
+                            </select>
+                            <label for="floatingnumber">Gender</label>
+                        </div>
+
+                        <div class="form-floating m-2 ">
+                            <select for="email" class="form-select" id="floatingnumber" placeholder="Dose 2">
+                                <option selected>--</option>
+                                <option value="value1">Single</option>
+                                <option value="value2">Married</option>
+                                <option value="value3">Widowed</option>
+                                <option value="value4">Separated</option>
+                                <option value="value5">Divorced</option>
+                            </select>
+                            <label for="floatingnumber">Marital Status</label>
+                        </div>
+                        <div class="form-floating form-group m-2 ">
+                            <input class="form-control" id="exp" maxlength="3" name="experience" type="number" placeholder="Experience" />
+                            <label class="control-label" for="exp">Experience </label>
+
+                        </div>
+                    </div>
+
+                    <div class=" mb-2" id="field2">
+                        <div class="form-floating m-2 ">
+                            <select for="salary" class="form-select" id="floatingnumber" placeholder="Salary per month *">
+                                <option selected>--</option>
+                                <option value="value1">Yes</option>
+                                <option value="value2">No</option>
+                            </select>
+                            <label for="floatingnumber">Salary per month *</label>
+                        </div>
+                        <div class="form-floating m-2 ">
+                            <input class="form-control" id="np" maxlength="3" type="number" placeholder="Notice Period" />
+                            <label for="floatingnumber">Notice Period (In Days) </label>
+                        </div>
+
+                        <div class="form-floating m-2 ">
+                            <input class="form-control" id="np" maxlength="3" type="number" placeholder="Notice Period" />
+                            <label for="floatingnumber">Contract End Date *</label>
+                        </div>
+                    </div>
+
+                    <div class=" mb-2" id="field2">
+                        <div class="form-floating m-2 ">
+                            <input class="form-control" id="np" maxlength="3" name="Notice Period" type="text" placeholder="Notice Period" />
+                            <label for="floatingnumber">
+                                Emergency Contact Person Name
+                            </label>
+                        </div>
+                        <div class="form-floating m-2 ">
+                            <input class="form-control" id="np" maxlength="3" name="Notice Period" type="number" placeholder="Notice Period" />
+                            <label for="floatingnumber">
+                                Emergency Contact Person No
+
+                            </label>
+                        </div>
+                        <div class="form-floating m-2 ">
+                            <input class="form-control" id="np" maxlength="3" name="Notice Period" type="email" placeholder="Notice Period" />
+                            <label for="floatingnumber">
+                                Emergency Contact Person Email
+
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class=" mb-2" id="field2">
+                        <div class="form-floating m-2 ">
+                            <input class="form-control" id="np" maxlength="3" name="Notice Period" type="name" placeholder="Notice Period" />
+                            <label for="floatingnumber">
+                                Reporting Manager name
+                            </label>
+                        </div>
+                        <div class="form-floating m-2 ">
+                            <input class="form-control" id="np" maxlength="3" name="Notice Period" type="number" placeholder="Notice Period" />
+                            <label for="floatingnumber">
+                                Reporting Manager Contact
+                            </label>
+                        </div>
+                        <div class="form-floating m-2 ">
+                            <input class="form-control" id="np" maxlength="3" name="Notice Period" type="email" placeholder="Notice Period" />
+                            <label for="floatingnumber">Reporting Manager Email ID</label>
+                        </div>
+                    </div>
+
+                    <div class=" mb-2" id="field1">
+                        <div class="form-floating m-2 ">
+                            <input class="form-control" id="np" maxlength="3" name="Notice Period" type="number" placeholder="Notice Period" />
+                            <label for="floatingnumber">
+                                Nominee Name
+                            </label>
+                        </div>
+                        <div class="form-floating m-2 ">
+                            <input class="form-control" id="np" maxlength="3" name="Notice Period" type="number" placeholder="Notice Period" />
+                            <label for="floatingnumber">
+                                Relationship with Nominee
+                            </label>
+                        </div>
+                        <div class="form-floating m-2 ">
+                            <input class="form-control" id="np" maxlength="3" name="Notice Period" type="number" placeholder="Notice Period" />
+                            <label for="floatingnumber">
+                                Nominee DOB
+                            </label>
+                        </div>
+                    </div>
+                    <div class=" mb-2" id="field2">
+                        <div class="form-floating m-2 ">
+                            <input class="form-control" id="np" maxlength="3" name="Notice Period" type="num" placeholder="Notice Period" />
+                            <label for="floatingnumber">
+                                ESIC No if Any
+
+                            </label>
+                        </div>
+                        <div class="form-floating m-2 ">
+                            <input class="form-control" id="np" maxlength="3" name="Notice Period" type="num" placeholder="Notice Period" />
+                            <label for="floatingnumber">UAN If any </label>
+                        </div>
+                        <div class="form-floating m-2 ">
+                            <input class="form-control" id="np" maxlength="3" name="Notice Period" type="num" placeholder="Notice Period" />
+                            <label for="floatingnumber">
+                                Aadhar No *
+                            </label>
+                        </div>
+                    </div>
+                    <div class="" id="field2">
+                        <div class="form-floating m-2 ">
+                            <input class="form-control" id="np" maxlength="3" name="Notice Period" type="num" placeholder="Notice Period" />
+                            <label for="floatingnumber">
+                                Category *
+                            </label>
+                        </div>
+                        <div class="form-floating m-2 ">
+                            <input class="form-control" id="np" maxlength="3" name="Notice Period" type="num" placeholder="Notice Period" />
+                            <label for="floatingnumber">
+                                PAN
+                            </label>
+                        </div>
+                        <div class="form-floating m-2 ">
+                            <input class="form-control" id="np" maxlength="3" name="Notice Period" type="num" placeholder="Notice Period" />
+                            <label for="floatingnumber">
+                                Remarks
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab">
+                <!----><div id="form">
+
+                    <div class="basic">
+                        <div class="text-center icons"><span class="user-icon"><i class="fa-solid fa-cloud-arrow-up"></i></span></div>
+                        <div class="mt-4  head"><h4>Upload Documents</h4></div>
+                        <div class="row " id="form-upload">
+
+                            <div class="col-lg-12 ">
+                                <div class="card mt-4">
+                                    <div class="table-responsive">
+                                        <table id="tblCustomers" class="table" cellpadding="0" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Document</th>
+                                                    <th>File</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td>Photo</td>
+                                                    <td class="choosefile"><input type="file" name="UploadFile" id="txtimg" /></td>
+                                                    <td><button type="button" id="btnAdd" value="Add">Upload</button></td>
+                                                </tr>
+                                                <tr>
+
+                                                    <td>Adhar Card</td>
+                                                    <td class="choosefile"><input type="file" name="UploadFile" id="txtimg" /></td>
+                                                    <td><button type="button" id="btnAdd" value="Add">Upload</button></td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                        <br />
+
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>         <!---->
+            </div>
+
+            <div style="overflow:auto;">
+                <div class="d-flex justify-content-center ">
+                    <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+                    <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                </div>
+            </div>
+            <!-- Circles which indicates the steps of the form: -->
+            <div style="text-align:center;margin-top:40px;">
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
+            </div>
+        </form>
+    </div>
+</div>

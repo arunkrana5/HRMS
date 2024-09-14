@@ -1,0 +1,64 @@
+﻿@model IList<Billing.TranList>
+
+<div class="">
+    <div class="table-responsive">
+        <table id="TableTran" class="table table-bordered text-nowrap key-buttons">
+            <thead>
+                <tr>
+                    <th>S.no.</th>
+                    <th>Name</th>
+                    <th>Code</th>
+                    <th>Dealer Type</th>
+                    <th>Gender</th>
+                    <th>Department</th>
+                    <th>Designation</th>
+                    <th>State </th>
+                    <th>Location </th>
+                    <th>Pay Days</th>
+                    <th>Net Pay</th>
+                    <th>Incentive</th>
+                    <th>Net Gross</th>
+                    <th>CTC</th>
+                    <th>Agency Per</th>
+                    <th>Agency Commission</th>
+                    <th>Total</th>
+                    <th>Updated Date</th>
+                    <th>Updated by</th>
+                    <th>IP Address</th>
+                </tr>
+
+            </thead>
+            <tbody>
+                @{ int count = 0;}
+                @foreach (var item in Model)
+                {
+                    count++;
+                <tr>
+                    <td>@count</td>
+                    <td>@item.EMPName</td>
+                    <td>@item.EMPCode</td>
+                    <td>@item.DealerType</td>
+                    
+                    <td>@item.Gender</td>
+                    <td>@item.Department</td>
+                    <td>@item.Designation</td>
+                    <td>@item.State</td>
+                    <td>@item.Location</td>
+                    <td>@item.PayDays</td>
+                    <td>@item.NetPay</td>
+                    <td>@item.Incentive</td>
+                    <td>@item.NetGross</td>
+                    <td>@item.CTC</td>
+                    <td>@item.Tran_AgencyPer</td>
+                    <td>@item.Tran_AgencyCommission</td>
+                    <td>@item.Total</td>
+                    <td>@item.ModifiedDate</td>
+                    <td>@item.ModifiedBy</td>
+                    <td>@item.IPAddress</td>
+                </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>

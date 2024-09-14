@@ -1,0 +1,77 @@
+
+.sidebar-root {
+position : relative;
+overflow : hidden;
+}
+.sidebar-root div.sidebar-container {
+position: absolute;
+}
+div.sidebar-container {
+width : 100px;
+height : 300px;
+position: fixed;
+
+}
+div.sidebar-container.right {
+top: 50%;
+right: 100px;
+}
+
+
+div.sidebar-inject {
+	position: absolute;
+}
+div.sidebar-inject.left {
+	background: url("inject-left.png") center no-repeat;
+	top: 0px;
+	right: 0px;
+	width : 50px;
+}
+div.sidebar-inject.right {
+	background:#a7c234;
+	top: 35%;
+    left: -10px;
+    border-radius: 100px;
+    height: 50px !important;
+    width: 50px !important;
+	padding: 11px 12px;
+}
+
+.sidebar-inject:before{
+	
+  font-weight: 900;
+  content: "\f060";
+  font-size: 20px;
+  color:#fff 
+}
+	
+div.sidebar-body {
+margin: 20px;
+position: absolute;
+top: 0px;
+left: 0px;
+color: #FFFFFF;
+padding: 10px 0px;
+}
+ul.sidebar-menu {
+font-size: 12pt;
+font-weight: bold;
+list-style: none;
+text-decoration: none;
+color: white;
+background:#a7c234;
+padding:10px 0px;
+border-bottom-left-radius: 25px;
+border-top-left-radius: 25px;
+}
+ul.sidebar-menu li {
+	padding: 5px 10px;
+    border-bottom: 1px solid #b4c85f; 
+	
+}
+ul.sidebar-menu li a{
+color: #000;
+text-decoration: none;
+font-weight: bold;
+font-size:12px
+}

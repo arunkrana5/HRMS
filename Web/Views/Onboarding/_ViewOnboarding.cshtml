@@ -1,0 +1,228 @@
+﻿@model Onboarding.View
+
+<div class="tabs effect-4">
+    <!-- tab-title -->
+    <input type="radio" id="tab-1" name="tab-effect-4" checked="checked">
+    <span>
+        <i class="fa fa-home"></i><span>Basic Details</span>
+    </span>
+    <input type="radio" id="tab-2" name="tab-effect-4">
+    <span>
+        <i class="fa fa-bookmark"></i><span>Bank Details</span>
+    </span>
+
+    <input type="radio" id="tab-3" name="tab-effect-4">
+    <span>
+        <i class="fa fa-cloud-upload"></i><span>Upload Documents</span>
+    </span>
+
+    <div class="tab-content">
+        <section id="tab-item-1">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4 form-group">
+                    <label> Doc No</label>
+                    <p> @Model.DocNo</p>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 form-group">
+                    <label> Doc Date</label>
+                    <p> @Model.DocDate</p>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 form-group">
+                    <label> Name</label>
+                    <p> @Model.Name</p>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 form-group">
+                    <label> Gender</label>
+                    <p> @Model.Gender</p>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 form-group">
+                    <label> Father Name</label>
+                    <p> @Model.FatherName</p>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 form-group">
+                    <label> DOB</label>
+                    <p> @Model.DOB</p>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 form-group">
+                    <label> Mobile</label>
+                    <p> @Model.Mobile</p>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 form-group">
+                    <label> Email</label>
+                    <p> @Model.EmailID</p>
+                </div>
+
+
+                <div class="col-lg-4 col-md-4 col-sm-4 form-group">
+                    <label>Blood Group </label>
+                    <p> @Model.BloodGroup</p>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-4 form-group">
+                    <label> Marital Status</label>
+                    <p> @Model.MaritalStatus</p>
+                </div>
+
+
+                <div class="col-lg-4 col-md-4 col-sm-4 form-group">
+                    <label> Country</label>
+                    <p> @Model.CountryName</p>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 form-group">
+                    <label> Region</label>
+                    <p> @Model.RegionName</p>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 form-group">
+                    <label> State</label>
+                    <p> @Model.StateName</p>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 form-group">
+                    <label> City</label>
+                    <p> @Model.CityName</p>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 form-group">
+                    <label> Address</label>
+                    <p> @Model.Address</p>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 form-group">
+                    <label> PIN Code</label>
+                    <p> @Model.PINCode</p>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-4 form-group">
+                    <label>Vaccination</label>
+                    <p> @Model.VaccinationDetails</p>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 form-group">
+                    <label>Aadhar No</label>
+                    <p> @Model.AadharNo</p>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 form-group">
+                    <label>PAN</label>
+                    <p> @Model.PAN</p>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 form-group">
+                    <label>ESIC</label>
+                    <p> @Model.ESIC</p>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 form-group">
+                    <label>UAN</label>
+                    <p> @Model.UAN</p>
+                </div>
+
+
+            </div>
+        </section>
+        
+        <section id="tab-item-2">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4 form-group">
+                    <label> Bank Name</label>
+                    <p> @Model.BankName</p>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 form-group">
+                    <label> Account No</label>
+                    <p> @Model.AccountNo</p>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 form-group">
+                    <label>Branch</label>
+                    <p> @Model.BankBranch</p>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 form-group">
+                    <label> IFSC Code</label>
+                    <p> @Model.IFSCCode</p>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 form-group">
+                    <label> Nominee Name</label>
+                    <p> @Model.NomineeName</p>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 form-group">
+                    <label> Nominee DOB</label>
+                    <p> @Model.NomineeDOB</p>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 form-group">
+                    <label> Nominee Relation</label>
+                    <p> @Model.NomineeRelation</p>
+                </div>
+            </div>
+        </section>
+        <section id="tab-item-3">
+            <div class="row">
+                @if (Model.DocumentsList != null)
+                {
+                    <table id="tbldoc" class="table" cellpadding="0" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>S.No</th>
+                                <th>File</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @{ int count = 0;}
+                            @foreach (var item in Model.DocumentsList)
+                            {
+                                count++;
+                                <tr>
+                                    <td>@count</td>
+                                    <td><a target="_blank" href="@item.AttachmentPath">Documents</a> </td>
+                                    <td>@item.Description</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+            </div>
+        </section>
+
+    </div>
+
+    @if (Model.Approved > 0)
+    {
+        <div class="field1 my-2 row">
+            <div class="col-xl-3 col-md-6 col-sm-12">
+                <div class="form-floating form-group">
+                    <p class="@Model.ApprovedStatus">@Model.ApprovedStatus</p>
+
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 col-sm-12">
+                <div class="form-floating form-group">
+                    <p style="color:blue">@Model.ApprovedRemarks</p>
+
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@if (Model.Approved == 0)
+{
+    <footer>
+        @using (Ajax.BeginForm("OnboardingApprove", "Onboarding",
+                      new { src = ClsCommon.Encrypt(ViewBag.MenuID + "*/Onboarding/OnboardingApprove") },
+                       new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnboardingApproveSuccess", OnBegin = "ShowLoadingDialog()" },
+                          new { @id = "OnboardingApproveForm" })
+                  )
+        {
+            <div class="col-sm-12 form-group ">
+                <label>Reason</label>
+                <input type="hidden" id="AppID" name="AppID" value="@Model.AppID" />
+                <textarea name="ApproveRemarks" class="form-control" Placeholder="Reason"></textarea>
+            </div>
+            <div class="col-sm-12 text-center mt-3">
+                <button type="button" class="btn cnl-btn ripplelink " data-dismiss="modal"><i class="fa fa-times"></i>Close</button>
+                <button type="submit" class="btn apr-btn " name="Command" value="1">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                    Approve
+                </button>
+                <button type="submit" class="btn btn-danger " name="Command" value="2">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                    Resubmit
+                </button>
+            </div>
+        }
+    </footer>
+}
+

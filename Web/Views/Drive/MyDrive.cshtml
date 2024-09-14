@@ -1,0 +1,18 @@
+﻿@using Syncfusion.EJ2
+@using Syncfusion.EJ2.FileManager
+
+@section ControlsSection{
+    <div class="control-section">
+        <div class="sample-container">
+            <!-- File Manager full functionalities sample -->
+            @Html.EJS().FileManager("filemanager").AjaxSettings(
+              new Syncfusion.EJ2.FileManager.FileManagerAjaxSettings
+                   {
+                  Url = "FileOperations",
+                  DownloadUrl = "Download",
+                  UploadUrl = "Upload",
+                  GetImageUrl = "GetImage"
+              }).View(Syncfusion.EJ2.FileManager.ViewType.Details).Render()
+        </div>
+    </div>
+}

@@ -1,0 +1,70 @@
+﻿@model Tab.Approval
+
+@section style{
+    @System.Web.Optimization.Styles.Render("~/bundle/dataTablecss")
+}
+
+@Html.Partial("ListHeader_Partial", "E Invoice Reports")
+<div class="card">
+    <div class="x_panel">
+        <div class="card-body">
+            @using (Ajax.BeginForm("_EInvoice", "Billing",
+               new { src = ClsCommon.Encrypt(ViewBag.MenuID.ToString() + "*/Billing/_EInvoice") },
+                 new AjaxOptions { HttpMethod = "POST", OnSuccess = "BindTarget", OnBegin = "OnBegin()", OnFailure = "CloseLoadingDialog()" },
+           new { @id = "_EInvoiceFrom" })
+           )
+            {
+                <div class="row">
+                    <div class="col-sm-3 form-group">
+                        <label>Month <sup>*</sup></label>
+                        @Html.TextBoxFor(model => model.Month, new { @class = "form-control", @type = "Month" })
+                        @Html.ValidationMessageFor(model => model.Month, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-sm-2 form-group">
+                        <label class="small">&nbsp;</label>
+                        <button type="submit" id="btnSearch" name="Command" value="Add" class="btn btndefault pull-right form-control">
+                            <i class="fa fa-search"></i>  Search
+                        </button>
+                    </div>
+                </div>
+            }
+            <div class="row">
+                <div class="col-lg-12 ">
+                    <div id="TargetDiv"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts    {
+    @System.Web.Optimization.Scripts.Render("~/bundle/dataTablesjs")
+
+    @System.Web.Optimization.Scripts.Render("~/bundle/unobtrusivejs")
+
+    <script>
+
+   
+
+        function OnBegin() {
+            $("#TargetDiv").empty();
+            $("#TargetDiv").html('<img src="/assets/design/images/loader.gif" class="imgloader" />');
+        }
+
+
+        function BindTarget(args) {
+
+            $("#TargetDiv").empty();
+            $("#TargetDiv").html(args);
+            DatatableScripts();
+
+        }
+
+        $('#Month').bind("change", function () {
+            $("#btnSearch").click();
+        });
+
+    </script>
+}

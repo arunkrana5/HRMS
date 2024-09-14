@@ -1,0 +1,138 @@
+﻿
+@model IList<ErrorLog>
+
+@section style{
+    @System.Web.Optimization.Styles.Render("~/bundle/dataTablecss")
+}
+
+@using (Html.BeginForm("ErrorLogList", "Tools",
+      new { src = ViewBag.src }, FormMethod.Post,
+      new { id = "ErrorLogListFrom", enctype = "multipart/form-data" }))
+{
+
+    <div class="page-header">
+        <div class="page-leftheader">
+            <h4 class="page-title">
+                Error Log List
+            </h4>
+            <div class="page-leftheader-btn">
+                <button type="submit" name="Command" value="Delete" onclick="return Validate()" class="btn btn-primary delete-btn"><i class="fas fa-trash-alt"></i> Delete</button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 ">
+            <div class="card">
+                <div class="card-body">
+                    <div class="">
+
+                        <div class="table-responsive">
+                            <table id="example" class="table table-bordered text-nowrap key-buttons">
+                                <thead>
+                                    <tr>
+                                        <th>S.no.</th>
+                                        <th>
+                                            <input type="checkbox" class="newwidth" id="checkAll" onclick="chkAll();" name="ChkAll" value="All" />
+                                            <label for="checkAll"></label>
+                                        </th>
+                                        <th>Description</th>
+                                        <th>System Exception</th>
+                                        <th>Active Function</th>
+                                        <th>Active Form</th>
+                                        <th>Active Module</th>
+                                        <th>Logged At</th>
+                                        <th>IP Address</th>
+                                    </tr>
+                                    <tr class="searchbar">
+                                        <th class="searchhide"></th>
+                                        <th class="searchhide"></th>
+                                        <th class="searchhide"></th>
+                                        <th class="searchhide"></th>
+                                        <th class="searchhide"></th>
+                                        <th class="searchhide"></th>
+                                        <th class="searchhide"></th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{ int Count = 0;}
+                                    @foreach (ErrorLog item in Model)
+                                    {
+                                        Count++;
+                                        <tr>
+                                            <td>@Count</td>
+                                            <td>
+                                                <input type="checkbox" class="newwidth" id="Chksingle_@item.ID" name="Chksingle" value="@item.ID" />
+                                                <label for="Chksingle_@item.ID"></label>
+                                            </td>
+                                            <td><textarea class="form-control"> @item.ErrorDescription</textarea></td>
+                                            <td><textarea class="form-control">@item.SystemException</textarea></td>
+                                            <td><textarea class="form-control">@item.ActiveFunction</textarea></td>
+                                            <td><textarea class="form-control">@item.ActiveForm</textarea></td>
+                                            <td><textarea class="form-control">@item.ActiveModule</textarea></td>
+                                            <td>@item.LoggedAt</td>
+                                            <td>@item.IPAddress</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+}
+
+
+@section scripts    {
+    @System.Web.Optimization.Scripts.Render("~/bundle/dataTablesjs")
+
+    @System.Web.Optimization.Scripts.Render("~/bundle/unobtrusivejs")
+
+    <script>
+
+        function chkAll() {
+            var checkAll = $("#checkAll").is(":checked");
+            if (checkAll) {
+                $("input[name=Chksingle]").each(function () {
+                    $(this).prop('checked', true)
+                });
+            }
+            else {
+                $("input[name=Chksingle]").each(function () {
+                    $(this).prop('checked', false)
+                });
+            }
+        }
+
+        function Validate() {
+
+            var retunr = false;
+            var count = 0;
+            var checkAll = $("#checkAll").is(":checked");
+
+            $("input[name=Chksingle]").each(function () {
+                if ($(this).prop('checked') == true) {
+                    count++;
+                }
+            });
+
+            if (!checkAll && count == 0) {
+                swal("kindly select atleast one record", '')
+            }
+            else {
+
+                retunr = true;
+            }
+            return retunr;
+
+        }
+    </script>
+
+
+}

@@ -1,0 +1,656 @@
+﻿.page-leftheader-btn{
+	position: absolute;
+	top: 10px;
+	right: 0px;
+}
+
+.h-370 {
+    height: 370px !important;
+}
+
+.crypto-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    line-height: 34px;
+    text-align: center;
+    font-size: 16px;
+    margin-right: 10px;
+    font-weight: bold;
+        color: #fff !important;
+}
+
+
+.nmwith-list h5{
+    font-size: 14px;
+}
+
+/*************************/
+.svg-icon, .close-toggle .header-icon{
+    color: #27a9e1;
+    fill: #27a9e1;
+}
+
+
+.search-icon, .header-icon{
+    color: #57cab4;
+    fill: #57cab4;
+}
+
+
+
+
+.prm-clr{
+    color: #27a9e1 !important;
+}
+
+
+.scd-clr, body{
+    color: #0e3c5b !Important;
+}
+
+
+
+.app-sidebar2 {
+    width: 250px;
+    position: fixed;
+    z-index: 9999;
+    background: #fff;
+    border-right: 1px solid #eff0f6;
+    -webkit-transition: left 0.2s ease, width 0.2s ease;
+    transition: left 0.2s ease, width 0.2s ease;
+}   
+
+
+.side-menu__item .fa, .slide-menu a:before{
+    color: #fff;
+}
+
+.side-menu .slide-item{
+    border-bottom: 1px solid #4c5f77;
+    font-size: 14px;
+    color: #fff !important;
+  }
+
+  .side-menu .slide-item:hover{
+    background: #27a9e1;
+        color: #fff !important;
+
+   }
+
+
+  .app-sidebar.app-sidebar3{
+    background: #394b61 !important;
+  }
+
+  .side-menu__item .side-menu__label,   .side-menu__item:hover{
+    color: #fff !important;
+  }
+
+  .side-menu__item:hover .side-menu__label, .side-menu__item:hover .side-menu__icon, .side-menu__item:hover .angle {
+    color: #27a9e1 !important;
+}
+
+.sidebar-mini.sidenav-toggled.sidenav-toggled1 .app-sidebar .slide-menu a{
+    color: #27a9e1 !important;
+}
+
+.sidebar-mini.sidenav-toggled.sidenav-toggled1 .app-sidebar .slide-menu a:hover{
+    color: #fff !important;
+}
+
+.user-info h5{
+    color: #fff;
+}
+
+
+#back-to-top {
+    background: #57cab4;
+    }
+
+.svg-icon{
+    color: #fff;
+    fill: #fff;
+}
+
+.table.dataTable th, table th {
+    background: #e7ecf4 !important;
+    color: #394b61 !important;
+    padding: 10px !important;
+    font-size: 12px !important;
+}
+
+.dataTables_empty {
+}
+
+
+.btn-secondary {
+    color: #423535 !important;
+    background-color: #57cab4;
+    border-color: #57cab4;
+    box-shadow: 0 0px 10px -5px rgb(246 45 103 / 50%);
+}
+
+.page-leftheader .page-title {
+    font-size:20px
+}
+
+.dataTables_empty {
+    font-size: 16px !important;
+    color: #bdccd8 !important;
+}
+
+.modal-header {
+    padding: 0px;
+    background: #27a9e1;
+    padding: 10px;
+}
+
+.modal-title {
+    font-weight:bold !important
+}
+
+    .modal-title .fas{
+        display:none
+    }
+
+
+.modal-header .close {
+    padding: 0px;
+    color: #fff;
+    opacity: 9;
+}
+
+.table.dataTable {
+    width:100% !important
+}
+
+
+.fa-check-circle.checkgreen {
+    color: #28d41d !important
+}
+
+.page-item  dd]dd.active .page-link, .dataTables_paginate a:hover, .dataTables_paginate .current {
+    background-color: #60c8b7;
+    border: 0px;
+}
+
+.sidebar-mini.sidenav-toggled.sidenav-toggled1 .app-sidebar .slide-menu a:hover {
+    color: #000 !important;
+}
+
+.dropdown.header-option{
+display:none}
+
+
+/*********add news**************/
+
+.h-220{
+    height: 220px;
+}
+
+.crdtxt{
+    margin: 20px 0px;
+    font-size: 16px;
+}
+
+sup{
+    color: #ff0000;
+}
+.bg-ac-transparent {
+    background-color: rgb(68 195 189 / 50%) !important;
+}
+
+.bg-ac {
+    background-color: #44c3c3 !important;
+}
+
+.bg-ap-transparent {
+    background-color: rgb(224 89 59 / 50%) !important;
+}
+.bg-ap {
+    background-color: #e86735 !important;
+}
+
+
+.hmtd td{
+    padding: 3px !important;
+}
+
+table.border{
+    border: 0px !important;
+}
+.hmtdlb th, .hmtd th{
+    font-weight: bold !important;
+    font-size: .934rem;
+    padding: 10px;
+    text-align: left;
+}
+
+.tw-100{
+    width: 100px;
+}
+
+
+.btn-white{
+    background: #fff !important;
+}
+
+.fr-bx{
+    display: none;
+}
+
+
+.dsk-t{
+    display: block;
+}
+
+/************/
+.can-toggle {
+  position: relative;
+}
+.can-toggle *, .can-toggle *:before, .can-toggle *:after {
+  box-sizing: border-box;
+}
+.can-toggle input[type=checkbox] {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.can-toggle input[type=checkbox][disabled] ~ label {
+  pointer-events: none;
+}
+.can-toggle input[type=checkbox][disabled] ~ label .can-toggle__switch {
+  opacity: 0.4;
+}
+.can-toggle input[type=checkbox]:checked ~ label .can-toggle__switch:before {
+  content: attr(data-unchecked);
+  left: 0;
+}
+.can-toggle input[type=checkbox]:checked ~ label .can-toggle__switch:after {
+  content: attr(data-checked);
+}
+.can-toggle label {
+  user-select: none;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.can-toggle label .can-toggle__label-text {
+  flex: 1;
+  padding-left: 32px;
+}
+.can-toggle label .can-toggle__switch {
+  position: relative;
+  cursor:pointer;  
+}
+.can-toggle label .can-toggle__switch:before {
+  content: attr(data-checked);
+  position: absolute;
+  top: 0;
+  text-transform: uppercase;
+  text-align: center;
+}
+.can-toggle label .can-toggle__switch:after {
+  content: attr(data-unchecked);
+  position: absolute;
+  z-index: 5;
+  text-transform: uppercase;
+  text-align: center;
+  background: white;
+  transform: translate3d(0, 0, 0);
+}
+.can-toggle input[type=checkbox][disabled] ~ label {
+  color: rgba(234, 0, 48, 0.5);
+}
+.can-toggle input[type=checkbox]:focus ~ label .can-toggle__switch, .can-toggle input[type=checkbox]:hover ~ label .can-toggle__switch {
+  background-color: #ea0030;
+}
+.can-toggle input[type=checkbox]:focus ~ label .can-toggle__switch:after, .can-toggle input[type=checkbox]:hover ~ label .can-toggle__switch:after {
+  color: #b70026;
+}
+.can-toggle input[type=checkbox]:hover ~ label {
+  color: #d1002b;
+}
+.can-toggle input[type=checkbox]:checked ~ label:hover {
+  color: #55bc49;
+}
+.can-toggle input[type=checkbox]:checked ~ label .can-toggle__switch {
+  background-color: #70c767;
+}
+.can-toggle input[type=checkbox]:checked ~ label .can-toggle__switch:after {
+  color: #4fb743;
+}
+.can-toggle input[type=checkbox]:checked:focus ~ label .can-toggle__switch, .can-toggle input[type=checkbox]:checked:hover ~ label .can-toggle__switch {
+  background-color: #5fc054;
+}
+.can-toggle input[type=checkbox]:checked:focus ~ label .can-toggle__switch:after, .can-toggle input[type=checkbox]:checked:hover ~ label .can-toggle__switch:after {
+  color: #47a43d;
+}
+.can-toggle label .can-toggle__label-text {
+  flex: 1;
+}
+.can-toggle label .can-toggle__switch {
+  transition: background-color 0.3s cubic-bezier(0, 1, 0.5, 1);
+  background: #ff0538;
+}
+.can-toggle label .can-toggle__switch:before {
+  color: rgba(255, 255, 255, 0.5);
+}
+.can-toggle label .can-toggle__switch:after {
+  -webkit-transition: -webkit-transform 0.3s cubic-bezier(0, 1, 0.5, 1);
+  transition: transform 0.3s cubic-bezier(0, 1, 0.5, 1);
+  color: #ea0030;
+}
+.can-toggle input[type=checkbox]:focus ~ label .can-toggle__switch:after, .can-toggle input[type=checkbox]:hover ~ label .can-toggle__switch:after {
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4);
+}
+.can-toggle input[type=checkbox]:checked ~ label .can-toggle__switch:after {
+  transform: translate3d(65px, 0, 0);
+}
+.can-toggle input[type=checkbox]:checked:focus ~ label .can-toggle__switch:after, .can-toggle input[type=checkbox]:checked:hover ~ label .can-toggle__switch:after {
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4);
+}
+.can-toggle label {
+  font-size: 14px;
+}
+.can-toggle label .can-toggle__switch {
+  height: 36px;
+  flex: 0 0 134px;
+  border-radius: 4px;
+}
+.can-toggle label .can-toggle__switch:before {
+  left: 67px;
+  font-size: 12px;
+  line-height: 36px;
+  width: 67px;
+  padding: 0 12px;
+}
+.can-toggle label .can-toggle__switch:after {
+  top: 2px;
+  left: 2px;
+  border-radius: 2px;
+  width: 65px;
+  line-height: 32px;
+  font-size: 12px;
+}
+.can-toggle label .can-toggle__switch:hover:after {
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4);
+}
+.can-toggle.can-toggle--size-small input[type=checkbox]:focus ~ label .can-toggle__switch:after, .can-toggle.can-toggle--size-small input[type=checkbox]:hover ~ label .can-toggle__switch:after {
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
+}
+.can-toggle.can-toggle--size-small input[type=checkbox]:checked ~ label .can-toggle__switch:after {
+  transform: translate3d(44px, 0, 0);
+}
+.can-toggle.can-toggle--size-small input[type=checkbox]:checked:focus ~ label .can-toggle__switch:after, .can-toggle.can-toggle--size-small input[type=checkbox]:checked:hover ~ label .can-toggle__switch:after {
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
+}
+.can-toggle.can-toggle--size-small label {
+  font-size: 13px;
+}
+.can-toggle.can-toggle--size-small label .can-toggle__switch {
+  height: 28px;
+  flex: 0 0 90px;
+  border-radius: 2px;
+}
+.can-toggle.can-toggle--size-small label .can-toggle__switch:before {
+  left: 45px;
+  font-size: 10px;
+  line-height: 28px;
+  width: 45px;
+  padding: 0 12px;
+}
+.can-toggle.can-toggle--size-small label .can-toggle__switch:after {
+  top: 1px;
+  left: 1px;
+  border-radius: 1px;
+  width: 44px;
+  line-height: 26px;
+  font-size: 10px;
+}
+.can-toggle.can-toggle--size-small label .can-toggle__switch:hover:after {
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
+}
+/************/
+            .page-leftheader-btn{
+                position: absolute;
+                top: 10px;
+                right: 0px;
+            }
+
+.clock {
+text-align: center;
+    color: #6574cd;
+    font-size: 19px;
+    font-weight: bold;
+    letter-spacing: 7px;
+    background: #ebeeff;
+    padding: 10px 20px;
+    border-radius: 10px;
+    display: table;
+    margin: 10px auto 40px; 
+    box-shadow: 0px 10px 10px 20px rgb(176 184 214 / 9%), 10px 10px 15px -5px #b0b8d6;  
+}
+
+.dvdline{
+    margin: 0px 5px;
+    color: #d8d8d8;
+}
+
+@media screen and (max-width:575px) {
+    .d-em{
+        height: auto;
+    }    
+
+
+.dsk-t{
+    display: none;
+}
+
+.fr-bx {
+    display: table;
+    width: 100%;
+    margin-bottom: 30px;
+}
+    .d-em img{
+        display: none;
+    }
+
+   
+
+    .card-body {
+        padding: 10px;
+    }
+
+ .fr-bx .fr-bx-4 {
+    display: table;
+    float: left;
+    width: 25%;
+} .frbox-dg {
+    background: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    margin: 5px;
+}
+ .frbox-dg i {
+    font-size: 32px;
+    margin-bottom: 12px;
+    display: table;
+    width: 100%;
+}
+.frbox-dg h2 {
+    font-size: 13px;
+}
+.mmt-20{
+    margin-top: 20px;
+}
+
+.dgn-sxbox{
+    background: #fff;
+ box-shadow: 0px 0px 0px 0px rgb(176 184 214 / 9%), 5px 5px 10px -6px #b0b8d6;   
+}
+
+.dgn-sxbox .row, .dgn-sxbox  .col-lg-4{
+    padding: 0px;
+    margin: 0px;
+}
+
+
+
+.mb-dgn .dgn-sxbox  .col-lg-4 {
+    width: 137px;
+}
+.dgn-sxbox .card{
+    background: none;
+ box-shadow: 0px 0px 0px 0px rgb(176 184 214 / 9%), 0px 0px 0px 0px #b0b8d6;
+ margin-bottom: 0px;
+ text-align:   center;
+ padding: 5px 0px;
+}
+
+.mb-dgn .dgn-sxbox .fs-60 {
+    font-size: 22px !important;
+    position: inherit;
+    margin: 0px auto;
+    display: contents;
+    text-align: center;
+    width: auto;
+    height: auto;
+    text-align: center;
+    
+}
+
+.mb-dgn .dgn-sxbox h2 {
+    font-size: 16px;
+}
+
+.dgn-sxbox .card-body{
+    padding: 0px;
+}
+
+.mbdgnsle .card-body {
+    padding: 2px 13px !important;
+}
+}
+
+
+@media screen and (max-width:450px) {
+
+
+.mb-dgn .dgn-sxbox .col-lg-4 {
+    width: 118px;
+}
+.crdtxt {
+    margin: 10px 0px;
+    font-size: 14px;
+}
+.fr-bx .fr-bx-4 {
+    width: 23%;
+}
+
+.frbox-dg i {
+    font-size: 25px;
+    margin-bottom: 10px;
+ 
+}
+
+
+.page-header{
+    margin: 10px 0px 0px;
+}
+
+.page-title {
+    font-size: 16px !important;
+}
+.frbox-dg h2 {
+    font-size: 12px;
+}
+
+.mb-dgn{}
+
+.mb-dgn .col-lg-4{
+    width: 114px;
+}    
+
+.mb-dgn .card-custom-icon {
+    position: initial;
+    color: #e5e9f2;
+    width: 30px;
+    height: auto;
+}
+.mb-dgn .fs-60 {
+    font-size: 32px !important;
+}
+
+.mb-dgn h2{
+    font-size: 20px;
+}
+.card, .mbdgnsle .card-body{
+    box-shadow: 0px 0px 0px 0px rgb(176 184 214 / 9%), 5px 5px 10px -6px #b0b8d6;
+}
+.mbdgnsle .card{
+    box-shadow: 0px 0px 0px 0px rgb(176 184 214 / 9%), 0px 0px 0px -6px #b0b8d6;
+    background: none;
+}
+
+.card-title{
+    font-size: 16px;
+}
+.mbdgnsle .card-body{
+    width: 45%;
+    float: left;
+    background: #fff;
+    border-radius: 10px;
+    margin-right: 15px;
+    margin-bottom: 10px;
+}
+
+.mbdgnsle .font-weight-semibold{
+    font-size: 12px;
+}
+
+.table thead th, .table thead td, .table-vcenter td, .table-vcenter th {
+    font-size: 12px;
+    padding: 5px;
+}
+
+
+
+.mbdgnsle .h-370 {
+    height: auto !important;
+}
+.mbdgnsle .crypto-icon{
+    display: none;
+}
+
+.header.top-header{
+    padding: 0px;
+}
+
+.app-content .side-app {
+    padding: 5px 0.75rem 0 0.75rem !important;
+}
+}
+
+
+@media screen and (max-width:400px) {
+    .mb-dgn .dgn-sxbox .col-lg-4 {
+    width: 109px;
+}
+}
+
+@media screen and (max-width:370px) {
+    .mb-dgn .dgn-sxbox .col-lg-4 {
+    width: 103px;
+}
+    }
+
+
+@media screen and (max-width:350px) {
+    .mb-dgn .dgn-sxbox .col-lg-4 {
+    width: 33%;
+}
+    }

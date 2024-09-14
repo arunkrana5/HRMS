@@ -1,0 +1,206 @@
+﻿@model Onboarding.Users.DocumentDetails
+
+<div class="row" id="demoform2">
+    <div class="col-sm-12 col-xl-12 col1 text-center brand-logo">
+        <div class="container">
+            <h1 class="pt-3">Requirter Details</h1>
+        </div>
+    </div>
+    <div class="col-xl-12 ">
+
+        @using (Ajax.BeginForm("OnboardDocuments", "Virtual",
+          new { Key = ViewBag.Key },
+           new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess" },
+              new { @id = "OnboardDocumentsForm", @enctype = "multipart/form-data" })
+      )
+        {
+            @Html.ValidationSummary(false);
+
+            <div class="tab" id="regForm">
+                <div class="basic">
+                    <div class="text-center icons">
+                        <span class="user-icon">
+                            <img src="~/Areas/Jobs/assets/Images/cloud-computing.png" />
+                    </div>
+                    <div class="mt-4  head"><h4>Upload Documents</h4></div>
+                    <div class="row " id="form-upload">
+
+                        <div class="col-lg-12 " id="documents">
+                            <div class="card mt-4 ">
+                                <div class="my-4"> <a id="btn-add" onclick="AddNewRow()"><span><img src="~/Areas/Jobs/assets/Images/icons8-plus-30.png" /></span> Add New Row</a></div>
+
+
+                                <div class="table-responsive">
+                                    <table id="tbldoc" class="table" cellpadding="0" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>Description</th>
+                                                <th>File</th>
+                                                <th>Upload</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            @if (Model.DocumentsList != null)
+                                            {
+                                                for (int i = 0; i < Model.DocumentsList.Count; i++)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            
+                                                            @Html.HiddenFor(model => Model.DocumentsList[i].Attach_ID,new {@class= "Attach_ID" })
+
+                                                            @if (!string.IsNullOrEmpty(Model.DocumentsList[i].Description))
+                                                            {
+                                                                @Html.TextAreaFor(model => Model.DocumentsList[i].Description, new { @class = "form-control", @readonly = "readonly" })
+                                                                @Html.ValidationMessageFor(model => Model.DocumentsList[i].Description, "", new { @class = "text-danger" })
+                                                            }
+                                                            else
+                                                            {
+                                                                @Html.TextAreaFor(model => Model.DocumentsList[i].Description, new { @class = "form-control" })
+                                                                @Html.ValidationMessageFor(model => Model.DocumentsList[i].Description, "", new { @class = "text-danger" })
+                                                            }
+                                                        </td>
+                                                        <td>
+                                                            @if (!string.IsNullOrEmpty(Model.DocumentsList[i].AttachmentPath))
+                                                            {
+                                                                <a title="click to download the document" target="_blank" href="@Model.DocumentsList[i].AttachmentPath">Doc</a>
+                                                            }
+                                                           
+
+                                                        </td>
+                                                        <td>
+                                                            @Html.TextBoxFor(model => Model.DocumentsList[i].Upload, new { @class = "form-control", @type = "file" })
+                                                            @Html.ValidationMessageFor(model => Model.DocumentsList[i].Upload, "", new { @class = "text-danger" })
+                                                        </td>
+                                                      
+                                                        <td>
+                                                           
+                                                                <a onclick="DeleteRow(this)" class="remove "><i class="fas fa-window-close red-clr" aria-hidden="true"></i></a>
+                                                            
+                                                           
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            }
+
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+
+
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div style="overflow:auto;">
+                <div class="d-flex justify-content-center ">
+
+                    <a href="/OnboardBankDetails/@ViewBag.Key" type="button" id="prevBtn" class="button">Previous</a>
+                    <button type="submit" class="button" name="Command" value="Add" id="nextBtn"><i class="fa fa-paper-plane" aria-hidden="true"></i> Submit</button>
+
+                </div>
+            </div>
+        }
+    </div>
+
+</div>
+@section scripts    {
+
+    @System.Web.Optimization.Scripts.Render("~/bundle/unobtrusivejs")
+
+    <script>
+        function OnSuccess(obj) {
+            console.log(obj)
+            if (obj.Status) {
+                SuccessToaster(obj.SuccessMessage);
+                window.location.href = obj.RedirectURL;
+            }
+            else {
+                CloseLoadingDialog();
+                FailToaster(obj.SuccessMessage);
+
+            }
+        }
+
+        // add new Row
+        function AddNewRow() {
+            var LastTRCount = parseInt($('#tbldoc').find("tbody tr").length) - 1;
+            var $tableBody = $('#tbldoc').find("tbody"),
+                $trLast = $tableBody.find("tr:last"),
+                $trNew = $trLast.clone();
+            $trNew.find("td:last").html('<a onclick="DeleteRow(this)" class="remove" data-toggle="tooltip" data-original-title="Remove"><i class="fas fa-window-close red-clr" aria-hidden="true"></i></a>');
+
+            $trNew.find("input").each(function (i) {
+                $(this).attr({
+                    'id': function (_, name) { return name.replace('_' + LastTRCount + '_', '_' + (parseInt(LastTRCount) + 1) + '_'); },
+                    'name': function (_, name) { return name.replace('[' + LastTRCount + ']', '[' + (parseInt(LastTRCount) + 1) + ']'); },
+                });
+
+                $(this).val("");
+
+
+            });
+            $trNew.find("textarea").each(function (i) {
+                $(this).attr({
+                    'id': function (_, name) { return name.replace('_' + LastTRCount + '_', '_' + (parseInt(LastTRCount) + 1) + '_'); },
+                    'name': function (_, name) { return name.replace('[' + LastTRCount + ']', '[' + (parseInt(LastTRCount) + 1) + ']'); },
+                });
+                $(this).val('');
+                $(this).removeAttr("readonly")
+            });
+
+            $trNew.find("span").each(function (i) {
+                if ($(this).attr("data-valmsg-for")) {
+                    $(this).attr({
+                        'data-valmsg-for': function (_, name) { return name.replace('[' + LastTRCount + ']', '[' + (parseInt(LastTRCount) + 1) + ']'); }
+                    });
+                }
+                if ($(this).attr("for")) {
+                    $(this).attr({
+                        'for': function (_, name) { return name.replace('_' + LastTRCount + '_', '_' + (parseInt(LastTRCount) + 1) + '_'); }
+                    });
+                }
+            });
+
+            $trLast.after($trNew);
+            var form = $("#OnboardDocumentsForm").closest("form");
+            form.removeData('validator');
+            form.removeData('unobtrusiveValidation');
+            $.validator.unobtrusive.parse(form);
+        }
+
+        function DeleteRow(obj) {
+            var ID = Number($(obj).closest("tr").find("input:hidden[class=Attach_ID]").val());
+            alert(ID)
+            var Msg = 'Are you sure want to delete  ?';
+            ConfirmMsgBox(Msg, '', function () {
+                if (ID !=0) {
+                    var myobj = DelRecordJson(ID, 'OnboardingAttachment');
+                    console.log(myobj)
+                    if (!myobj.Status) {
+                        FailToaster(myobj.SuccessMessage);
+
+                    } else {
+                        SuccessToaster(myobj.SuccessMessage);
+                        window.location.reload(true);
+
+                    }
+                } else {
+                    $(obj).closest('tr').remove();
+                }
+            });
+
+        }
+        
+    </script>
+}

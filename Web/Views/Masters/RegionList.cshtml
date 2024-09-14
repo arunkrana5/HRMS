@@ -1,0 +1,146 @@
+﻿@model IList<Region.List>
+@section style{
+    @System.Web.Optimization.Styles.Render("~/bundle/dataTablecss")
+}
+
+@Html.Partial("ListHeader_Partial", "Region List")
+
+<div class="row">
+    <div class="col-lg-12 ">
+        <div class="card">
+            <div class="card-body">
+                <div class="">
+                    <div class="table-responsive">
+                        <table id="example" class="table table-bordered text-nowrap key-buttons">
+                            <thead>
+                                <tr>
+                                    <th>S.no.</th>
+                                    <th>Action</th>
+                                    <th>Name</th>
+                                    <th>Code</th>
+                                    <th>Country</th>
+                                    <th>Inserted Date</th>
+                                    <th>Inserted by</th>
+                                    <th>Updated Date</th>
+                                    <th>Updated by</th>
+                                    <th>IP Address</th>
+                                </tr>
+
+                            </thead>
+                            <tbody>
+                                @{ int count = 0;}
+                                @foreach (Region.List item in Model)
+                                {
+                                    count++;
+                                    <tr>
+                                        <td>@count</td>
+                                        <td>
+                                            <input type="hidden" name="I" value="@item.RegionID" />
+                                            <input type="hidden" name="N" value="@item.RegionCode" />
+
+
+                                            @if (ClsApplicationSetting.GetSessionValue("Modify") == "True")
+                                            {
+                                                @Html.Raw(item.IsActive == true
+                                          ? "<a  data-toggle='tooltip' data-original-title='Click to DeActivate' list='Region_IsActive' OP='0' class='AIsActive' > <i class='fa fa-check-circle checkgreen' aria-hidden='true'></i></a>"
+                                          : "<a data-toggle='tooltip' data-original-title='Click to Activate' list='Region_IsActive' OP='1'  class='AIsActive' > <i class='fa fa-times-circle crossred' aria-hidden='true'></i></a>")
+
+                                                <a title="Edit" onclick="ListHeaderAdd(@item.RegionID);" data-toggle='tooltip'> <i class="fa fa-pencil-square-o checkgreen" aria-hidden="true"></i> </a>
+                                            }
+
+                                        </td>
+                                        <td>@item.RegionName</td>
+                                        <td>@item.RegionCode</td>
+                                        <td>@item.CountryName</td>
+                                        <td>@item.CreatedDate</td>
+                                        <td>@item.CreatedBy</td>
+                                        <td>@item.ModifiedDate</td>
+                                        <td>@item.ModifiedBy</td>
+                                        <td>@item.IPAddress</td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+<div class="modal fade pop-dgn" id="ViewModal">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+
+            <div class="modal-header blk-gdn-btn">
+                <h4 class="modal-title"><i class="fas fa-print"></i>Add Region </h4>
+                <div class="close" data-dismiss="modal">&times;</div>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div id="TagetDiv"></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+@section scripts    {
+    @System.Web.Optimization.Scripts.Render("~/bundle/dataTablesjs")
+
+    @System.Web.Optimization.Scripts.Render("~/bundle/unobtrusivejs")
+
+    <script>
+
+         function ListHeaderAdd(ID) {
+        if (ID == undefined)
+        {
+            ID = 0;
+        }
+			$.ajax({
+                url: "/Masters/_RegionAdd",
+                type: "Get",
+                data: { src: EncryptJSON(@ViewBag.MenuID+"*/Masters/_RegionAdd*" + ID) },
+                success: function (data)
+                {
+                    $("#TagetDiv").empty();
+                    $("#TagetDiv").html(data);
+                    $('#ViewModal').modal({
+                        backdrop: 'static',
+                        keyboard: false
+                    })
+                    $(".applyselect").select2();
+                     var form = $("form")
+                .removeData("validator")
+                .removeData("unobtrusiveValidation");
+                    $.validator.unobtrusive.parse(form);
+				},
+				error: function (er) {
+					alert(er);
+
+				}
+			});
+            }
+
+
+
+        function OnSuccess(obj) {
+            if (obj.Status) {
+                SuccessToaster(obj.SuccessMessage);
+                window.location.reload();
+            }
+            else {
+                CloseLoadingDialog();
+                FailToaster(obj.SuccessMessage);
+
+            }
+        }
+
+    </script>
+
+}

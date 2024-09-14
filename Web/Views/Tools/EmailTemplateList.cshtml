@@ -1,0 +1,84 @@
+﻿
+@model IList<EmailTemplate.List>
+
+@section style{
+    @System.Web.Optimization.Styles.Render("~/bundle/dataTablecss")
+}
+
+<div>
+    @Html.Partial("ListHeader_Partial", "Email Template List")
+
+    <div class="row">
+        <div class="col-lg-12 ">
+            <div class="card">
+                <div class="card-body">
+                    <div class="">
+                        <input type="hidden" id="hdnAddUrl" name="hdnAddUrl" value="@Url.Action("EmailTemplateAdd",new { src = ClsCommon.Encrypt(ViewBag.MenuID+"*"+"/Tools/EmailTemplateAdd"+"*"+"0") })" />
+                        <div class="table-responsive">
+                            <table id="example" class="table table-bordered text-nowrap key-buttons">
+                                <thead>
+                                    <tr>
+                                        <th>S.no.</th>
+                                        <th>Action</th>
+                                        <th>Template Name</th>
+                                        <th>Subject</th>
+                                        <th>CC Mail</th>
+                                        <th>BCC Mail</th>
+                                        <th>Inserted Date</th>
+                                        <th>Inserted by</th>
+                                        <th>Updated Date</th>
+                                        <th>Updated by</th>
+                                        <th>IP Address</th>
+                                    </tr>
+
+
+                                </thead>
+                                <tbody>
+                                    @{ int Count = 0;}
+                                    @foreach (EmailTemplate.List item in Model)
+                                    {
+                                        Count++;
+                                    <tr class="@(item.IsActive == true?"": "trrowred")">
+                                        <td>@Count</td>
+                                        <td>
+                                            <input type="hidden" id="hdn_@item.TemplateID" value="@item.TemplateName" />
+                                            @if (ClsApplicationSetting.GetSessionValue("Modify") == "True")
+                                            {
+                                                @Html.Raw(item.IsActive == true
+                             ? "<a  data-toggle='tooltip' data-original-title='Click to DeActivate' list='EmailTemplate_IsActive' OP='0' class='IsActive_Confirm' > <i class='fa fa-check-circle checkgreen' aria-hidden='true'></i></a>"
+                             : "<a data-toggle='tooltip' data-original-title='Click to Activate' list='EmailTemplate_IsActive' OP='1'  class='IsActive_Confirm' > <i class='fa fa-times-circle crossred' aria-hidden='true'></i></a>")
+
+
+                                                <a title="Edit" href="@Url.Action("EmailTemplateAdd", new { src = ClsCommon.Encrypt(ViewBag.MenuID + "*" + "/Tools/EmailTemplateAdd" + "*" + item.TemplateID) })" data-toggle='tooltip'> <i class="fa fa-pencil-square-o checkgreen" aria-hidden="true"></i> </a>
+                                            }
+                                        </td>
+
+                                        <td> @item.TemplateName</td>
+                                        <td> @item.Subject</td>
+                                        <td>@item.CCMail</td>
+                                        <td>@item.BCCMail</td>
+
+                                        <td>@item.CreatedDate</td>
+                                        <td>@item.CreatedBy</td>
+                                        <td>@item.ModifiedDate</td>
+                                        <td>@item.ModifiedBy</td>
+                                        <td>@item.IPAddress</td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section scripts    {
+    @System.Web.Optimization.Scripts.Render("~/bundle/dataTablesjs")
+
+    @System.Web.Optimization.Scripts.Render("~/bundle/unobtrusivejs")
+}

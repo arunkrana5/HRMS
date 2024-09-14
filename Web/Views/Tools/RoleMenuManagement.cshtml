@@ -1,0 +1,162 @@
+﻿
+@model IList<AdminModule>
+
+@{
+    ViewBag.Title = "RoleMenuManagement";
+}
+
+<div class="page-dgn">
+   
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            @using (Html.BeginForm("RoleMenuManagement", "Tools",
+                new { src = ViewBag.src }, FormMethod.Post,
+                new { id = "RoleMenuManagementFrom", @class = "RoleMenuManagementFrom", enctype = "multipart/form-data" }))
+            {
+            <div class="page-header">
+                <div class="page-leftheader">
+                    <h4 class="page-title">Role Menu Management</h4>
+                    <div class="page-leftheader-btn">
+
+                        <button type="submit" name="Command" value="JSON" class="btn btnupdate pull-right"><i class="fa fa-save"></i>Update Json</button>
+                        <button type="submit" name="Command" value="Sync" class="btn btndefault pull-right"><i class="fa fa-history"></i>Sync Menu</button>
+                        <button type="submit" name="Command" value="Update" class="btn btnupdate pull-right"><i class="fa fa-save"></i>Update</button>
+
+                        <button type="button" class="btn btncancel pull-right" onclick="ShowLoadingDialog(); window.location = '@Url.Action("RoleList",new { src = ClsCommon.Encrypt(ViewBag.MenuID+"*"+"/Tools/RoleList") })';"><i class="fa fa-times"></i> Cancel</button>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+
+                    <div id="accordion" role="tablist" aria-multiselectable="true">
+
+                        @foreach (AdminModule item in Model)
+                        {
+
+                            <div class="card p-0 mb-2">
+                                <div class="card-header  p-0" role="tab" id="heading_@item.ModuleID">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse_@item.ModuleID" class="blk-gdn-btn hd-acd collapsed" aria-expanded="false" aria-controls="collapse_@item.ModuleID">
+                                        <span><i class="@item.ModuleIcon"></i></span> @item.ModuleName
+                                    </a>
+                                </div>
+                                <div id="collapse_@item.ModuleID" class="collapse" role="tabpanel" aria-labelledby="heading_@item.ModuleID" aria-expanded="false" style="">
+                                    <div class="card-body p-0 shadow-box">
+                                        <div class="table-responsive menu-tbl">
+                                            <table class="table table-striped" width="100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th><i class="fas fa-bars"></i> Menu Name</th>
+                                                        <th class="text-center"><i class="fas fa-book"></i>Read</th>
+                                                        <th class="text-center"><i class="fas fa-pencil-alt"></i> Write</th>
+                                                        <th class="text-center"><i class="fas fa-edit"></i> Modify</th>
+                                                        <th class="text-center"><i class="fas fa-trash-alt"></i> Delete</th>
+                                                        <th class="text-center"><i class="fas fa-solid fa-file-export"></i> Export</th>
+                                                        <th class="text-center"><i class="fas fa-solid fa-file-import"></i> Import</th>
+                                                        <th class="text-center"><i class="fas fa-solid fa-mobile"></i> App</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (AdminMenu Mitem in item.MainMenuList)
+                                                    {
+                                                    <tr style="@(Mitem.IsChild == "Y" ? "" : "")">
+                                                        <td> <i class="fa fa-bullseye"></i>@Mitem.MenuName</td>
+                                                        <td class="text-center">
+                                                            <input type="checkbox" id="Read_@Mitem.MenuID" name="Read_@Mitem.MenuID" @(Mitem.R ? "checked" : "") />
+                                                            <label for="Read_@Mitem.MenuID"></label>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <input type="checkbox" id="Write_@Mitem.MenuID" name="Write_@Mitem.MenuID" @(Mitem.W ? "checked" : "") />
+                                                            <label for="Write_@Mitem.MenuID"></label>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <input type="checkbox" id="Modify_@Mitem.MenuID" name="Modify_@Mitem.MenuID" @(Mitem.M ? "checked" : "") />
+                                                            <label for="Modify_@Mitem.MenuID"></label>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <input type="checkbox" id="Delete_@Mitem.MenuID" name="Delete_@Mitem.MenuID" @(Mitem.D ? "checked" : "") />
+                                                            <label for="Delete_@Mitem.MenuID"></label>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <input type="checkbox" id="Export_@Mitem.MenuID" name="Export_@Mitem.MenuID" @(Mitem.E ? "checked" : "") />
+                                                            <label for="Export_@Mitem.MenuID"></label>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <input type="checkbox" id="Import_@Mitem.MenuID" name="Import_@Mitem.MenuID" @(Mitem.I ? "checked" : "") />
+                                                            <label for="Import_@Mitem.MenuID"></label>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <input type="checkbox" id="App_@Mitem.MenuID" name="App_@Mitem.MenuID" @(Mitem.App ? "checked" : "") />
+                                                            <label for="App_@Mitem.MenuID"></label>
+                                                        </td>
+                                                    </tr>
+                                                        if (Mitem.IsChild == "Y")
+                                                        {
+                                                            @ShowChild(Mitem.ChildMenuList);
+                                                        }
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                        }
+                    </div>
+                    }
+
+                </div>
+
+
+            </div>
+</div>
+
+
+
+@helper ShowChild(List<AdminMenu> ChildList)
+{
+    foreach (AdminMenu Mitem2 in ChildList)
+    {
+<tr style="background-color:#f5f5f5" class="ChildMenuList">
+    <td><i class="fa fa-chevron-right"></i> @Mitem2.MenuName</td>
+    <td class="text-center">
+        <input type="checkbox" id="Read_@Mitem2.MenuID" name="Read_@Mitem2.MenuID" @(Mitem2.R ? "checked" : "") />
+        <label for="Read_@Mitem2.MenuID"></label>
+    </td>
+    <td class="text-center">
+        <input type="checkbox" id="Write_@Mitem2.MenuID" name="Write_@Mitem2.MenuID" @(Mitem2.W ? "checked" : "") />
+        <label for="Write_@Mitem2.MenuID"></label>
+    </td>
+    <td class="text-center">
+        <input type="checkbox" id="Modify_@Mitem2.MenuID" name="Modify_@Mitem2.MenuID" @(Mitem2.M ? "checked" : "") />
+        <label for="Modify_@Mitem2.MenuID"></label>
+    </td>
+    <td class="text-center">
+        <input type="checkbox" id="Delete_@Mitem2.MenuID" name="Delete_@Mitem2.MenuID" @(Mitem2.D ? "checked" : "") />
+        <label for="Delete_@Mitem2.MenuID"></label>
+    </td>
+    <td class="text-center">
+        <input type="checkbox" id="Export_@Mitem2.MenuID" name="Export_@Mitem2.MenuID" @(Mitem2.E ? "checked" : "") />
+        <label for="Export_@Mitem2.MenuID"></label>
+    </td>
+    <td class="text-center">
+        <input type="checkbox" id="Import_@Mitem2.MenuID" name="Import_@Mitem2.MenuID" @(Mitem2.I ? "checked" : "") />
+        <label for="Import_@Mitem2.MenuID"></label>
+    </td>
+    <td class="text-center">
+        <input type="checkbox" id="App_@Mitem2.MenuID" name="App_@Mitem2.MenuID" @(Mitem2.App ? "checked" : "") />
+        <label for="App_@Mitem2.MenuID"></label>
+    </td>
+</tr>
+        if (Mitem2.IsChild == "Y")
+        {
+            @ShowChild(Mitem2.ChildMenuList);
+
+        }
+    }
+}

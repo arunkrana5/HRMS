@@ -1,0 +1,15 @@
+.modal-lg, .modal-xl {
+    max-width: 2500px;
+}
+
+.modal-backdrop.show {
+    opacity: 1;
+    background-color:white;
+}
+.modal th{
+    color:black;
+}
+
+.modal th, .modal td {
+padding:0px;
+}

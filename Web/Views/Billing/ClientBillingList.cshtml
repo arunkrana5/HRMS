@@ -1,0 +1,245 @@
+﻿@model MyTab.Billing
+
+@section style{
+    @System.Web.Optimization.Styles.Render("~/bundle/dataTablecss")
+}
+
+@Html.Partial("ListHeader_Partial", "Billing List")
+
+<div class="card">
+
+    <div class="x_panel">
+        <div class="card-body">
+            <input type="hidden" id="hdnAddUrl" name="hdnAddUrl" value="@Url.Action("CreateStaffBill",new { src = ClsCommon.Encrypt(ViewBag.MenuID+"*/Billing/CreateStaffBill*0") })" />
+
+            @using (Ajax.BeginForm("_ClientBillingList", "Billing",
+               new { src = ClsCommon.Encrypt(ViewBag.MenuID.ToString() + "*/Billing/_ClientBillingList") },
+                 new AjaxOptions { HttpMethod = "POST", OnSuccess = "BindTarget", OnBegin = "OnBegin()", OnFailure = "CloseLoadingDialog()" },
+           new { @id = "_ClientBillingListFrom" })
+           )
+            {
+                <div class="row">
+                    <div class="col-sm-2 form-group">
+                        <label>Financial Year <sup>*</sup></label>
+                        <select id="@Html.IdFor(x=>x.FYID)" name="@Html.NameFor(x=>x.FYID)" class="applyselect form-control">
+                            <option value="">All</option>
+                            @foreach (var item in Model.FinyearList)
+                            {
+                                <option value="@item.Name">@item.Name</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="col-sm-2 form-group">
+                        <label>Month <sup>*</sup></label>
+                        @Html.TextBoxFor(model => model.Date, new { @class = "form-control", @type = "Month" })
+                        @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-sm-2 form-group">
+                        <label>Client <sup>*</sup></label>
+                        <select id="@Html.IdFor(x=>x.ClientCode)" name="@Html.NameFor(x=>x.ClientCode)" class="applyselect form-control" onchange="FillSubClient(this)">
+                            <option value="">All</option>
+                            @foreach (var item in Model.ClientList)
+                            {
+                                <option value="@item.Name">@item.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-sm-2 form-group">
+                        <label>Sub Client <sup>*</sup></label>
+                        <select id="@Html.IdFor(x=>x.SC_Code)" name="@Html.NameFor(x=>x.SC_Code)" class="applyselect form-control">
+                            <option value="">All</option>
+                            @foreach (var item in Model.SubClientList)
+                            {
+                                <option value="@item.Name">@item.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-sm-2 form-group">
+                        <label class="small">&nbsp;</label>
+                        <button type="submit" id="btnSearch" name="Command" value="Add" class="btn btndefault pull-right form-control">
+                            <i class="fa fa-search"></i>  Search
+                        </button>
+                    </div>
+
+
+                </div>
+            }
+
+            <div class="row">
+                <div class="col-lg-12 ">
+                    <div id="TargetDiv"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade pop-dgn" id="ViewModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header blk-gdn-btn">
+                <h4 class="modal-title"><i class="fas fa-print"></i>Staff List </h4>
+                <div class="close" data-dismiss="modal">&times;</div>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div id="ModalTagetDiv"></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+@section scripts    {
+    @System.Web.Optimization.Scripts.Render("~/bundle/dataTablesjs")
+
+    @System.Web.Optimization.Scripts.Render("~/bundle/unobtrusivejs")
+   
+
+<script>
+    $(document).ready(function () {
+        $("#btnSearch").click();
+    });
+
+        function ListHeaderExport() {
+        var Usertype =$("#Usertype").find("option:selected").val();
+            var url = "/Export/AttendanceLog_Monthly_Export";
+            var src = EncryptJSON(@ViewBag.MenuID+"*" + "/Export/AttendanceLog_Monthly_Export*" + $('#Month').val() + "*" + Usertype)
+            window.location.href = url + "?src=" + src;
+    }
+        function OnBegin() {
+            $("#TargetDiv").empty();
+            $("#TargetDiv").html('<img src="/assets/design/images/loader.gif" class="imgloader" />');
+        }
+
+
+        function BindTarget(args) {
+            $("#TargetDiv").empty();
+            $("#TargetDiv").html(args);
+            DatatableScripts();
+
+
+        }
+        function FillSubClient(obj) {
+            var ID = $(obj).find("option:selected").val();
+            if (ID != '') {
+                var data = GetDropDownList(ID, "SubClientList");
+                if (data != '') {
+                    $("#SC_Code").empty();
+                    $("#SC_Code").append($("<option />").val("").text("All"));
+                    $(data).each(function () {
+                        $("#SC_Code").append($("<option />").val(this.Name).text(this.Name));
+                        $("#SC_Code").select2();
+
+                    });
+
+                } else {
+                    $("#SC_Code").empty();
+                    $("#SC_Code").append($("<option />").val("").text("All"));
+                }
+            } else {
+                $("#SC_Code").empty();
+                $("#SC_Code").append($("<option />").val("").text("All"));
+            }
+
+        }
+
+
+      function ViewBillingTran(obj) {
+          var ID = $(obj).closest("tr").find("input:hidden[name=I]").val();
+			$.ajax({
+                url: "/Billing/_ClientBillingTranList",
+                type: "Get",
+                data: { src: EncryptJSON(@ViewBag.MenuID+"*/Billing/_ClientBillingTranList*" + ID) },
+                success: function (data)
+                {
+                    $("#ModalTagetDiv").empty();
+                    $("#ModalTagetDiv").html(data);
+                    DatatableScripts_ByID("TableTran")
+                    $('#ViewModal').modal({
+                        backdrop: 'static',
+                        keyboard: false
+                    })
+				},
+				error: function (er) {
+					alert(er);
+
+				}
+			});
+            }
+
+
+
+        function DeleteBillTran(obj) {
+            var ID = $(obj).closest("tr").find("input:hidden[name=I]").val();
+            var Name = $(obj).closest("tr").find("input:hidden[name=N]").val();
+            var Msg = 'Are you sure want to delete Staff List of Bill DocNo =' + Name + ' ?';
+            ConfirmMsgBox(Msg, '', function () {
+                if (ID) {
+                    var myobj = DelRecordJson(ID, 'BillTran');
+                    if (!myobj.Status) {
+                        FailToaster(myobj.SuccessMessage);
+
+                    } else {
+                        SuccessToaster(myobj.SuccessMessage);
+                        $("#btnSearch").click();
+
+                    }
+                }
+            });
+
+        }
+
+
+
+        function downloadBill(obj) {
+            ShowLoadingDialog();
+            var BillID = $(obj).closest("tr").find("input:hidden[name=I]").val();
+           $.ajax({
+               url: "/Billing/PrintStaffBilling",
+               type: "get",
+               data: { src: EncryptJSON(@ViewBag.MenuID+"*/Billing/PrintStaffBilling*" + BillID) },
+                success: function (Result)
+                {
+                    $(Result).each(function () {
+                        downloadFileWithLink(this.Path);
+                    });
+                    CloseLoadingDialog();
+				},
+				error: function (er) {
+                    CloseLoadingDialog();
+				}
+			});
+    }
+
+    function downloadFileWithLink(href) {
+        var link = document.createElement("a");
+        let name = (href?.split("/") || [])
+        name = name[name?.length - 1]
+        link.setAttribute('download', name);
+        link.href = href;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+    }
+
+
+    function downloadMeregedPDF(obj) {
+        var Date = $('#Date').val();
+        var DocNo = $(obj).closest("tr").find("input:hidden[name=N]").val();
+
+        var url = "/Billing/MergeDocuments";
+        var src = EncryptJSON(@ViewBag.MenuID+"*" + "/Export/MergeDocuments*" + Date + "*" + DocNo)
+        window.location.href = url + "?src=" + src;
+
+    }
+
+</script>
+}

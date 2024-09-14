@@ -1,0 +1,47 @@
+﻿@model Department.Add
+
+
+
+@using (Ajax.BeginForm("_DepartmentAdd", "Masters",
+        new { src = ViewBag.src },
+         new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess", OnBegin = "ShowLoadingDialog()" },
+            new { @id = "_DepartmentAddForm" })
+    )
+{
+
+
+    
+    @Html.HiddenFor(x => Model.DeptID)
+<div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6 form-group">
+        <label> Name<sup>*</sup></label>
+        @Html.TextBoxFor(model => model.DeptName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.DeptName, "", new { @class = "text-danger" })
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 form-group">
+        <label>Code </label>
+        @Html.TextBoxFor(model => model.DeptCode, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.DeptCode, "", new { @class = "text-danger" })
+    </div>
+
+
+    <div class="col-lg-6 col-md-6 col-sm-6 form-group">
+        <label>Priority</label>
+        @Html.TextBoxFor(model => model.Priority, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Priority, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="col-lg-12 form-group">
+
+        @if (Model.DeptID > 0)
+        {
+            <button type="submit" class="btn btn-indigo" name="Command" value="Add"><i class="fa fa-paper-plane" aria-hidden="true"></i> Update</button>
+        }
+        else
+        {
+            <button type="submit" class="btn btn-indigo" name="Command" value="Add"><i class="fa fa-paper-plane" aria-hidden="true"></i> Submit</button>
+        }
+    </div>
+
+</div>
+}

@@ -1,0 +1,46 @@
+﻿@model Onboarding.Create
+
+@using (Ajax.BeginForm("_CreateOnboarding", "Onboarding",
+        new { src = ViewBag.src },
+         new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnOnboardingSuccess", OnBegin = "ShowLoadingDialog()" },
+            new { @id = "_CreateOnboardingForm" })
+    )
+{
+<div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6 form-group">
+        <label>Name<sup>*</sup></label>
+        @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 form-group">
+        <label>Date of Birth <sup>*</sup></label>
+        @Html.TextBoxFor(model => model.DOB, new { @class = "form-control", @type = "date" })
+        @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="col-lg-6 col-md-6 col-sm-6 form-group">
+        <label>Gender</label>
+        @Html.EnumDropDownListFor(m => m.Gender, "Select", new { @class = "form-control applyselect" })
+        @Html.ValidationMessageFor(m => m.Gender)
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 form-group">
+        <label>Email<sup>*</sup></label>
+        @Html.TextBoxFor(model => model.EmailID, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.EmailID, "", new { @class = "text-danger" })
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 form-group">
+        <label>Mobile<sup>*</sup></label>
+        @Html.TextBoxFor(model => model.Mobile, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 form-group">
+        <label>Father's Name<sup>*</sup></label>
+        @Html.TextBoxFor(model => model.FatherName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.FatherName, "", new { @class = "text-danger" })
+    </div>
+    <div class="col-lg-12 form-group">
+        <button type="submit" class="btn btn-indigo" name="Command" value="Add"><i class="fa fa-paper-plane" aria-hidden="true"></i> Create</button>
+    </div>
+
+</div>
+}

@@ -1,0 +1,67 @@
+﻿
+@model string
+
+
+
+<div class="page-header">
+    <div class="page-leftheader">
+        <h4 class="page-title">@Model</h4>
+        <div class="page-leftheader-btn">
+
+            @if (ClsApplicationSetting.GetSessionValue("Write") == "True")
+            {
+                <a class="btn btndefault" onclick="ListHeaderAdd();">
+                    <i class="fa fa-plus"></i> Add
+                </a>
+            }
+            @if (ClsApplicationSetting.GetSessionValue("Export") == "True")
+            {
+                <a id="anchListExcelReport" onclick="ListHeaderExport();" class="btn btnupdate btn-l ripplelink">
+                    <i class="fa fa-file-excel-o"></i> Export
+                </a>
+            }
+            @if (ClsApplicationSetting.GetSessionValue("Import") == "True")
+            {
+                <a id="anchListExcelReport" onclick="ListHeaderImport();" class="btn btnupdate btn-l ripplelink">
+                    <i class="fa fa-file-excel-o"></i> Import
+                </a>
+            }
+        </div>
+    </div>
+
+</div>
+
+
+<script type="text/javascript">
+    function ListHeaderAdd() {
+        if ($("#hdnAddUrl").val() == undefined) {
+            FailToaster("Invalid Link")
+        }
+        else {
+            var count = 0;
+            ShowLoadingDialog();
+            window.location = $("#hdnAddUrl").val();
+        }
+    }
+
+    function ListHeaderExport() {
+        if ($("#hdnExportUrl").val() == undefined) {
+            FailToaster("Invalid Link")
+        }
+        else {
+            var count = 0;
+            window.location = $("#hdnExportUrl").val();
+        }
+    }
+    function ListHeaderImport() {
+        if ($("#hdnImportUrl").val() == undefined) {
+            FailToaster("Invalid Link")
+        }
+        else {
+            var count = 0;
+            window.location = $("#hdnImportUrl").val();
+        }
+    }
+
+
+</script>
